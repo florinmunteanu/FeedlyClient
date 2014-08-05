@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "FeedlyClient.MainViewController.(buttonClicked (FeedlyClient.MainViewController) -&gt; (Swift.AnyObject) -&gt; ()).(closure #2):MainViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "FeedlyClient.FeedlyAuthenticationURLProtocol.canInitWithRequest (FeedlyClient.FeedlyAuthenticationURLProtocol.Type)(Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.NSURLRequest&gt;) -&gt; Swift.Bool:FeedlyAuthenticationURLProtocol.swift">
+      </ContextState>
+      <ContextState
+         contextName = "FeedlyClient.MainViewController.buttonClicked (FeedlyClient.MainViewController)(Swift.AnyObject) -&gt; ():MainViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "__64-[AFHTTPRequestOperation setCompletionBlockWithSuccess:failure:]_block_invoke42:AFHTTPRequestOperation.m">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

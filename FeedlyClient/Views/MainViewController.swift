@@ -9,14 +9,11 @@
 import UIKit
 
 class MainViewController: UIViewController {
-    init(coder aDecoder: NSCoder!) {
-        super.init(coder: aDecoder)
-    }
     
-    init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    //init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    //    super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         // Custom initialization
-    }
+    //}
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,27 +27,26 @@ class MainViewController: UIViewController {
     }
     
     @IBAction func buttonClicked(sender : AnyObject) {
+        //self.webView.delegate
+        /*
         var auth = FeedlyAuthentication()
         var succes = { (operation: AFHTTPRequestOperation!, object: AnyObject!) -> Void in
             
         }
-        var failure = { (operation: AFHTTPRequestOperation!, object: AnyObject!) -> Void in
+        var failure = { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+            
         }
-        
-        
-        var parameters = [ "response_type" : "code",
-            "client_id"     : Constants.clientId,
-            "redirect_uri"  : Constants.redirectUrl.stringByReplacingPercentEscapesUsingEncoding(NSUTF8StringEncoding),
-            "scope"         : Constants.scope];
-        var serializer = AFHTTPRequestSerializer()
-        var request = serializer.requestWithMethod("GET", URLString: Constants.apiURL + "/v3/auth/auth", parameters: parameters, error: nil)
-        
-        //var operation = AFHTTPRequestOperation(request: request)
-        //operation.responseSerializer = serializer
-        
-        var manager = AFHTTPRequestOperationManager();
-        manager.GET(Constants.apiURL + "/v3/auth/auth", parameters: parameters, success: succes, failure: failure)
-
+        var request = NSURLRequest(URL: NSURL(string: "http://sandbox.feedly.com/v3/auth/auth?client_id=sandbox&redirect_uri=https%3A%2F%2Flocalhost&scope=https%3A%2F%2Fcloud.feedly.com%2Fsubscriptions&response_type=code"))
+        self.webView.loadRequest(request);
+        */
+        //var fa = FeedlyAuthentication()
+        //var url = fa.authenticationUrl()
+        var loginController = LoginViewController()
+    
+        self.presentViewController(loginController, animated: false, completion: {()->Void in
+            // save in keychain
+            })
+        //LoginViewController().presentViewController(self, animated: false, completion: nil)
     }
     /*
     // #pragma mark - Navigation

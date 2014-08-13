@@ -3,11 +3,11 @@ import UIKit
 
 class LoginViewController: UIViewController, UIWebViewDelegate {
     
-    init() {
+    override init() {
         super.init(nibName: "LoginViewController", bundle: NSBundle.mainBundle())
     }
     
-    init(coder aDecoder: NSCoder!) {
+    required init(coder aDecoder: NSCoder!) {
         super.init(coder: aDecoder)
     }
     
@@ -42,13 +42,17 @@ class LoginViewController: UIViewController, UIWebViewDelegate {
             
             var auth = FeedlyAuthentication()
             var code = auth.getAuthenticationCode(request.URL)
+            
             auth.beginGetAccessToken(code,
                 success: {(userToken: UserAccessToken) -> Void in
+                    // Set the current feedly user token
+                    CurrentFeedlyUser.token = userToken
                     self.activityIndicator.stopAnimating()
                 },
                 failure: {(error:NSError) -> Void in
                     self.activityIndicator.stopAnimating()
-                })
+                    self.displayAlert(error)
+            })
             
             return false // Do not further process this request
         }
@@ -57,18 +61,17 @@ class LoginViewController: UIViewController, UIWebViewDelegate {
         }
     }
     
+    func displayAlert(error: NSError) {
+        var alert = UIAlertController(title: "Error", message: "There was an error during authorization process.", preferredStyle: UIAlertControllerStyle.Alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
+        self.presentViewController(alert, animated: true, completion: nil)
+    }
+    
     func isAuthorizationCodeRequest(request: NSURLRequest!) -> Bool {
-        return request != nil && request.URL != nil && request.URL.path != nil && request.URL.description.rangeOfString("code=")
-    }
-    
-    func startActivityIndicator() {
-        
-        //self.activityIndicator!.startAnimating()
-        //self.alertView!.show()
-    }
-    
-    func stopActivityIndicator() {
-        //self.activityIndicator!.stopAnimating()
-        //self.alertView!.dismissWithClickedButtonIndex(0, animated: true)
+        return request != nil &&
+            request.URL != nil &&
+            request.URL.path != nil &&
+            request.URL.description.rangeOfString("code=") != nil &&
+            request.URL.description.rangeOfString(Constants.redirectUrl) != nil
     }
 }

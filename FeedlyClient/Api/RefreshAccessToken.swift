@@ -1,28 +1,26 @@
 
 import Foundation
 
+///  Defines an access token used to access the Feedly API
+///
 class RefreshAccessToken {
     
-    init() {
-        
-    }
-    
     init(json: Dictionary<String, String>) {
-        if let userId = json[APIParameters.userId] {
+        if let userId = json[AuthParameters.userId] {
             self.userId = userId
         }
-        if let accessToken = json[APIParameters.accessToken] {
+        if let accessToken = json[AuthParameters.accessToken] {
             self.accessToken = accessToken
         }
-        if let expiresIn = json[APIParameters.expiresIn] {
+        if let expiresIn = json[AuthParameters.expiresIn] {
             if let intValue = expiresIn.toInt() {
                 self.expiresIn = intValue
             }
         }
-        if let tokenType = json[APIParameters.tokenType] {
+        if let tokenType = json[AuthParameters.tokenType] {
             self.tokenType = tokenType
         }
-        if let plan = json[APIParameters.plan] {
+        if let plan = json[AuthParameters.plan] {
             self.plan = plan
         }
     }

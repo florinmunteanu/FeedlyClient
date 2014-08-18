@@ -46,7 +46,8 @@ class LoginViewController: UIViewController, UIWebViewDelegate {
             auth.beginGetAccessToken(code,
                 success: {(userToken: UserAccessToken) -> Void in
                     // Set the current feedly user token
-                    CurrentFeedlyUser.token = userToken
+                    //CurrentFeedlyUser.token = userToken
+
                     self.activityIndicator.stopAnimating()
                 },
                 failure: {(error:NSError) -> Void in

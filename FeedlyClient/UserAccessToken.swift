@@ -1,58 +1,59 @@
 
 import Foundation
 
+///  Defines an access token used to access the Feedly API
+///
 class UserAccessToken {
     
-    init() {
-        
-    }
-    
+    /// Initialize an access token using a dictionary with values received from JSON call made to Feedly auth
     init(json: Dictionary<String, String>) {
-        if let id = json[APIParameters.userId] {
+        if let id = json[AuthParameters.userId] {
             self.userId = id
         }
-        if let accessToken = json[APIParameters.accessToken] {
+        if let accessToken = json[AuthParameters.accessToken] {
             self.accessToken = accessToken
         }
-        if let expiresIn = json[APIParameters.expiresIn] {
+        if let expiresIn = json[AuthParameters.expiresIn] {
             if let intValue = expiresIn.toInt() {
                 self.expiresIn = intValue
             }
         }
-        if let state = json[APIParameters.state] {
+        if let state = json[AuthParameters.state] {
             self.state = state
         }
-        if let refreshToken = json[APIParameters.refreshToken] {
+        if let refreshToken = json[AuthParameters.refreshToken] {
             self.refreshToken = refreshToken
         }
-        if let tokenType = json[APIParameters.tokenType] {
+        if let tokenType = json[AuthParameters.tokenType] {
             self.tokenType = tokenType
         }
-        if let plan = json[APIParameters.plan] {
+        if let plan = json[AuthParameters.plan] {
             self.plan = plan
         }
     }
     
+    /// Standard plan String
     var standardPlan = "standard"
     
+    /// Pro plan String
     var proPlan = "pro"
     
-    // Feedly user id
+    /// Feedly user id
     var userId: String = ""
     
-    // A token that may be used to obtain a new access token. Refresh tokens are valid until the user revokes access.
+    /// A token that may be used to obtain a new access token. Refresh tokens are valid until the user revokes access.
     var refreshToken: String = ""
     
-    // A token that may be used to access APIs. Access tokens are have an expiration.
+    /// A token that may be used to access APIs. Access tokens are have an expiration.
     var accessToken: String = ""
     
-    // Indicated the user plan (standard or pro).
+    /// Indicated the user plan (standard or pro).
     var plan: String = ""
     
-    // The remaining lifetime on the access token.
+    /// The remaining lifetime on the access token.
     var expiresIn: Int = 0
     
-    // Indicates the type of token returned. At this time, this field will always have the value of Bearer.
+    /// Indicates the type of token returned. At this time, this field will always have the value of Bearer.
     var tokenType: String = ""
     
     var state: String = ""

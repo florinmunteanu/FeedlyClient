@@ -7,10 +7,10 @@ class FeedlyAuthentication {
         /* Correct URL: http://sandbox.feedly.com/v3/auth/auth?client_id=sandbox&redirect_uri=https%3A%2F%2Flocalhost&scope=https%3A%2F%2Fcloud.feedly.com%2Fsubscriptions&response_type=code */
         
         var queryParameters = [
-            APIParameters.responseType : "code",
-            APIParameters.clientId     : Constants.clientId,
-            APIParameters.redirectUri  : Constants.redirectUrl.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet()),
-            APIParameters.scope        : Constants.scope.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet())
+            AuthParameters.responseType : "code",
+            AuthParameters.clientId     : Constants.clientId,
+            AuthParameters.redirectUri  : Constants.redirectUrl.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet()),
+            AuthParameters.scope        : Constants.scope.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet())
         ]
         
         var url = String(format: Constants.apiURL + "/v3/auth/auth?")
@@ -60,12 +60,12 @@ class FeedlyAuthentication {
             
             */
             var parameters = [
-                APIParameters.code         : authenticationCode,
-                APIParameters.clientId     : Constants.clientId,
-                APIParameters.clientSecret : Constants.clientSecret,
-                APIParameters.redirectUri  : Constants.redirectUrl,
-                APIParameters.state        : "",
-                APIParameters.grantType    : "authorization_code"
+                AuthParameters.code         : authenticationCode,
+                AuthParameters.clientId     : Constants.clientId,
+                AuthParameters.clientSecret : Constants.clientSecret,
+                AuthParameters.redirectUri  : Constants.redirectUrl,
+                AuthParameters.state        : "",
+                AuthParameters.grantType    : "authorization_code"
             ]
             
             var manager = AFHTTPRequestOperationManager()
@@ -98,10 +98,10 @@ class FeedlyAuthentication {
             var url = String(format: Constants.apiURL + "/v3/auth/token")
             
             var parameters = [
-                APIParameters.refreshToken : refreshToken,
-                APIParameters.clientId     : Constants.clientId,
-                APIParameters.clientSecret : Constants.clientSecret,
-                APIParameters.grantType    : "refresh_token"
+                AuthParameters.refreshToken : refreshToken,
+                AuthParameters.clientId     : Constants.clientId,
+                AuthParameters.clientSecret : Constants.clientSecret,
+                AuthParameters.grantType    : "refresh_token"
             ]
             
             var manager = AFHTTPRequestOperationManager()
@@ -131,10 +131,10 @@ class FeedlyAuthentication {
             var url = String(format: Constants.apiURL + "/v3/auth/token")
             
             var parameters = [
-                APIParameters.refreshToken : refreshToken,
-                APIParameters.clientId     : Constants.clientId,
-                APIParameters.clientSecret : Constants.clientSecret,
-                APIParameters.grantType    : "revoke_token"
+                AuthParameters.refreshToken : refreshToken,
+                AuthParameters.clientId     : Constants.clientId,
+                AuthParameters.clientSecret : Constants.clientSecret,
+                AuthParameters.grantType    : "revoke_token"
             ]
             
             var manager = AFHTTPRequestOperationManager()

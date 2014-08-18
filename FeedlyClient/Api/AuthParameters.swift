@@ -1,7 +1,7 @@
 
 import Foundation
 
-struct APIParameters {
+struct AuthParameters {
     
     static var clientId = "client_id"
     

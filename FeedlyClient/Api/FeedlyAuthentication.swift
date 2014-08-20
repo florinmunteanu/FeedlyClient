@@ -75,7 +75,7 @@ class FeedlyAuthentication {
             var operation = manager.POST(url, parameters: parameters,
                 success:  {
                     (operation: AFHTTPRequestOperation!, responseObject: AnyObject!) -> Void  in
-                    if let jsonResult = responseObject as? Dictionary<String, String> {
+                    if let jsonResult = responseObject as? Dictionary<String, AnyObject> {
                         
                         var userToken = UserAccessToken(json: jsonResult)
                         success(userToken)

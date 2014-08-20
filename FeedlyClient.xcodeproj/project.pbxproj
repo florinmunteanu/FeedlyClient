@@ -15,8 +15,8 @@
 		4E6ADB081975A05100D3C72C /* FeedlyClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6ADB071975A05100D3C72C /* FeedlyClientTests.swift */; };
 		4E757E7019A1BA2600CEF5DD /* FeedlyCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E757E6F19A1BA2600CEF5DD /* FeedlyCategories.swift */; };
 		4E757E7219A1BA7F00CEF5DD /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E757E7119A1BA7F00CEF5DD /* Category.swift */; };
+		4E757E7419A1C0AC00CEF5DD /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E757E7319A1C0AC00CEF5DD /* KeychainService.swift */; };
 		4EA3FEDB199A9B8800B84C0F /* FeedlyApiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3FEDA199A9B8800B84C0F /* FeedlyApiError.swift */; };
-		4EA3FEDD199AA1F900B84C0F /* CredentialsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3FEDC199AA1F900B84C0F /* CredentialsStore.swift */; };
 		4EA3FEDF199AA9FA00B84C0F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EA3FEDE199AA9FA00B84C0F /* Security.framework */; };
 		4EA3FEE1199AAA9C00B84C0F /* RefreshAccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3FEE0199AAA9C00B84C0F /* RefreshAccessToken.swift */; };
 		4EA3FEE3199AAD4800B84C0F /* AuthParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3FEE2199AAD4800B84C0F /* AuthParameters.swift */; };
@@ -54,8 +54,8 @@
 		4E6ADB071975A05100D3C72C /* FeedlyClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedlyClientTests.swift; sourceTree = "<group>"; };
 		4E757E6F19A1BA2600CEF5DD /* FeedlyCategories.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedlyCategories.swift; path = Api/FeedlyCategories.swift; sourceTree = "<group>"; };
 		4E757E7119A1BA7F00CEF5DD /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Category.swift; path = Api/Category.swift; sourceTree = "<group>"; };
+		4E757E7319A1C0AC00CEF5DD /* KeychainService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		4EA3FEDA199A9B8800B84C0F /* FeedlyApiError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedlyApiError.swift; sourceTree = "<group>"; };
-		4EA3FEDC199AA1F900B84C0F /* CredentialsStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CredentialsStore.swift; path = Api/CredentialsStore.swift; sourceTree = "<group>"; };
 		4EA3FEDE199AA9FA00B84C0F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		4EA3FEE0199AAA9C00B84C0F /* RefreshAccessToken.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RefreshAccessToken.swift; path = Api/RefreshAccessToken.swift; sourceTree = "<group>"; };
 		4EA3FEE2199AAD4800B84C0F /* AuthParameters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthParameters.swift; path = Api/AuthParameters.swift; sourceTree = "<group>"; };
@@ -131,6 +131,7 @@
 				4E6ADAF41975A05000D3C72C /* Supporting Files */,
 				4EDD1C0A1975A214004C346D /* Storyboard.storyboard */,
 				4EDD1C0E1975C530004C346D /* bridge.h */,
+				4E757E7319A1C0AC00CEF5DD /* KeychainService.swift */,
 			);
 			path = FeedlyClient;
 			sourceTree = "<group>";
@@ -172,7 +173,6 @@
 				4EA3FEE0199AAA9C00B84C0F /* RefreshAccessToken.swift */,
 				4EA3FEE6199BF45800B84C0F /* UserProfile.swift */,
 				4EA3FEDA199A9B8800B84C0F /* FeedlyApiError.swift */,
-				4EA3FEDC199AA1F900B84C0F /* CredentialsStore.swift */,
 				4EA3FEE2199AAD4800B84C0F /* AuthParameters.swift */,
 				4E757E7119A1BA7F00CEF5DD /* Category.swift */,
 			);
@@ -341,12 +341,12 @@
 				4EA3FEDB199A9B8800B84C0F /* FeedlyApiError.swift in Sources */,
 				4E3FAE721986EBAD007DF98D /* LoginViewController.swift in Sources */,
 				4E6ADAF71975A05000D3C72C /* AppDelegate.swift in Sources */,
-				4EA3FEDD199AA1F900B84C0F /* CredentialsStore.swift in Sources */,
 				4EDD1C101975C594004C346D /* FeedlyAuthentication.swift in Sources */,
 				4EA3FEE3199AAD4800B84C0F /* AuthParameters.swift in Sources */,
 				4EA3FEE1199AAA9C00B84C0F /* RefreshAccessToken.swift in Sources */,
 				4EA3FEE5199BF43A00B84C0F /* FeedlyUserProfile.swift in Sources */,
 				4E6ADAFA1975A05000D3C72C /* FeedlyClient.xcdatamodeld in Sources */,
+				4E757E7419A1C0AC00CEF5DD /* KeychainService.swift in Sources */,
 				4ED18CEC197EE4B900EA7522 /* Constants.swift in Sources */,
 				4E757E7019A1BA2600CEF5DD /* FeedlyCategories.swift in Sources */,
 				4E757E7219A1BA7F00CEF5DD /* Category.swift in Sources */,

@@ -45,6 +45,7 @@ class MainViewController: UIViewController {
     
         self.presentViewController(loginController, animated: false, completion: {()->Void in
             // save in keychain
+            
             })
         //LoginViewController().presentViewController(self, animated: false, completion: nil)
     }

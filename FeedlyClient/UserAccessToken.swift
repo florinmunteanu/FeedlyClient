@@ -6,28 +6,28 @@ import Foundation
 class UserAccessToken {
     
     /// Initialize an access token using a dictionary with values received from JSON call made to Feedly auth
-    init(json: Dictionary<String, String>) {
-        if let id = json[AuthParameters.userId] {
+    init(json: Dictionary<String, AnyObject>) {
+        if let id = json[AuthParameters.userId] as AnyObject? as? String {
             self.userId = id
         }
-        if let accessToken = json[AuthParameters.accessToken] {
+        if let accessToken = json[AuthParameters.accessToken] as AnyObject? as? String {
             self.accessToken = accessToken
         }
-        if let expiresIn = json[AuthParameters.expiresIn] {
+        if let expiresIn = json[AuthParameters.expiresIn] as AnyObject? as? String {
             if let intValue = expiresIn.toInt() {
                 self.expiresIn = intValue
             }
         }
-        if let state = json[AuthParameters.state] {
+        if let state = json[AuthParameters.state] as AnyObject? as? String {
             self.state = state
         }
-        if let refreshToken = json[AuthParameters.refreshToken] {
+        if let refreshToken = json[AuthParameters.refreshToken] as AnyObject? as? String {
             self.refreshToken = refreshToken
         }
-        if let tokenType = json[AuthParameters.tokenType] {
+        if let tokenType = json[AuthParameters.tokenType] as AnyObject? as? String {
             self.tokenType = tokenType
         }
-        if let plan = json[AuthParameters.plan] {
+        if let plan = json[AuthParameters.plan] as AnyObject? as? String {
             self.plan = plan
         }
     }

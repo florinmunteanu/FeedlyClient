@@ -47,7 +47,13 @@ class LoginViewController: UIViewController, UIWebViewDelegate {
                 success: {(userToken: UserAccessToken) -> Void in
                     // Set the current feedly user token
                     //CurrentFeedlyUser.token = userToken
-
+                    FeedlyCategories().beginGetCategories(userToken.accessToken,
+                        success: {([Category]) -> Void in
+                            
+                        },
+                        failure: {(NSError) -> Void in
+                            
+                    })
                     self.activityIndicator.stopAnimating()
                 },
                 failure: {(error:NSError) -> Void in

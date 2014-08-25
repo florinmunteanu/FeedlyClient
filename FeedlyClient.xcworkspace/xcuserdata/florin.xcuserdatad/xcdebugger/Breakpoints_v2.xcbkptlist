@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FeedlyClient/Api/Login/LoginViewController.swift"
-            timestampString = "430112541.26494"
+            timestampString = "430376515.565114"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
             landmarkName = "webView(_:shouldStartLoadWithRequest:navigationType:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -297,7 +297,7 @@
                   symbolName = "FeedlyClient.FeedlyCategories.(beginGetCategories (FeedlyClient.FeedlyCategories) -&gt; (Swift.String, success : (Swift.Array&lt;FeedlyClient.Category&gt;) -&gt; (), failure : (ObjectiveC.NSError) -&gt; ()) -&gt; ObjectiveC.AFHTTPRequestOperation).(closure #1)"
                   moduleName = "FeedlyClient"
                   urlString = "file:///Users/florin/Documents/Developer/FeedlyClient/FeedlyClient/Api/FeedlyCategories.swift"
-                  timestampString = "430203915.591949"
+                  timestampString = "430493563.174379"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "21"
@@ -311,7 +311,7 @@
                   symbolName = "FeedlyClient.FeedlyCategories.(beginGetCategories (FeedlyClient.FeedlyCategories) -&gt; (Swift.String, success : (Swift.Array&lt;FeedlyClient.Category&gt;) -&gt; (), failure : (ObjectiveC.NSError) -&gt; ()) -&gt; ObjectiveC.AFHTTPRequestOperation).(closure #1)"
                   moduleName = "FeedlyClient"
                   urlString = "file:///Users/florin/Documents/Developer/FeedlyClient/FeedlyClient/Api/FeedlyCategories.swift"
-                  timestampString = "430203915.592595"
+                  timestampString = "430493563.174812"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "21"
@@ -380,6 +380,22 @@
             startingLineNumber = "52"
             endingLineNumber = "52"
             landmarkName = "webView(_:shouldStartLoadWithRequest:navigationType:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FeedlyClient/Api/FeedlySubcriptions.swift"
+            timestampString = "430376063.802531"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+            landmarkName = "beginGetSubscriptions(_:success:failure:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -15,15 +15,17 @@ func beginGetUserProfile(accessToken: String, success: (UserProfile) -> Void, fa
      
         var operation = manager.GET(url, parameters: nil,
             success:  {
-                (operation: AFHTTPRequestOperation!, responseObject: AnyObject!) -> Void  in
+                (operation: AFHTTPRequestOperation!, responseObject: AnyObject!) -> Void in
+                
                 if let jsonResult = responseObject as? Dictionary<String, String> {
-                    
                     var profile = UserProfile(json: jsonResult)
                     success(profile)
                     
                 } else {
                     
-                    //failure(error)
+                    var error = NSError(domain: FeedlyApiError.domain, code: 1100,
+                        userInfo: [NSLocalizedDescriptionKey: "Received an incorrect user profile response that could not be parsed.", NSLocalizedFailureReasonErrorKey: "User profile response was not in json format or the json format has changed."])
+                    failure(error)
                 }
             },
             failure: {

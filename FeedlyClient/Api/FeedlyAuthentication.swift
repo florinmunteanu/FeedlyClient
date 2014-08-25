@@ -74,15 +74,16 @@ class FeedlyAuthentication {
             
             var operation = manager.POST(url, parameters: parameters,
                 success:  {
-                    (operation: AFHTTPRequestOperation!, responseObject: AnyObject!) -> Void  in
+                    (operation: AFHTTPRequestOperation!, responseObject: AnyObject!) -> Void in
+                    
                     if let jsonResult = responseObject as? Dictionary<String, AnyObject> {
-                        
                         var userToken = UserAccessToken(json: jsonResult)
                         success(userToken)
-                    
+                        
                     } else {
                         
-                        var error = NSError(domain: FeedlyApiError.domain, code: 1000, userInfo: [NSLocalizedDescriptionKey: "Received an incorrect response that could not be parsed.", NSLocalizedFailureReasonErrorKey: "Response was not in json format or the json format has changed."])
+                        var error = NSError(domain: FeedlyApiError.domain, code: 1000,
+                            userInfo: [NSLocalizedDescriptionKey: "Received an incorrect access token that could not be parsed.", NSLocalizedFailureReasonErrorKey: "Access token response was not in json format or the json format has changed."])
                         failure(error)
                     }
                 },
@@ -110,11 +111,14 @@ class FeedlyAuthentication {
             
             var operation = manager.POST(url, parameters: parameters,
                 success: {
-                    (operation: AFHTTPRequestOperation!, responseObject: AnyObject!) -> Void  in
+                    (operation: AFHTTPRequestOperation!, responseObject: AnyObject!) -> Void in
+                    
                     if let jsonResult = responseObject as? Dictionary<String, String> {
                         var refreshToken = RefreshAccessToken(json: jsonResult)
                     } else {
-                        var error = NSError(domain: FeedlyApiError.domain, code: 1001, userInfo: [NSLocalizedDescriptionKey: "Received an incorrect response that could not be parsed.", NSLocalizedFailureReasonErrorKey: "Response was not in json format or the json format has changed."])
+                        
+                        var error = NSError(domain: FeedlyApiError.domain, code: 1001,
+                            userInfo: [NSLocalizedDescriptionKey: "Received an incorrect refresh token response that could not be parsed.", NSLocalizedFailureReasonErrorKey: "Refresh token response was not in json format or the json format has changed."])
                         failure(error)
                     }
                 },

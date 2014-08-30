@@ -6,7 +6,20 @@ import Foundation
 // The content itself contains sanitized HTML markup.
 class EntryContent {
     
-    var content: String
+    init(json: Dictionary<String, String>) {
+        if let content = json["content"] as AnyObject! as? String {
+            self.content = content
+        }
+        if let direction = json["direction"] as AnyObject! as? String {
+            self.direction = direction
+        }
+    }
     
-    var direction: String
+    var leftToRight = "ltr"
+    
+    var rightToLeft = "rtl"
+    
+    var content: String = ""
+    
+    var direction: String = ""
 }

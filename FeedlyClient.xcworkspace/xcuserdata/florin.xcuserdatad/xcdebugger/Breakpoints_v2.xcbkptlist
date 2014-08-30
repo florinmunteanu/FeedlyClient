@@ -41,22 +41,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "FeedlyClient/Api/Login/LoginViewController.swift"
-            timestampString = "430376515.565114"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
-            landmarkName = "webView(_:shouldStartLoadWithRequest:navigationType:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "FeedlyClient/Api/FeedlyAuthentication.swift"
             timestampString = "429560222.768158"
             startingColumnNumber = "9223372036854775807"
@@ -297,12 +281,12 @@
                   symbolName = "FeedlyClient.FeedlyCategories.(beginGetCategories (FeedlyClient.FeedlyCategories) -&gt; (Swift.String, success : (Swift.Array&lt;FeedlyClient.Category&gt;) -&gt; (), failure : (ObjectiveC.NSError) -&gt; ()) -&gt; ObjectiveC.AFHTTPRequestOperation).(closure #1)"
                   moduleName = "FeedlyClient"
                   urlString = "file:///Users/florin/Documents/Developer/FeedlyClient/FeedlyClient/Api/FeedlyCategories.swift"
-                  timestampString = "430493563.174379"
+                  timestampString = "431040043.291872"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "21"
-                  endingLineNumber = "21"
-                  offsetFromSymbolStart = "27">
+                  startingLineNumber = "22"
+                  endingLineNumber = "22"
+                  offsetFromSymbolStart = "31">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -311,12 +295,26 @@
                   symbolName = "FeedlyClient.FeedlyCategories.(beginGetCategories (FeedlyClient.FeedlyCategories) -&gt; (Swift.String, success : (Swift.Array&lt;FeedlyClient.Category&gt;) -&gt; (), failure : (ObjectiveC.NSError) -&gt; ()) -&gt; ObjectiveC.AFHTTPRequestOperation).(closure #1)"
                   moduleName = "FeedlyClient"
                   urlString = "file:///Users/florin/Documents/Developer/FeedlyClient/FeedlyClient/Api/FeedlyCategories.swift"
-                  timestampString = "430493563.174812"
+                  timestampString = "431040043.294093"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "21"
-                  endingLineNumber = "21"
-                  offsetFromSymbolStart = "962">
+                  startingLineNumber = "22"
+                  endingLineNumber = "22"
+                  offsetFromSymbolStart = "1031">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FeedlyClient.FeedlyCategories.(beginGetCategories (FeedlyClient.FeedlyCategories) -&gt; (Swift.String, success : (Swift.Array&lt;FeedlyClient.Category&gt;) -&gt; (), failure : (ObjectiveC.NSError) -&gt; ()) -&gt; ObjectiveC.AFHTTPRequestOperation).(closure #1)"
+                  moduleName = "FeedlyClient"
+                  urlString = "file:///Users/florin/Documents/Developer/FeedlyClient/FeedlyClient/Api/FeedlyCategories.swift"
+                  timestampString = "431040043.294525"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "22"
+                  endingLineNumber = "22"
+                  offsetFromSymbolStart = "2185">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -370,22 +368,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "FeedlyClient/Api/Login/LoginViewController.swift"
-            timestampString = "430112531.431128"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
-            landmarkName = "webView(_:shouldStartLoadWithRequest:navigationType:)"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -397,6 +379,282 @@
             endingLineNumber = "24"
             landmarkName = "beginGetSubscriptions(_:success:failure:)"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FeedlyClient/Api/Entry.swift"
+            timestampString = "431038212.703715"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
+            landmarkName = "init(json:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FeedlyClient/Api/Entry.swift"
+            timestampString = "431038212.703715"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
+            landmarkName = "init(json:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FeedlyClient/FeedlyEntries.swift"
+            timestampString = "431040042.956276"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
+            landmarkName = "beginGetEntries(_:accessToken:success:failure:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FeedlyClient/Api/Login/LoginViewController.swift"
+            timestampString = "431038419.103806"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
+            landmarkName = "webView(_:shouldStartLoadWithRequest:navigationType:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FeedlyClient/Api/FeedlyStreams.swift"
+            timestampString = "431038659.33026"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "beginGetStream(_:options:success:failure:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FeedlyClient/Api/FeedlyStreams.swift"
+            timestampString = "431038659.33026"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "beginGetStream(_:options:success:failure:)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FeedlyClient.FeedlyStreams.(beginGetStream (FeedlyClient.FeedlyStreams) -&gt; (Swift.String, options : Swift.Optional&lt;FeedlyClient.StreamSearchOptions&gt;, success : (FeedlyClient.Stream) -&gt; (), failure : (ObjectiveC.NSError) -&gt; ()) -&gt; ObjectiveC.AFHTTPRequestOperation).(closure #1)"
+                  moduleName = "FeedlyClient"
+                  urlString = "file:///Users/florin/Documents/Developer/FeedlyClient/FeedlyClient/Api/FeedlyStreams.swift"
+                  timestampString = "431040043.301936"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "30"
+                  endingLineNumber = "30"
+                  offsetFromSymbolStart = "31">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FeedlyClient.FeedlyStreams.(beginGetStream (FeedlyClient.FeedlyStreams) -&gt; (Swift.String, options : Swift.Optional&lt;FeedlyClient.StreamSearchOptions&gt;, success : (FeedlyClient.Stream) -&gt; (), failure : (ObjectiveC.NSError) -&gt; ()) -&gt; ObjectiveC.AFHTTPRequestOperation).(closure #1)"
+                  moduleName = "FeedlyClient"
+                  urlString = "file:///Users/florin/Documents/Developer/FeedlyClient/FeedlyClient/Api/FeedlyStreams.swift"
+                  timestampString = "431040043.302182"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "30"
+                  endingLineNumber = "30"
+                  offsetFromSymbolStart = "143">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FeedlyClient.FeedlyStreams.(beginGetStream (FeedlyClient.FeedlyStreams) -&gt; (Swift.String, options : Swift.Optional&lt;FeedlyClient.StreamSearchOptions&gt;, success : (FeedlyClient.Stream) -&gt; (), failure : (ObjectiveC.NSError) -&gt; ()) -&gt; ObjectiveC.AFHTTPRequestOperation).(closure #1)"
+                  moduleName = "FeedlyClient"
+                  urlString = "file:///Users/florin/Documents/Developer/FeedlyClient/FeedlyClient/Api/FeedlyStreams.swift"
+                  timestampString = "431040043.302432"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "30"
+                  endingLineNumber = "30"
+                  offsetFromSymbolStart = "1464">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FeedlyClient.FeedlyStreams.(beginGetStream (FeedlyClient.FeedlyStreams) -&gt; (Swift.String, options : Swift.Optional&lt;FeedlyClient.StreamSearchOptions&gt;, success : (FeedlyClient.Stream) -&gt; (), failure : (ObjectiveC.NSError) -&gt; ()) -&gt; ObjectiveC.AFHTTPRequestOperation).(closure #1)"
+                  moduleName = "FeedlyClient"
+                  urlString = "file:///Users/florin/Documents/Developer/FeedlyClient/FeedlyClient/Api/FeedlyStreams.swift"
+                  timestampString = "431040043.302695"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "30"
+                  endingLineNumber = "30"
+                  offsetFromSymbolStart = "2772">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FeedlyClient/Api/Login/LoginViewController.swift"
+            timestampString = "431039834.360074"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
+            landmarkName = "webView(_:shouldStartLoadWithRequest:navigationType:)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FeedlyClient.LoginViewController.(webView (FeedlyClient.LoginViewController) -&gt; (Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.UIWebView&gt;, shouldStartLoadWithRequest : Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.NSURLRequest&gt;, navigationType : C.UIWebViewNavigationType) -&gt; Swift.Bool).(closure #1).(closure #1)"
+                  moduleName = "FeedlyClient"
+                  urlString = "file:///Users/florin/Documents/Developer/FeedlyClient/FeedlyClient/Api/Login/LoginViewController.swift"
+                  timestampString = "431040043.30607"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "91"
+                  endingLineNumber = "91"
+                  offsetFromSymbolStart = "12">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FeedlyClient.LoginViewController.(webView (FeedlyClient.LoginViewController) -&gt; (Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.UIWebView&gt;, shouldStartLoadWithRequest : Swift.ImplicitlyUnwrappedOptional&lt;ObjectiveC.NSURLRequest&gt;, navigationType : C.UIWebViewNavigationType) -&gt; Swift.Bool).(closure #1).(closure #2)"
+                  moduleName = "FeedlyClient"
+                  urlString = "file:///Users/florin/Documents/Developer/FeedlyClient/FeedlyClient/Api/Login/LoginViewController.swift"
+                  timestampString = "431040043.306573"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "93"
+                  endingLineNumber = "93"
+                  offsetFromSymbolStart = "12">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FeedlyClient/Api/Login/LoginViewController.swift"
+            timestampString = "431039834.360074"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
+            landmarkName = "webView(_:shouldStartLoadWithRequest:navigationType:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FeedlyClient/FeedlyEntries.swift"
+            timestampString = "431040042.956276"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "beginGetEntry(_:accessToken:success:failure:)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FeedlyClient.FeedlyEntries.(beginGetEntry (FeedlyClient.FeedlyEntries) -&gt; (Swift.String, accessToken : Swift.Optional&lt;Swift.String&gt;, success : (FeedlyClient.Entry) -&gt; (), failure : (ObjectiveC.NSError) -&gt; ()) -&gt; ObjectiveC.AFHTTPRequestOperation).(closure #1)"
+                  moduleName = "FeedlyClient"
+                  urlString = "file:///Users/florin/Documents/Developer/FeedlyClient/FeedlyClient/FeedlyEntries.swift"
+                  timestampString = "431040043.309981"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "26"
+                  endingLineNumber = "26"
+                  offsetFromSymbolStart = "31">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FeedlyClient.FeedlyEntries.(beginGetEntry (FeedlyClient.FeedlyEntries) -&gt; (Swift.String, accessToken : Swift.Optional&lt;Swift.String&gt;, success : (FeedlyClient.Entry) -&gt; (), failure : (ObjectiveC.NSError) -&gt; ()) -&gt; ObjectiveC.AFHTTPRequestOperation).(closure #1)"
+                  moduleName = "FeedlyClient"
+                  urlString = "file:///Users/florin/Documents/Developer/FeedlyClient/FeedlyClient/FeedlyEntries.swift"
+                  timestampString = "431040043.3104"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "26"
+                  endingLineNumber = "26"
+                  offsetFromSymbolStart = "143">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "FeedlyClient.FeedlyEntries.(beginGetEntry (FeedlyClient.FeedlyEntries) -&gt; (Swift.String, accessToken : Swift.Optional&lt;Swift.String&gt;, success : (FeedlyClient.Entry) -&gt; (), failure : (ObjectiveC.NSError) -&gt; ()) -&gt; ObjectiveC.AFHTTPRequestOperation).(closure #1)"
+                  moduleName = "FeedlyClient"
+                  urlString = "file:///Users/florin/Documents/Developer/FeedlyClient/FeedlyClient/FeedlyEntries.swift"
+                  timestampString = "431040043.310936"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "26"
+                  endingLineNumber = "26"
+                  offsetFromSymbolStart = "3410">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

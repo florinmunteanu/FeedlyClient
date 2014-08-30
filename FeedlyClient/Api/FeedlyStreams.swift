@@ -6,7 +6,8 @@ class FeedlyStreams {
     func beginGetStream(streamId: String, options: StreamSearchOptions?, success: (Stream) -> Void, failure: (NSError) -> Void)
         -> AFHTTPRequestOperation {
             
-            var url = String(format: Constants.apiURL + "/v3/streams/" + streamId + "/ids")
+            var encodedStreamId = streamId.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet())
+            var url = Constants.apiURL + "/v3/streams/" + encodedStreamId + "/ids"
             
             // GET /v3/streams/:streamId/ids
             

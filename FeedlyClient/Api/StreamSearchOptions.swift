@@ -3,6 +3,10 @@ import Foundation
 
 class StreamSearchOptions {
     
+    init() {
+        
+    }
+    
     var accessToken: String?
     
     // Optional integer number of entry ids to return. default is 20. max is 10,000.

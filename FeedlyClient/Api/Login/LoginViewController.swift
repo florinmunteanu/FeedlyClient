@@ -87,7 +87,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate {
                         accessToken: userToken.accessToken,
                         success: {
                         (entry: Entry) -> Void in
-                        self.webView.loadHTMLString(<#string: String!#>, baseURL: <#NSURL!#>)
+                        //self.webView.loadHTMLString(<#string: String!#>, baseURL: <#NSURL!#>)
                         }, failure: { (error:NSError) -> Void in
                         
                     })

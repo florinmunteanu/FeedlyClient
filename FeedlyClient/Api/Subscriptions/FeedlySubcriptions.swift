@@ -5,7 +5,7 @@ class FeedlySubscriptions {
     func beginGetSubscriptions(accessToken: String, success: ([Subscription]) -> Void, failure: (NSError) -> Void)
         -> AFHTTPRequestOperation {
             
-            var url = String(format: Constants.apiURL + "/v3/subscriptions")
+            var url = Constants.apiURL + "/v3/subscriptions"
             
             // GET https://sandbox.feedly.com/v3/subscriptions
             

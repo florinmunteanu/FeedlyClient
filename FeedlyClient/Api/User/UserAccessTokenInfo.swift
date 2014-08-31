@@ -1,9 +1,9 @@
 
 import Foundation
 
-///  Defines an access token used to access the Feedly API
+///  Defines access token info used to access the Feedly API
 ///
-class UserAccessToken {
+class UserAccessTokenInfo {
     
     /// Initialize an access token using a dictionary with values received from JSON call made to Feedly auth
     init(json: Dictionary<String, AnyObject>) {

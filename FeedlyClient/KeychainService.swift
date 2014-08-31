@@ -2,12 +2,12 @@
 import Foundation
 import Security
 
-//http://matthewpalmer.net/blog/2014/06/21/example-ios-keychain-swift-save-query/
+// http://matthewpalmer.net/blog/2014/06/21/example-ios-keychain-swift-save-query/
+// https://developer.apple.com/library/mac/documentation/security/Conceptual/keychainServConcepts/02concepts/concepts.html
 
 // Identifiers
-let serviceIdentifier = "MySerivice"
+let serviceIdentifier = "FeedlyClient"
 let userAccount = "authenticatedUser"
-//let accessGroup = "MySerivice"
 
 // Arguments for the keychain queries
 let kSecClassValue = kSecClass.takeRetainedValue() as NSString
@@ -20,10 +20,13 @@ let kSecReturnDataValue = kSecReturnData.takeRetainedValue() as NSString
 let kSecMatchLimitOneValue = kSecMatchLimitOne.takeRetainedValue() as NSString
 
 class KeychainService : NSObject {
-    class func saveToken(accessToken: String) {
+    class func saveAccessToken(accessToken: String) {
         self.save(serviceIdentifier, data: accessToken)
     }
     
+    class func loadAccessToken() -> String? {
+        return self.load(serviceIdentifier)
+    }
    /*
     * Internal methods for querying the keychain.
     */
@@ -31,7 +34,7 @@ class KeychainService : NSObject {
         var dataFromString: NSData = data.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
         
         // Instantiate a new default keychain query
-        var keychainQuery: NSMutableDictionary = NSMutableDictionary(objects: [kSecClassGenericPasswordValue, service, userAccount, dataFromString], forKeys: [kSecClassValue, kSecAttrServiceValue, kSecAttrAccountValue, kSecValueDataValue])
+        var keychainQuery = NSMutableDictionary(objects: [kSecClassGenericPasswordValue, service, userAccount, dataFromString], forKeys: [kSecClassValue, kSecAttrServiceValue, kSecAttrAccountValue, kSecValueDataValue])
         
         // Delete any existing items
         SecItemDelete(keychainQuery as CFDictionaryRef)
@@ -46,7 +49,7 @@ class KeychainService : NSObject {
         // Limit our results to one item
         var keychainQuery: NSMutableDictionary = NSMutableDictionary(objects: [kSecClassGenericPasswordValue, service, userAccount, kCFBooleanTrue, kSecMatchLimitOneValue], forKeys: [kSecClassValue, kSecAttrServiceValue, kSecAttrAccountValue, kSecReturnDataValue, kSecMatchLimitValue])
         
-        var dataTypeRef :Unmanaged<AnyObject>?
+        var dataTypeRef: Unmanaged<AnyObject>?
         
         // Search for the keychain items
         let status: OSStatus = SecItemCopyMatching(keychainQuery, &dataTypeRef)

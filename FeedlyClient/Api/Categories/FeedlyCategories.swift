@@ -5,7 +5,7 @@ class FeedlyCategories {
     func beginGetCategories(accessToken: String, success: ([Category]) -> Void, failure: (NSError) -> Void)
         -> AFHTTPRequestOperation {
             
-            var url = String(format: Constants.apiURL + "/v3/categories")
+            var url = Constants.apiURL + "/v3/categories"
             
             // GET https://sandbox.feedly.com/v3/categories
             

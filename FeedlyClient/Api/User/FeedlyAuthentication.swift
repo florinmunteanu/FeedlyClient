@@ -42,7 +42,7 @@ class FeedlyAuthentication {
         return ""
     }
     
-    func beginGetAccessToken(authenticationCode: String, success: (UserAccessToken) -> Void, failure: (NSError) -> Void)
+    func beginGetAccessToken(authenticationCode: String, success: (UserAccessTokenInfo) -> Void, failure: (NSError) -> Void)
         -> AFHTTPRequestOperation {
             var url = String(format: Constants.apiURL + "/v3/auth/token")
             
@@ -77,7 +77,7 @@ class FeedlyAuthentication {
                     (operation: AFHTTPRequestOperation!, responseObject: AnyObject!) -> Void in
                     
                     if let jsonResult = responseObject as? Dictionary<String, AnyObject> {
-                        var userToken = UserAccessToken(json: jsonResult)
+                        var userToken = UserAccessTokenInfo(json: jsonResult)
                         success(userToken)
                         
                     } else {

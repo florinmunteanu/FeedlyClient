@@ -1,7 +1,8 @@
 
 import Foundation
 
-class Entry {
+class FeedlyEntry {
+    
     init(json: Dictionary<String, AnyObject>) {
         if let id = json["id"] as AnyObject! as? String {
             self.id = id
@@ -26,7 +27,7 @@ class Entry {
         }
         
         if let categories = json["categories"] as AnyObject! as? [Dictionary<String, String>] {
-            self.categories = Category.fromJson(categories)
+            self.categories = FeedlyCategory.fromJson(categories)
         }
         if let keywords = json["keywords"] as AnyObject! as? [String] {
             self.keywords = keywords
@@ -41,15 +42,15 @@ class Entry {
             self.author = author
         }
         if let origin = json["origin"] as AnyObject! as? Dictionary<String, String> {
-            self.origin = EntryOrigin(json: origin)
+            self.origin = FeedlyEntryOrigin(json: origin)
         } else {
-            self.origin = EntryOrigin()
+            self.origin = FeedlyEntryOrigin()
         }
         if let content = json["content"] as AnyObject! as? Dictionary<String, String> {
-            self.content = EntryContent(json: content)
+            self.content = FeedlyEntryContent(json: content)
         }
         if let summary = json["summary"] as AnyObject! as? Dictionary<String, String> {
-            self.summary = EntryContent(json: summary)
+            self.summary = FeedlyEntryContent(json: summary)
         }
         
         if let unread = json["unread"] as AnyObject! as? Bool {
@@ -68,13 +69,13 @@ class Entry {
             self.fingerprint = ""
         }
         if let enclosure = json["enclosure"] as AnyObject! as? [Dictionary<String, String>] {
-            self.enclosure = EntryLink.fromJsonArray(enclosure)
+            self.enclosure = FeedlyEntryLink.fromJsonArray(enclosure)
         }
         if let alternate = json["alternate"] as AnyObject! as? [Dictionary<String, String>] {
-            self.alternate = EntryLink.fromJsonArray(alternate)
+            self.alternate = FeedlyEntryLink.fromJsonArray(alternate)
         }
         if let visual = json["visual"] as AnyObject! as? Dictionary<String, AnyObject> {
-            self.visual = EntryVisual(json: visual)
+            self.visual = FeedlyEntryVisual(json: visual)
         }
     }
     
@@ -99,7 +100,7 @@ class Entry {
 
     // A list of category objects (“id” and “label”) that the user associated with the feed of this entry.
     // This value is only returned if an Authorization header is provided.
-    var categories: [Category]?
+    var categories: [FeedlyCategory]?
     
     var engagementRate: Double?
     
@@ -108,15 +109,15 @@ class Entry {
     
     // Optional origin object the feed from which this article was crawled. 
     // If present, “streamId” will contain the feed id, “title” will contain the feed title, and “htmlUrl” will contain the feed’s website.
-    var origin: EntryOrigin
+    var origin: FeedlyEntryOrigin
     
     // Optional content object the article content. 
     // This object typically has two values: “content” for the content itself, and “direction” (“ltr” for left-to-right, “rtl” for right-to-left).
     // The content itself contains sanitized HTML markup.
-    var content: EntryContent?
+    var content: FeedlyEntryContent?
     
     //content object the article summary.
-    var summary: EntryContent?
+    var summary: FeedlyEntryContent?
     
     // Was this entry read by the user?
     // If an Authorization header is not provided, this will always return false. 
@@ -131,13 +132,13 @@ class Entry {
     
     // Optional link object array a list of media links (videos, images, sound etc) provided by the feed. 
     // Some entries do not have a summary or content, only a collection of media links.
-    var enclosure: [EntryLink]?
+    var enclosure: [FeedlyEntryLink]?
     
     // Optional link object array a list of alternate links for this article. 
     // Each link object contains a media type and a URL. Typically, a single object is present, with a link to the original web page.
-    var alternate: [EntryLink]?
+    var alternate: [FeedlyEntryLink]?
     
     // Optional visual object an image URL for this entry. 
     // If present, “url” will contain the image URL, “width” and “height” its dimension, and “contentType” its MIME type.
-    var visual: EntryVisual?
+    var visual: FeedlyEntryVisual?
 }

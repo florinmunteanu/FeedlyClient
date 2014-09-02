@@ -3,24 +3,24 @@ import Foundation
 
 ///  Defines an access token used to access the Feedly API
 ///
-class RefreshAccessToken {
+class FeedlyRefreshAccessToken {
     
     init(json: Dictionary<String, String>) {
-        if let userId = json[AuthParameters.userId] {
+        if let userId = json[FeedlyAuthParameters.userId] {
             self.userId = userId
         }
-        if let accessToken = json[AuthParameters.accessToken] {
+        if let accessToken = json[FeedlyAuthParameters.accessToken] {
             self.accessToken = accessToken
         }
-        if let expiresIn = json[AuthParameters.expiresIn] {
+        if let expiresIn = json[FeedlyAuthParameters.expiresIn] {
             if let intValue = expiresIn.toInt() {
                 self.expiresIn = intValue
             }
         }
-        if let tokenType = json[AuthParameters.tokenType] {
+        if let tokenType = json[FeedlyAuthParameters.tokenType] {
             self.tokenType = tokenType
         }
-        if let plan = json[AuthParameters.plan] {
+        if let plan = json[FeedlyAuthParameters.plan] {
             self.plan = plan
         }
     }

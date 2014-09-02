@@ -1,9 +1,10 @@
 
 import Foundation
 
-class EntryOrigin {
+class FeedlyEntryOrigin {
     
     init() {
+        
         self.htmlUrl = ""
         self.title = ""
         self.streamId = ""

@@ -1,8 +1,10 @@
 
 import Foundation
 
-class Stream {
+class FeedlyStream {
+    
     init(json: Dictionary<String, AnyObject>) {
+        
         if let entries = json["ids"] as AnyObject! as? [String] {
             self.entries = entries
         }

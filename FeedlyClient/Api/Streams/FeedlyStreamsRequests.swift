@@ -1,9 +1,11 @@
 
 import Foundation
 
-class FeedlyStreams {
+class FeedlyStreamsRequests {
+    
     // A feedId, a categoryId, a tagId or a system category ids can be used as stream ids.
-    func beginGetStream(streamId: String, options: StreamSearchOptions?, success: (Stream) -> Void, failure: (NSError) -> Void)
+    //
+    class func beginGetStream(streamId: String, options: FeedlyStreamSearchOptions?, success: (FeedlyStream) -> Void, failure: (NSError) -> Void)
         -> AFHTTPRequestOperation {
             
             var encodedStreamId = streamId.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet())
@@ -28,7 +30,7 @@ class FeedlyStreams {
                     (operation: AFHTTPRequestOperation!, responseObject: AnyObject!) -> Void in
                     
                     if let jsonResult = responseObject as? Dictionary<String, AnyObject> {
-                        var stream = Stream(json: jsonResult)
+                        var stream = FeedlyStream(json: jsonResult)
                         success(stream)
                     } else {
                         

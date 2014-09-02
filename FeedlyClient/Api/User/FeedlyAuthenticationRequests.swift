@@ -1,16 +1,16 @@
 
 import Foundation
 
-class FeedlyAuthentication {
+class FeedlyAuthenticationRequests {
     
-    func authenticationUrl() -> String{
+    class func authenticationUrl() -> String{
         /* Correct URL: http://sandbox.feedly.com/v3/auth/auth?client_id=sandbox&redirect_uri=https%3A%2F%2Flocalhost&scope=https%3A%2F%2Fcloud.feedly.com%2Fsubscriptions&response_type=code */
         
         var queryParameters = [
-            AuthParameters.responseType : "code",
-            AuthParameters.clientId     : Constants.clientId,
-            AuthParameters.redirectUri  : Constants.redirectUrl.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet()),
-            AuthParameters.scope        : Constants.scope.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet())
+            FeedlyAuthParameters.responseType : "code",
+            FeedlyAuthParameters.clientId     : Constants.clientId,
+            FeedlyAuthParameters.redirectUri  : Constants.redirectUrl.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet()),
+            FeedlyAuthParameters.scope        : Constants.scope.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet())
         ]
         
         var url = String(format: Constants.apiURL + "/v3/auth/auth?")
@@ -21,7 +21,7 @@ class FeedlyAuthentication {
         return url
     }
     
-    func getAuthenticationCode(url: NSURL) -> String {
+    class func getAuthenticationCode(url: NSURL) -> String {
         // Should receive an url in the form of:
         // https://your.redirect.uri/feedlyCallback?code=AQAA7rJ7InAiOjEsImEiOiJmZWVk…&state=state.passed.in
         
@@ -42,8 +42,9 @@ class FeedlyAuthentication {
         return ""
     }
     
-    func beginGetAccessToken(authenticationCode: String, success: (UserAccessTokenInfo) -> Void, failure: (NSError) -> Void)
+    class func beginGetAccessToken(authenticationCode: String, success: (FeedlyUserAccessTokenInfo) -> Void, failure: (NSError) -> Void)
         -> AFHTTPRequestOperation {
+            
             var url = String(format: Constants.apiURL + "/v3/auth/token")
             
             /*
@@ -60,12 +61,12 @@ class FeedlyAuthentication {
             
             */
             var parameters = [
-                AuthParameters.code         : authenticationCode,
-                AuthParameters.clientId     : Constants.clientId,
-                AuthParameters.clientSecret : Constants.clientSecret,
-                AuthParameters.redirectUri  : Constants.redirectUrl,
-                AuthParameters.state        : "",
-                AuthParameters.grantType    : "authorization_code"
+                FeedlyAuthParameters.code         : authenticationCode,
+                FeedlyAuthParameters.clientId     : Constants.clientId,
+                FeedlyAuthParameters.clientSecret : Constants.clientSecret,
+                FeedlyAuthParameters.redirectUri  : Constants.redirectUrl,
+                FeedlyAuthParameters.state        : "",
+                FeedlyAuthParameters.grantType    : "authorization_code"
             ]
             
             var manager = AFHTTPRequestOperationManager()
@@ -77,7 +78,7 @@ class FeedlyAuthentication {
                     (operation: AFHTTPRequestOperation!, responseObject: AnyObject!) -> Void in
                     
                     if let jsonResult = responseObject as? Dictionary<String, AnyObject> {
-                        var userToken = UserAccessTokenInfo(json: jsonResult)
+                        var userToken = FeedlyUserAccessTokenInfo(json: jsonResult)
                         success(userToken)
                         
                     } else {
@@ -94,15 +95,16 @@ class FeedlyAuthentication {
             return operation
     }
     
-    func beginGetRefreshToken(refreshToken: String, success: (RefreshAccessToken) -> Void, failure: (NSError) -> Void)
+    class func beginGetRefreshToken(refreshToken: String, success: (FeedlyRefreshAccessToken) -> Void, failure: (NSError) -> Void)
         -> AFHTTPRequestOperation {
+            
             var url = String(format: Constants.apiURL + "/v3/auth/token")
             
             var parameters = [
-                AuthParameters.refreshToken : refreshToken,
-                AuthParameters.clientId     : Constants.clientId,
-                AuthParameters.clientSecret : Constants.clientSecret,
-                AuthParameters.grantType    : "refresh_token"
+                FeedlyAuthParameters.refreshToken : refreshToken,
+                FeedlyAuthParameters.clientId     : Constants.clientId,
+                FeedlyAuthParameters.clientSecret : Constants.clientSecret,
+                FeedlyAuthParameters.grantType    : "refresh_token"
             ]
             
             var manager = AFHTTPRequestOperationManager()
@@ -114,7 +116,7 @@ class FeedlyAuthentication {
                     (operation: AFHTTPRequestOperation!, responseObject: AnyObject!) -> Void in
                     
                     if let jsonResult = responseObject as? Dictionary<String, String> {
-                        var refreshToken = RefreshAccessToken(json: jsonResult)
+                        var refreshToken = FeedlyRefreshAccessToken(json: jsonResult)
                     } else {
                         
                         var error = NSError(domain: FeedlyApiError.domain, code: 1001,
@@ -130,15 +132,16 @@ class FeedlyAuthentication {
             return operation
     }
     
-    func beginRevokeRefreshToken(refreshToken: String, success: () -> Void, failure: (NSError) -> Void)
+    class func beginRevokeRefreshToken(refreshToken: String, success: () -> Void, failure: (NSError) -> Void)
         -> AFHTTPRequestOperation {
+            
             var url = String(format: Constants.apiURL + "/v3/auth/token")
             
             var parameters = [
-                AuthParameters.refreshToken : refreshToken,
-                AuthParameters.clientId     : Constants.clientId,
-                AuthParameters.clientSecret : Constants.clientSecret,
-                AuthParameters.grantType    : "revoke_token"
+                FeedlyAuthParameters.refreshToken : refreshToken,
+                FeedlyAuthParameters.clientId     : Constants.clientId,
+                FeedlyAuthParameters.clientSecret : Constants.clientSecret,
+                FeedlyAuthParameters.grantType    : "revoke_token"
             ]
             
             var manager = AFHTTPRequestOperationManager()

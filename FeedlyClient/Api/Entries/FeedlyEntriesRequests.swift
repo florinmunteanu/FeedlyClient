@@ -1,9 +1,9 @@
 
 import Foundation
 
-class FeedlyEntries {
+class FeedlyEntriesRequests {
     
-    func beginGetEntry(entryId: String, accessToken: String?, success: (Entry) -> Void, failure: (NSError) -> Void)
+    class func beginGetEntry(entryId: String, accessToken: String?, success: (FeedlyEntry) -> Void, failure: (NSError) -> Void)
         -> AFHTTPRequestOperation {
             var encodedEntryId = entryId.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet())
             var url = Constants.apiURL + "/v3/entries/" + encodedEntryId
@@ -25,7 +25,7 @@ class FeedlyEntries {
                     
                     if let jsonResult = responseObject as? [Dictionary<String, AnyObject>] {
                         if jsonResult.count == 1 {
-                            var entry = Entry(json: jsonResult[0])
+                            var entry = FeedlyEntry(json: jsonResult[0])
                             success(entry)
                         } else {
                             var error = NSError(domain: FeedlyApiError.domain, code: 1500,
@@ -45,7 +45,7 @@ class FeedlyEntries {
             return operation
     }
     
-    func beginGetEntries(entries: [String], accessToken: String?, success: (Dictionary<String, Entry>) -> Void, failure: (NSError) -> Void)
+    class func beginGetEntries(entries: [String], accessToken: String?, success: (Dictionary<String, FeedlyEntry>) -> Void, failure: (NSError) -> Void)
         -> AFHTTPRequestOperation {
             
             var url = String(format: Constants.apiURL + "/v3/entries/.mget")
@@ -70,6 +70,7 @@ class FeedlyEntries {
                     (operation: AFHTTPRequestOperation!, responseObject: AnyObject!) -> Void in
                     
                     if let jsonResult = responseObject as? [Dictionary<String, AnyObject>] {
+                        // TO DO: call callback of FeedlyEntry
                         
                     } else {
                         var error = NSError(domain: FeedlyApiError.domain, code: 1502,

@@ -1,13 +1,13 @@
 
 import Foundation
 
-class FeedlySubscriptions {
-    func beginGetSubscriptions(accessToken: String, success: ([Subscription]) -> Void, failure: (NSError) -> Void)
+class FeedlyUserProfileRequests {
+    
+    class func beginGetUserProfile(accessToken: String, success: (FeedlyUserProfile) -> Void, failure: (NSError) -> Void)
         -> AFHTTPRequestOperation {
+            var url = String(format: Constants.apiURL + "/v3/profile")
             
-            var url = Constants.apiURL + "/v3/subscriptions"
-            
-            // GET https://sandbox.feedly.com/v3/subscriptions
+            // GET https://sandbox.feedly.com/v3/profile
             
             var manager = AFHTTPRequestOperationManager()
             manager.requestSerializer = AFHTTPRequestSerializer()
@@ -19,13 +19,14 @@ class FeedlySubscriptions {
                 success:  {
                     (operation: AFHTTPRequestOperation!, responseObject: AnyObject!) -> Void in
                     
-                    if let jsonResult = responseObject as? [Dictionary<String, AnyObject>] {
-                        var subscriptions = Subscription.fromJsonArray(jsonResult)
-                        success(subscriptions)
+                    if let jsonResult = responseObject as? Dictionary<String, String> {
+                        var profile = FeedlyUserProfile(json: jsonResult)
+                        success(profile)
+                        
                     } else {
                         
-                        var error = NSError(domain: FeedlyApiError.domain, code: 1300,
-                            userInfo: [NSLocalizedDescriptionKey: "Received an incorrect subscriptions response that could not be parsed.", NSLocalizedFailureReasonErrorKey: "Subscriptions response was not in json format or the json format has changed."])
+                        var error = NSError(domain: FeedlyApiError.domain, code: 1100,
+                            userInfo: [NSLocalizedDescriptionKey: "Received an incorrect user profile response that could not be parsed.", NSLocalizedFailureReasonErrorKey: "User profile response was not in json format or the json format has changed."])
                         failure(error)
                     }
                 },

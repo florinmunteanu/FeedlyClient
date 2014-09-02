@@ -1,7 +1,7 @@
 
 import Foundation
 
-class StreamSearchOptions {
+class FeedlyStreamSearchOptions {
     
     init() {
         

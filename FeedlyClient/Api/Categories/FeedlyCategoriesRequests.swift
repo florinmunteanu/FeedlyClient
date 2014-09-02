@@ -1,8 +1,9 @@
 
 import Foundation
 
-class FeedlyCategories {
-    func beginGetCategories(accessToken: String, success: ([Category]) -> Void, failure: (NSError) -> Void)
+class FeedlyCategoriesRequests {
+    
+    class func beginGetCategories(accessToken: String, success: ([FeedlyCategory]) -> Void, failure: (NSError) -> Void)
         -> AFHTTPRequestOperation {
             
             var url = Constants.apiURL + "/v3/categories"
@@ -20,7 +21,7 @@ class FeedlyCategories {
                     (operation: AFHTTPRequestOperation!, responseObject: AnyObject!) -> Void  in
                     
                     if let jsonResult = responseObject as? [Dictionary<String, String>] {
-                        var categories = Category.fromJson(jsonResult)
+                        var categories = FeedlyCategory.fromJson(jsonResult)
                         success(categories)
                     } else {
                         

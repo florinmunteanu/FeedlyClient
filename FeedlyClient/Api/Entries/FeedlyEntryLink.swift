@@ -1,7 +1,7 @@
 
 import Foundation
 
-class EntryLink {
+class FeedlyEntryLink {
     
     init(json: Dictionary<String, String>) {
         if let href = json["href"] as AnyObject! as? String {
@@ -16,11 +16,11 @@ class EntryLink {
     
     var type: String = ""
     
-    class func fromJsonArray(jsonArray: [Dictionary<String, String>]) -> [EntryLink] {
-        var entries = Array<EntryLink>()
+    class func fromJsonArray(jsonArray: [Dictionary<String, String>]) -> [FeedlyEntryLink] {
+        var entries = Array<FeedlyEntryLink>()
         
         for json in jsonArray {
-            entries.append(EntryLink(json: json))
+            entries.append(FeedlyEntryLink(json: json))
         }
         return entries
     }

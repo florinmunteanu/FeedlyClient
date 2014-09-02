@@ -3,31 +3,31 @@ import Foundation
 
 ///  Defines access token info used to access the Feedly API
 ///
-class UserAccessTokenInfo {
+class FeedlyUserAccessTokenInfo {
     
     /// Initialize an access token using a dictionary with values received from JSON call made to Feedly auth
     init(json: Dictionary<String, AnyObject>) {
-        if let id = json[AuthParameters.userId] as AnyObject? as? String {
+        if let id = json[FeedlyAuthParameters.userId] as AnyObject? as? String {
             self.userId = id
         }
-        if let accessToken = json[AuthParameters.accessToken] as AnyObject? as? String {
+        if let accessToken = json[FeedlyAuthParameters.accessToken] as AnyObject? as? String {
             self.accessToken = accessToken
         }
-        if let expiresIn = json[AuthParameters.expiresIn] as AnyObject? as? String {
+        if let expiresIn = json[FeedlyAuthParameters.expiresIn] as AnyObject? as? String {
             if let intValue = expiresIn.toInt() {
                 self.expiresIn = intValue
             }
         }
-        if let state = json[AuthParameters.state] as AnyObject? as? String {
+        if let state = json[FeedlyAuthParameters.state] as AnyObject? as? String {
             self.state = state
         }
-        if let refreshToken = json[AuthParameters.refreshToken] as AnyObject? as? String {
+        if let refreshToken = json[FeedlyAuthParameters.refreshToken] as AnyObject? as? String {
             self.refreshToken = refreshToken
         }
-        if let tokenType = json[AuthParameters.tokenType] as AnyObject? as? String {
+        if let tokenType = json[FeedlyAuthParameters.tokenType] as AnyObject? as? String {
             self.tokenType = tokenType
         }
-        if let plan = json[AuthParameters.plan] as AnyObject? as? String {
+        if let plan = json[FeedlyAuthParameters.plan] as AnyObject? as? String {
             self.plan = plan
         }
     }

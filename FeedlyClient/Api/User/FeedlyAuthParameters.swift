@@ -1,7 +1,7 @@
 
 import Foundation
 
-struct AuthParameters {
+struct FeedlyAuthParameters {
     
     static var clientId = "client_id"
     

@@ -1,8 +1,8 @@
 
 import Foundation
 
-class SearchOptions
-{
+class SearchOptions {
+    
     init(query: String) {
         self.query = query
     }

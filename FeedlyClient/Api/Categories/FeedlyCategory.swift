@@ -1,7 +1,7 @@
 
 import Foundation
 
-class Category {
+class FeedlyCategory {
     
     var id: String = ""
     
@@ -9,11 +9,11 @@ class Category {
     
     var uncategorized = "global.uncategorized"
     
-    class func fromJson(json: [Dictionary<String, String>]) -> [Category] {
-        var categories = Array<Category>()
+    class func fromJson(json: [Dictionary<String, String>]) -> [FeedlyCategory] {
+        var categories = Array<FeedlyCategory>()
         
         for dict in json {
-            var category = Category()
+            var category = FeedlyCategory()
             
             for (key, value) in dict {
                 if key == "id" {

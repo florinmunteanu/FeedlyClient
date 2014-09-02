@@ -1,7 +1,7 @@
 
 import Foundation
 
-class Subscription {
+class FeedlySubscription {
     
     init(json: Dictionary<String, AnyObject>) {
         if let title = json["title"] as AnyObject! as? String {
@@ -17,13 +17,13 @@ class Subscription {
             self.website = website
         }
         if let categories = json["categories"] as AnyObject! as? [Dictionary<String, String>] {
-            self.categories = Category.fromJson(categories)
+            self.categories = FeedlyCategory.fromJson(categories)
         }
     }
     
     var title: String = ""
     
-    var categories: [Category] = []
+    var categories: [FeedlyCategory] = []
     
     var id: String = ""
     
@@ -31,10 +31,10 @@ class Subscription {
     
     var website: String = ""
     
-    class func fromJsonArray(json: [Dictionary<String, AnyObject>]) -> [Subscription] {
-        var subscriptions: [Subscription] = []
+    class func fromJsonArray(json: [Dictionary<String, AnyObject>]) -> [FeedlySubscription] {
+        var subscriptions: [FeedlySubscription] = []
         for entry in json {
-            subscriptions.append(Subscription(json: entry))
+            subscriptions.append(FeedlySubscription(json: entry))
         }
         
         return subscriptions

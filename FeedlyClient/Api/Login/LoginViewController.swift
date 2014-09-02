@@ -18,7 +18,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate {
     }
     
     override func viewDidAppear(animated: Bool) {
-        var url = FeedlyAuthentication().authenticationUrl()
+        var url = FeedlyAuthenticationRequests.authenticationUrl()
         var request = NSURLRequest(URL: NSURL(string: url))
         self.webView.loadRequest(request)
     }
@@ -36,17 +36,16 @@ class LoginViewController: UIViewController, UIWebViewDelegate {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    var delegate: LoginProtocol?
+    var delegate: FeedlyUserLogin?
     
     func webView(webView: UIWebView!, shouldStartLoadWithRequest request: NSURLRequest!, navigationType: UIWebViewNavigationType) -> Bool {
         if self.isAuthorizationCodeRequest(request) {
+            
             self.activityIndicator.startAnimating()
+            var code = FeedlyAuthenticationRequests.getAuthenticationCode(request.URL)
             
-            var auth = FeedlyAuthentication()
-            var code = auth.getAuthenticationCode(request.URL)
-            
-            auth.beginGetAccessToken(code,
-                success: {(userToken: UserAccessTokenInfo) -> Void in
+            FeedlyAuthenticationRequests.beginGetAccessToken(code,
+                success: {(userToken: FeedlyUserAccessTokenInfo) -> Void in
 
                     self.activityIndicator.stopAnimating()
                     self.dismissViewControllerAnimated(true, completion: nil)
@@ -77,9 +76,5 @@ class LoginViewController: UIViewController, UIWebViewDelegate {
             request.URL.path != nil &&
             request.URL.description.rangeOfString("code=") != nil &&
             request.URL.description.rangeOfString(Constants.redirectUrl) != nil
-    }
-    
-    func userLoggedIn(userAccessTokenInfo: UserAccessTokenInfo) {
-        
     }
 }

@@ -4,7 +4,7 @@ import Foundation
 // Optional visual object an image URL for this entry.
 // If present, “url” will contain the image URL, “width” and “height” its dimension, and “contentType” its MIME type.
 
-class EntryVisual {
+class FeedlyEntryVisual {
     
     init(json: Dictionary<String, AnyObject>) {
         if let url = json["url"] as AnyObject! as? String {

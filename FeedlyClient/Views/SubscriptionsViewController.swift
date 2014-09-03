@@ -35,7 +35,12 @@ class SubscriptionsViewController: UIViewController, FeedlyUserLogin, UITableVie
                     (error: NSError) -> Void in
                     // display tsmessage
             })
-            
+            FeedlyCategoriesRequests.beginGetCategories(token, success: {
+                (categories: [FeedlyCategory]) -> Void in
+                
+                
+                }, failure: { (error: NSError) -> Void in
+            })
             //FeedlyStreams().beginGetStream(
             //FeedlyEntries().beginGetEntrie(streamId)
         }

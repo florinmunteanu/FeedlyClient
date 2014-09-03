@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6220.8" systemVersion="13E28" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Category" syncable="YES">
+        <attribute name="id" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="label" attributeType="String" syncable="YES"/>
+        <relationship name="subscriptions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Subscription" inverseName="categories" inverseEntity="Subscription" syncable="YES"/>
+    </entity>
+    <entity name="Subscription" syncable="YES">
+        <attribute name="id" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="logo" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="title" attributeType="String" syncable="YES"/>
+        <attribute name="website" attributeType="String" syncable="YES"/>
+        <relationship name="categories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Category" inverseName="subscriptions" inverseEntity="Category" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Subscription" positionX="-398" positionY="-139" width="128" height="118"/>
+        <element name="Category" positionX="-182" positionY="-124" width="119" height="88"/>
+    </elements>
+</model>

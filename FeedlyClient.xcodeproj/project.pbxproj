@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4E3FAE721986EBAD007DF98D /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3FAE701986EBAD007DF98D /* LoginViewController.swift */; };
 		4E3FAE731986EBAD007DF98D /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E3FAE711986EBAD007DF98D /* LoginViewController.xib */; };
+		4E476F9D19B6421D0010588D /* Feedly.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4E476F9B19B6421D0010588D /* Feedly.xcdatamodeld */; };
 		4E6ADAF71975A05000D3C72C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6ADAF61975A05000D3C72C /* AppDelegate.swift */; };
 		4E6ADAFA1975A05000D3C72C /* FeedlyClient.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4E6ADAF81975A05000D3C72C /* FeedlyClient.xcdatamodeld */; };
 		4E6ADAFC1975A05000D3C72C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E6ADAFB1975A05000D3C72C /* Images.xcassets */; };
@@ -64,6 +65,7 @@
 		4DCF2C68A0C64F758B3366A1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E3FAE701986EBAD007DF98D /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = Api/Login/LoginViewController.swift; sourceTree = "<group>"; };
 		4E3FAE711986EBAD007DF98D /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LoginViewController.xib; path = Api/Login/LoginViewController.xib; sourceTree = "<group>"; };
+		4E476F9C19B6421D0010588D /* Feedly.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Feedly.xcdatamodel; sourceTree = "<group>"; };
 		4E6ADAF11975A05000D3C72C /* FeedlyClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FeedlyClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E6ADAF51975A05000D3C72C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4E6ADAF61975A05000D3C72C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -298,6 +300,7 @@
 		4EFFAE7D19916EE60031B5F0 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				4E476F9B19B6421D0010588D /* Feedly.xcdatamodeld */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -466,6 +469,7 @@
 				4E6ADAFA1975A05000D3C72C /* FeedlyClient.xcdatamodeld in Sources */,
 				4ECDA80219B1A95E0025E2B8 /* FeedlyRefreshAccessToken.swift in Sources */,
 				4ECDA82D19B3B2E80025E2B8 /* SearchOptions.swift in Sources */,
+				4E476F9D19B6421D0010588D /* Feedly.xcdatamodeld in Sources */,
 				4ECDA80119B1A95E0025E2B8 /* FeedlyUserAccessTokenInfo.swift in Sources */,
 				4ECDA82219B1AC100025E2B8 /* FeedlySubcriptionsRequests.swift in Sources */,
 				4ECDA82419B38C1C0025E2B8 /* FeedlyUserLogin.swift in Sources */,
@@ -683,6 +687,17 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
+		4E476F9B19B6421D0010588D /* Feedly.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				4E476F9C19B6421D0010588D /* Feedly.xcdatamodel */,
+			);
+			currentVersion = 4E476F9C19B6421D0010588D /* Feedly.xcdatamodel */;
+			name = Feedly.xcdatamodeld;
+			path = CoreData/Feedly.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
 		4E6ADAF81975A05000D3C72C /* FeedlyClient.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (

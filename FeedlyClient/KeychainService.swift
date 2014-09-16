@@ -10,14 +10,14 @@ let serviceIdentifier = "FeedlyClient"
 let userAccount = "authenticatedUser"
 
 // Arguments for the keychain queries
-let kSecClassValue = kSecClass.takeRetainedValue() as NSString
-let kSecAttrAccountValue = kSecAttrAccount.takeRetainedValue() as NSString
-let kSecValueDataValue = kSecValueData.takeRetainedValue() as NSString
-let kSecClassGenericPasswordValue = kSecClassGenericPassword.takeRetainedValue() as NSString
-let kSecAttrServiceValue = kSecAttrService.takeRetainedValue() as NSString
-let kSecMatchLimitValue = kSecMatchLimit.takeRetainedValue() as NSString
-let kSecReturnDataValue = kSecReturnData.takeRetainedValue() as NSString
-let kSecMatchLimitOneValue = kSecMatchLimitOne.takeRetainedValue() as NSString
+let kSecClassValue = kSecClass as NSString
+let kSecAttrAccountValue = kSecAttrAccount as NSString
+let kSecValueDataValue = kSecValueData as NSString
+let kSecClassGenericPasswordValue = kSecClassGenericPassword as NSString
+let kSecAttrServiceValue = kSecAttrService as NSString
+let kSecMatchLimitValue = kSecMatchLimit as NSString
+let kSecReturnDataValue = kSecReturnData as NSString
+let kSecMatchLimitOneValue = kSecMatchLimitOne as NSString
 
 class KeychainService : NSObject {
     class func saveAccessToken(accessToken: String) {
@@ -31,7 +31,7 @@ class KeychainService : NSObject {
     * Internal methods for querying the keychain.
     */
     private class func save(service: NSString, data: NSString) {
-        var dataFromString: NSData = data.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
+        var dataFromString: NSData = data.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!
         
         // Instantiate a new default keychain query
         var keychainQuery = NSMutableDictionary(objects: [kSecClassGenericPasswordValue, service, userAccount, dataFromString], forKeys: [kSecClassValue, kSecAttrServiceValue, kSecAttrAccountValue, kSecValueDataValue])

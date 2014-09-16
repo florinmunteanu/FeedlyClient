@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6206.9" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="xvR-WF-tSy">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7026.1"/>
+    </dependencies>
+    <scenes>
+        <!--Categories-->
+        <scene sceneID="gsf-6x-osd">
+            <objects>
+                <tableViewController clearsSelectionOnViewWillAppear="NO" id="vNx-Tm-gv9" customClass="CategoriesViewController" customModule="FeedlyClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="lQW-gw-OfP">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="QVM-UL-QYM">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QVM-UL-QYM" id="2x8-Px-z8p">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="zzV-4V-6qO" kind="show" id="pTR-tY-ZZq"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="vNx-Tm-gv9" id="HeL-1A-PNJ"/>
+                            <outlet property="delegate" destination="vNx-Tm-gv9" id="hNx-b7-E2v"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Categories" id="S0j-pZ-3ko">
+                        <barButtonItem key="leftBarButtonItem" systemItem="refresh" id="sbm-8A-8oD"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="organize" id="Ih6-X6-Zwu"/>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ixV-jf-8NF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1198" y="-414"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="N7H-xx-hjF">
+            <objects>
+                <navigationController id="Mcq-r4-UMq" sceneMemberID="viewController">
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="CYE-xn-9Pg">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="vNx-Tm-gv9" kind="relationship" relationship="rootViewController" id="2tM-1S-nmn"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oJ0-Ui-BHY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="374" y="-414"/>
+        </scene>
+        <!--Split View Controller-->
+        <scene sceneID="adU-nY-d4c">
+            <objects>
+                <splitViewController id="xvR-WF-tSy" sceneMemberID="viewController">
+                    <connections>
+                        <segue destination="Mcq-r4-UMq" kind="relationship" relationship="masterViewController" id="NZ2-O1-XoC"/>
+                        <segue destination="zzV-4V-6qO" kind="relationship" relationship="detailViewController" id="VE8-ka-lcg"/>
+                    </connections>
+                </splitViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6Kd-Sw-GM4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-446" y="-414"/>
+        </scene>
+        <!--Root View Controller-->
+        <scene sceneID="90k-mY-IzR">
+            <objects>
+                <tableViewController id="vev-rL-pEz" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Lra-T4-Fp0">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="ptr-i6-PTs">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ptr-i6-PTs" id="2zZ-fg-u45">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="vev-rL-pEz" id="eCM-By-O6Z"/>
+                            <outlet property="delegate" destination="vev-rL-pEz" id="y0H-uO-jlx"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Root View Controller" id="Zdx-yx-4Wa"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1wc-eT-hfs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1263" y="698"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Vr1-kh-iVo">
+            <objects>
+                <navigationController id="zzV-4V-6qO" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="88y-om-Ka8">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="vev-rL-pEz" kind="relationship" relationship="rootViewController" id="OOc-R5-pDC"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2fT-Pe-zzA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="365" y="698"/>
+        </scene>
+    </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="pTR-tY-ZZq"/>
+    </inferredMetricsTieBreakers>
+</document>

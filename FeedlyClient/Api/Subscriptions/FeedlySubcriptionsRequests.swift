@@ -25,7 +25,7 @@ class FeedlySubscriptionsRequests {
                         success(subscriptions)
                     } else {
                         
-                        var error = NSError(domain: FeedlyApiError.domain, code: 1300,
+                        var error = NSError(domain: FeedlyClientError.domain, code: 1300,
                             userInfo: [NSLocalizedDescriptionKey: "Received an incorrect subscriptions response that could not be parsed.", NSLocalizedFailureReasonErrorKey: "Subscriptions response was not in json format or the json format has changed."])
                         failure(error)
                     }

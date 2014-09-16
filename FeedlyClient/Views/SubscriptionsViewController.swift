@@ -4,6 +4,10 @@ class SubscriptionsViewController: UIViewController, FeedlyUserLogin, UITableVie
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //var appDelegate = [[UIApplication sharedApplication] delegate]
+        
+        //let delegate = UIApplication.sharedApplication().delegate as? AppDelegate
+        //delegate?.saveContext()
         self.beginLoadSubscriptions()
     }
     
@@ -53,25 +57,25 @@ class SubscriptionsViewController: UIViewController, FeedlyUserLogin, UITableVie
         KeychainService.saveAccessToken(userAccessTokenInfo.accessToken)
     }
     
-    // UITableViewDataSource
+    // MARK: UITableViewDataSource
     
-    func numberOfSectionsInTableView(tableView: UITableView!) -> Int {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath: NSIndexPath!) -> UITableViewCell! {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCellWithIdentifier("SubscriptionCell", forIndexPath: indexPath) as UITableViewCell
-        cell.textLabel.text = "a"
+        //cell.textLabel?.text = "a"
         return cell
     }
     
-    // UITableViewDelegate
+    // MARK: UITableViewDelegate
     
-    func tableView(tableView: UITableView!, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath!) {
+    func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
         
     }
 }

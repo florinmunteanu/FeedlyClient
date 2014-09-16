@@ -7,7 +7,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate {
         super.init(nibName: "LoginViewController", bundle: NSBundle.mainBundle())
     }
     
-    required init(coder aDecoder: NSCoder!) {
+    required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
@@ -38,7 +38,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate {
     
     var delegate: FeedlyUserLogin?
     
-    func webView(webView: UIWebView!, shouldStartLoadWithRequest request: NSURLRequest!, navigationType: UIWebViewNavigationType) -> Bool {
+    func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
         if self.isAuthorizationCodeRequest(request) {
             
             self.activityIndicator.startAnimating()
@@ -70,11 +70,9 @@ class LoginViewController: UIViewController, UIWebViewDelegate {
         self.presentViewController(alert, animated: true, completion: nil)
     }
     
-    private func isAuthorizationCodeRequest(request: NSURLRequest!) -> Bool {
-        return request != nil &&
-            request.URL != nil &&
-            request.URL.path != nil &&
-            request.URL.description.rangeOfString("code=") != nil &&
-            request.URL.description.rangeOfString(Constants.redirectUrl) != nil
+    private func isAuthorizationCodeRequest(request: NSURLRequest) -> Bool {
+        return request.URL.path != nil &&
+               request.URL.description.rangeOfString("code=") != nil &&
+               request.URL.description.rangeOfString(Constants.redirectUrl) != nil
     }
 }

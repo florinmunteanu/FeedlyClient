@@ -16,7 +16,7 @@ class FeedlyAuthenticationRequests {
         var url = String(format: Constants.apiURL + "/v3/auth/auth?")
         
         for (index, entry) in enumerate(queryParameters) {
-            url = url.stringByAppendingFormat(index == queryParameters.count - 1 ? "%@=%@" : "%@=%@&", entry.0, entry.1)
+            url = url.stringByAppendingFormat(index == queryParameters.count - 1 ? "%@=%@" : "%@=%@&", entry.0, entry.1!)
         }
         return url
     }
@@ -25,7 +25,7 @@ class FeedlyAuthenticationRequests {
         // Should receive an url in the form of:
         // https://your.redirect.uri/feedlyCallback?code=AQAA7rJ7InAiOjEsImEiOiJmZWVk…&state=state.passed.in
         
-        var queryComponents = url.query.componentsSeparatedByString("&")
+        var queryComponents = url.query!.componentsSeparatedByString("&")
         
         var pairs = queryComponents.map({
             (component: String) -> (field: String, value: String) in
@@ -83,7 +83,7 @@ class FeedlyAuthenticationRequests {
                         
                     } else {
                         
-                        var error = NSError(domain: FeedlyApiError.domain, code: 1000,
+                        var error = NSError(domain: FeedlyClientError.domain, code: 1000,
                             userInfo: [NSLocalizedDescriptionKey: "Received an incorrect access token that could not be parsed.", NSLocalizedFailureReasonErrorKey: "Access token response was not in json format or the json format has changed."])
                         failure(error)
                     }
@@ -119,7 +119,7 @@ class FeedlyAuthenticationRequests {
                         var refreshToken = FeedlyRefreshAccessToken(json: jsonResult)
                     } else {
                         
-                        var error = NSError(domain: FeedlyApiError.domain, code: 1001,
+                        var error = NSError(domain: FeedlyClientError.domain, code: 1001,
                             userInfo: [NSLocalizedDescriptionKey: "Received an incorrect refresh token response that could not be parsed.", NSLocalizedFailureReasonErrorKey: "Refresh token response was not in json format or the json format has changed."])
                         failure(error)
                     }

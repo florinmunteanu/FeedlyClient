@@ -49,36 +49,6 @@
             endingLineNumber = "39"
             landmarkName = "beginLoadSubscriptions()"
             landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "FeedlyClient.MainViewController.beginLoadSubscriptions (FeedlyClient.MainViewController)() -&gt; ()"
-                  moduleName = "FeedlyClient"
-                  urlString = "file:///Users/florin/Documents/Developer/FeedlyClient/FeedlyClient/Views/MainViewController.swift"
-                  timestampString = "431380164.714549"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "50"
-                  endingLineNumber = "50"
-                  offsetFromSymbolStart = "576">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "FeedlyClient.MainViewController.beginLoadSubscriptions (FeedlyClient.MainViewController)() -&gt; ()"
-                  moduleName = "FeedlyClient"
-                  urlString = "file:///Users/florin/Documents/Developer/FeedlyClient/FeedlyClient/Views/MainViewController.swift"
-                  timestampString = "431380164.714889"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "50"
-                  endingLineNumber = "50"
-                  offsetFromSymbolStart = "615">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -114,11 +84,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FeedlyClient/Views/SubscriptionsViewController.swift"
-            timestampString = "431376664.857542"
+            timestampString = "431554849.68744"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "32"
-            endingLineNumber = "32"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
             landmarkName = "beginLoadSubscriptions()"
             landmarkType = "5">
          </BreakpointContent>
@@ -130,11 +100,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FeedlyClient/Views/SubscriptionsViewController.swift"
-            timestampString = "431380148.461992"
+            timestampString = "431554849.68744"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
             landmarkName = "beginLoadSubscriptions()"
             landmarkType = "5">
             <Locations>
@@ -145,11 +115,11 @@
                   symbolName = "FeedlyClient.SubscriptionsViewController.(beginLoadSubscriptions (FeedlyClient.SubscriptionsViewController) -&gt; () -&gt; ()).(closure #3)"
                   moduleName = "FeedlyClient"
                   urlString = "file:///Users/florin/Documents/Developer/FeedlyClient/FeedlyClient/Views/SubscriptionsViewController.swift"
-                  timestampString = "431380164.718927"
+                  timestampString = "431790099.635526"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "42"
-                  endingLineNumber = "42"
+                  startingLineNumber = "46"
+                  endingLineNumber = "46"
                   offsetFromSymbolStart = "12">
                </Location>
                <Location
@@ -159,14 +129,62 @@
                   symbolName = "FeedlyClient.SubscriptionsViewController.(beginLoadSubscriptions (FeedlyClient.SubscriptionsViewController) -&gt; () -&gt; ()).(closure #4)"
                   moduleName = "FeedlyClient"
                   urlString = "file:///Users/florin/Documents/Developer/FeedlyClient/FeedlyClient/Views/SubscriptionsViewController.swift"
-                  timestampString = "431380164.719211"
+                  timestampString = "431790099.635808"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "43"
-                  endingLineNumber = "43"
+                  startingLineNumber = "47"
+                  endingLineNumber = "47"
                   offsetFromSymbolStart = "12">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FeedlyClient/AppDelegate.swift"
+            timestampString = "431790070.044204"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
+            landmarkName = "managedObjectModel"
+            landmarkType = "19">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FeedlyClient/CoreData/CategoryExtensions.swift"
+            timestampString = "431847164.453471"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "getOrAdd(_:inManagedObjectContext:error:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "FeedlyClient/CoreData/SubscriptionExtensions.swift"
+            timestampString = "431898072.325039"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
+            landmarkName = "addOrUpdate(_:inManagedObjectContext:error:)"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

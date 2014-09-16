@@ -9,7 +9,7 @@ class FeedlyStreamsRequests {
         -> AFHTTPRequestOperation {
             
             var encodedStreamId = streamId.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet())
-            var url = Constants.apiURL + "/v3/streams/" + encodedStreamId + "/ids"
+            var url = Constants.apiURL + "/v3/streams/" + encodedStreamId! + "/ids"
             
             // GET /v3/streams/:streamId/ids
             
@@ -34,7 +34,7 @@ class FeedlyStreamsRequests {
                         success(stream)
                     } else {
                         
-                        var error = NSError(domain: FeedlyApiError.domain, code: 1400,
+                        var error = NSError(domain: FeedlyClientError.domain, code: 1400,
                             userInfo: [NSLocalizedDescriptionKey: "Received an incorrect stream response that could not be parsed.", NSLocalizedFailureReasonErrorKey: "Stream response was not in json format or the json format has changed."])
                         failure(error)
                     }

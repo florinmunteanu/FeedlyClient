@@ -25,7 +25,7 @@ class FeedlyUserProfileRequests {
                         
                     } else {
                         
-                        var error = NSError(domain: FeedlyApiError.domain, code: 1100,
+                        var error = NSError(domain: FeedlyClientError.domain, code: 1100,
                             userInfo: [NSLocalizedDescriptionKey: "Received an incorrect user profile response that could not be parsed.", NSLocalizedFailureReasonErrorKey: "User profile response was not in json format or the json format has changed."])
                         failure(error)
                     }

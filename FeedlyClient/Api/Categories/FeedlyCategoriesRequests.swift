@@ -25,7 +25,7 @@ class FeedlyCategoriesRequests {
                         success(categories)
                     } else {
                         
-                        var error = NSError(domain: FeedlyApiError.domain, code: 1200,
+                        var error = NSError(domain: FeedlyClientError.domain, code: 1200,
                             userInfo: [NSLocalizedDescriptionKey: "Received an incorrect categories response that could not be parsed.", NSLocalizedFailureReasonErrorKey: "Categories response was not in json format or the json format has changed."])
                         failure(error)
                     }

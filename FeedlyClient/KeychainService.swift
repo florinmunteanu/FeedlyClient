@@ -20,21 +20,29 @@ let kSecReturnDataValue = kSecReturnData as NSString
 let kSecMatchLimitOneValue = kSecMatchLimitOne as NSString
 
 class KeychainService : NSObject {
-    class func saveAccessToken(accessToken: String) {
-        self.save(serviceIdentifier, data: accessToken)
+    class func saveData(data: KeychainData) {
+        var jsonData = data.toJson(nil)
+        
+        if jsonData != nil {
+            self.save(serviceIdentifier, data: jsonData!)
+        }
     }
     
-    class func loadAccessToken() -> String? {
+    class func loadData() -> KeychainData? {
         return self.load(serviceIdentifier)
     }
-   /*
-    * Internal methods for querying the keychain.
-    */
-    private class func save(service: NSString, data: NSString) {
-        var dataFromString: NSData = data.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)!
-        
+    
+    class func clearData() {
+        var emptyData = KeychainData()
+        KeychainService.saveData(emptyData)
+    }
+    
+    /*
+     *  Internal methods for querying the keychain.
+     */
+    private class func save(service: NSString, data: NSData) {
         // Instantiate a new default keychain query
-        var keychainQuery = NSMutableDictionary(objects: [kSecClassGenericPasswordValue, service, userAccount, dataFromString], forKeys: [kSecClassValue, kSecAttrServiceValue, kSecAttrAccountValue, kSecValueDataValue])
+        var keychainQuery = NSMutableDictionary(objects: [kSecClassGenericPasswordValue, service, userAccount, data], forKeys: [kSecClassValue, kSecAttrServiceValue, kSecAttrAccountValue, kSecValueDataValue])
         
         // Delete any existing items
         SecItemDelete(keychainQuery as CFDictionaryRef)
@@ -43,7 +51,7 @@ class KeychainService : NSObject {
         var status: OSStatus = SecItemAdd(keychainQuery as CFDictionaryRef, nil)
     }
     
-    private class func load(service: NSString) -> NSString? {
+    private class func load(service: NSString) -> KeychainData? {
         // Instantiate a new default keychain query
         // Tell the query to return a result
         // Limit our results to one item
@@ -56,13 +64,14 @@ class KeychainService : NSObject {
         
         let opaque = dataTypeRef?.toOpaque()
         
-        var contentsOfKeychain: NSString?
+        var contentsOfKeychain: KeychainData?
         
         if let op = opaque? {
             let retrievedData = Unmanaged<NSData>.fromOpaque(op).takeUnretainedValue()
             
-            // Convert the data retrieved from the keychain into a string
-            contentsOfKeychain = NSString(data: retrievedData, encoding: NSUTF8StringEncoding)
+            // Convert the data retrieved from the keychain into an instance of KeychainData
+
+            contentsOfKeychain = KeychainData.fromJson(retrievedData, error: nil)
         } else {
             println("Nothing was retrieved from the keychain. Status code \(status)")
         }

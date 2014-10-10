@@ -19,7 +19,7 @@ class FeedlyUserProfileRequests {
                 success:  {
                     (operation: AFHTTPRequestOperation!, responseObject: AnyObject!) -> Void in
                     
-                    if let jsonResult = responseObject as? Dictionary<String, String> {
+                    if let jsonResult = responseObject as? Dictionary<String, AnyObject> {
                         var profile = FeedlyUserProfile(json: jsonResult)
                         success(profile)
                         

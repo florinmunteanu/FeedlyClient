@@ -8,12 +8,20 @@ class CategoriesViewController: UITableViewController, NSFetchedResultsControlle
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+            
         var refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl.addTarget(self, action: "refresh:", forControlEvents: .ValueChanged)
         
         self.refreshControl = refreshControl
+        
+        //var accessToken = KeychainService.loadAccessToken()
+        
+        //if accessToken == nil {
+        //    var loginController = LoginViewController()
+        //    loginController.delegate = self
+        //    self.presentViewController(loginController, animated: false, completion: nil)
+        //}
     }
     
     func refresh(refreshControl: UIRefreshControl) {
@@ -21,25 +29,31 @@ class CategoriesViewController: UITableViewController, NSFetchedResultsControlle
         
         self.loadSubscriptions()
         
-        refreshControl.endRefreshing()
-        refreshControl.attributedTitle = NSAttributedString(string: "Refreshed")
+        //refreshControl.endRefreshing()
+        //refreshControl.attributedTitle = NSAttributedString(string: "Refreshed")
     }
     
     func loadSubscriptions() {
-        var accessToken = KeychainService.loadAccessToken()
+        var keychainData = KeychainService.loadData()
         
-        if let token = accessToken {
+        if let token = keychainData?.accessToken {
             var subscriptionsOperation = FeedlySubscriptionsRequests.beginGetSubscriptions(token,
                 success: {
                     (subscriptions: [FeedlySubscription]) -> Void in
                     self.insertSubscriptions(subscriptions, error: nil)
+                    self.endRefreshing()
                     self.tableView.reloadData()
                 },
                 failure: {
                     (error: NSError) -> Void in
-                    
+                    self.endRefreshing()
             })
         }
+    }
+    
+    func endRefreshing() {
+        self.refreshControl?.attributedTitle = NSAttributedString(string: "Refreshed")
+        self.refreshControl?.endRefreshing()
     }
     
     func insertSubscriptions(subscriptions: [FeedlySubscription], error: NSErrorPointer) {
@@ -47,6 +61,12 @@ class CategoriesViewController: UITableViewController, NSFetchedResultsControlle
             for subscription in subscriptions {
                 Subscription.addOrUpdate(subscription, inManagedObjectContext: self.managedObjectContext!, error: nil)
             }
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "Settings" {
+            
         }
     }
     
@@ -97,7 +117,7 @@ class CategoriesViewController: UITableViewController, NSFetchedResultsControlle
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("SubscriptionCell", forIndexPath: indexPath) as UITableViewCell
+        var cell = tableView.dequeueReusableCellWithIdentifier("CategoryCell", forIndexPath: indexPath) as UITableViewCell
         //cell.textLabel?.text = "a"
         return cell
     }

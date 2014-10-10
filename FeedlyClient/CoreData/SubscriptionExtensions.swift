@@ -25,7 +25,7 @@ extension Subscription {
     
     class func addOrUpdate(subscription: FeedlySubscription, inManagedObjectContext context: NSManagedObjectContext, error: NSErrorPointer) {
         var fetchRequest = NSFetchRequest(entityName: "Subscription")
-        fetchRequest.predicate = NSPredicate(format: " id = %@", subscription.id)
+        fetchRequest.predicate = NSPredicate(format: "id=%@", subscription.id)
         
         var fetchError: NSError? = nil
         var matches = context.executeFetchRequest(fetchRequest, error: &fetchError)
@@ -47,6 +47,7 @@ extension Subscription {
             for category in subscription.categories {
                 categories.addObject(Category.fromFeedlyCategory(category))
             }
+            newSubscription.categories = categories
         } else {
             var existingSubscription = matches?.last as Subscription;
             

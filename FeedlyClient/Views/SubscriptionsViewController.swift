@@ -1,6 +1,6 @@
 
 import Foundation
-class SubscriptionsViewController: UIViewController, FeedlyUserLogin, UITableViewDelegate, UITableViewDataSource {
+class SubscriptionsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,16 +19,16 @@ class SubscriptionsViewController: UIViewController, FeedlyUserLogin, UITableVie
     @IBOutlet weak var subscriptionsTableView: UITableView!
     
     @IBAction func buttonClicked(sender : AnyObject) {
-        var loginController = LoginViewController()
-        loginController.delegate = self
-        self.presentViewController(loginController, animated: false, completion: nil)
+        //var loginController = LoginViewController()
+        //loginController.delegate = self
+        //self.presentViewController(loginController, animated: false, completion: nil)
     }
     
     func beginLoadSubscriptions() {
-        var accessToken = KeychainService.loadAccessToken()
+        var keychainData = KeychainService.loadData()
         
         //REDO : if we have access token and there's nothing saved in Core Data ?
-        if let token = accessToken {
+        if let token = keychainData?.accessToken {
             var subscriptionsOperation = FeedlySubscriptionsRequests.beginGetSubscriptions(token,
                 success: {
                     (subscriptions: [FeedlySubscription]) -> Void in
@@ -52,10 +52,15 @@ class SubscriptionsViewController: UIViewController, FeedlyUserLogin, UITableVie
     
     // FeedlyUseLogin
     // https://developer.apple.com/library/ios/featuredarticles/ViewControllerPGforiPhoneOS/ManagingDataFlowBetweenViewControllers/ManagingDataFlowBetweenViewControllers.html#//apple_ref/doc/uid/TP40007457-CH8-SW9
-    
+    /*
     func userLoggedIn(userAccessTokenInfo: FeedlyUserAccessTokenInfo) {
-        KeychainService.saveAccessToken(userAccessTokenInfo.accessToken)
+        var data = KeychainData()
+        data.accessToken = userAccessTokenInfo.accessToken
+        data.userName = userAccessTokenInfo.userId
+        
+        KeychainService.saveData(data)
     }
+*/
     
     // MARK: UITableViewDataSource
     

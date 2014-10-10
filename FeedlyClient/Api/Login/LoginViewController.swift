@@ -44,24 +44,58 @@ class LoginViewController: UIViewController, UIWebViewDelegate {
             self.activityIndicator.startAnimating()
             var code = FeedlyAuthenticationRequests.getAuthenticationCode(request.URL)
             
-            FeedlyAuthenticationRequests.beginGetAccessToken(code,
-                success: {(userToken: FeedlyUserAccessTokenInfo) -> Void in
-
-                    self.activityIndicator.stopAnimating()
-                    self.dismissViewControllerAnimated(true, completion: nil)
-                    self.delegate?.userLoggedIn(userToken)
+            var accessTokenOperation = FeedlyAuthenticationRequests.beginGetAccessToken(code,
+                success: {
+                    (userToken: FeedlyUserAccessTokenInfo) -> Void in
+                    self.beginGetUserProfile(userToken)
                 },
                 failure: {
                     (error:NSError) -> Void in
                     self.activityIndicator.stopAnimating()
                     self.displayAlert(error)
             })
-            
+            /*
+            var userProfileOperation = FeedlyUserProfileRequests.beginGetUserProfile(tokenInfo.accessToken,
+            success: {
+            (userProfile: FeedlyUserProfile) -> Void in
+            if self.delegate != nil {
+            self.delegate!.userLoggedIn(tokenInfo, userProfile: userProfile)
+            self.activityIndicator.stopAnimating()
+            self.dismissViewControllerAnimated(true, completion: nil)
+            }
+            },
+            failure: {
+            (error: NSError) -> Void in
+            self.activityIndicator.stopAnimating()
+            self.displayAlert(error)
+            }
+            )
+            userProfileOperation.addDependency(accessTokenOperation)
+            */
             return false // Do not further process this request
         }
         else {
             return true
         }
+    }
+    
+    private func beginGetUserProfile(tokenInfo: FeedlyUserAccessTokenInfo) {
+        FeedlyUserProfileRequests.beginGetUserProfile(tokenInfo.accessToken,
+            success: {
+                (userProfile: FeedlyUserProfile) -> Void in
+                
+                if self.delegate != nil {
+                    self.delegate!.userLoggedIn(tokenInfo, userProfile: userProfile)
+                    self.activityIndicator.stopAnimating()
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                }
+            },
+            failure: {
+                (error: NSError) -> Void in
+                self.activityIndicator.stopAnimating()
+                self.displayAlert(error)
+            }
+        )
     }
     
     private func displayAlert(error: NSError) {
@@ -72,7 +106,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate {
     
     private func isAuthorizationCodeRequest(request: NSURLRequest) -> Bool {
         return request.URL.path != nil &&
-               request.URL.description.rangeOfString("code=") != nil &&
-               request.URL.description.rangeOfString(Constants.redirectUrl) != nil
+            request.URL.description.rangeOfString("code=") != nil &&
+            request.URL.description.rangeOfString(Constants.redirectUrl) != nil
     }
 }

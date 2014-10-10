@@ -5,6 +5,10 @@ import Foundation
 ///
 class FeedlyUserAccessTokenInfo {
     
+    init() {
+        
+    }
+    
     /// Initialize an access token using a dictionary with values received from JSON call made to Feedly auth
     init(json: Dictionary<String, AnyObject>) {
         if let id = json[FeedlyAuthParameters.userId] as AnyObject? as? String {

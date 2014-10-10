@@ -3,54 +3,54 @@ import Foundation
 
 class FeedlyUserProfile {
     
-    init(json: Dictionary<String, String>) {
+    init(json: Dictionary<String, AnyObject>) {
         
-        if let userId = json["id"] {
+        if let userId = json["id"] as AnyObject? as? String {
             self.userId = userId
         }
-        if let email = json["email"] {
+        if let email = json["email"] as AnyObject? as? String {
             self.email = email
         }
-        if let givenName = json["givenName"] {
+        if let givenName = json["givenName"] as AnyObject? as? String {
             self.givenName = givenName
         }
-        if let familyName = json["familyName"] {
+        if let familyName = json["familyName"] as AnyObject? as? String {
             self.familyName = familyName
         }
-        if let fullName = json["fullName"] {
+        if let fullName = json["fullName"] as AnyObject? as? String {
             self.fullName = fullName
         }
-        if let google = json["google"] {
+        if let google = json["google"] as AnyObject? as? String {
             self.googleId = google
         }
-        if let twitterUserId = json["twitterUserId"] {
+        if let twitterUserId = json["twitterUserId"] as AnyObject? as? String {
             self.twitterId = twitterUserId
         }
-        if let facebookUserId = json["facebookUserId"] {
+        if let facebookUserId = json["facebookUserId"] as AnyObject? as? String {
             self.facebookId = facebookUserId
         }
-        if let wordpressUserId = json["wordpressUserId"] {
+        if let wordpressUserId = json["wordpressUserId"] as AnyObject? as? String {
             self.wordpressId = wordpressUserId
         }
-        if let windowsLiveId = json["windowsLiveId"] {
+        if let windowsLiveId = json["windowsLiveId"] as AnyObject? as? String {
             self.windowsLiveId = windowsLiveId
         }
-        if let wave = json["wave"] {
+        if let wave = json["wave"] as AnyObject? as? String {
             self.wave = wave
         }
-        if let product = json["product"] {
+        if let product = json["product"] as AnyObject? as? String {
             self.product = product
         }
-        if let productExpiration = json["productExpiration"] {
+        if let productExpiration = json["productExpiration"] as AnyObject? as? String {
             self.productExpiration = productExpiration
         }
-        if let subscriptionStatus = json["subscriptionStatus"] {
+        if let subscriptionStatus = json["subscriptionStatus"] as AnyObject? as? String {
             self.subscriptionStatus = subscriptionStatus
         }
-        if let evernoteConnected = json["isEvernoteConnected"] {
+        if let evernoteConnected = json["isEvernoteConnected"] as AnyObject? as? String {
             self.isEvernoteConnected = (evernoteConnected.lowercaseString == "true")
         }
-        if let pocketConnected = json["isPocketConnected"] {
+        if let pocketConnected = json["isPocketConnected"] as AnyObject? as? String {
             self.isPocketConnected = (pocketConnected.lowercaseString == "true")
         }
     }

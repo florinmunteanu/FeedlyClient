@@ -1,8 +1,10 @@
 
 import Foundation
-
+import CoreData
 
 class SettingsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FeedlyUserLogin {
+    
+    var managedObjectContext: NSManagedObjectContext? = nil
     
     override func viewDidLoad() {
         

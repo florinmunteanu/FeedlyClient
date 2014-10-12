@@ -19,7 +19,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="zzV-4V-6qO" kind="show" id="pTR-tY-ZZq"/>
+                                    <segue destination="zzV-4V-6qO" kind="show" identifier="Subscriptions" id="pTR-tY-ZZq"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -146,16 +146,16 @@
             </objects>
             <point key="canvasLocation" x="-446" y="-414"/>
         </scene>
-        <!--Root View Controller-->
+        <!--Category Subscriptions View Controller-->
         <scene sceneID="90k-mY-IzR">
             <objects>
-                <tableViewController id="vev-rL-pEz" sceneMemberID="viewController">
+                <tableViewController id="vev-rL-pEz" customClass="CategorySubscriptionsViewController" customModule="FeedlyClient" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Lra-T4-Fp0">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="ptr-i6-PTs">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="EntryCell" id="ptr-i6-PTs">
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ptr-i6-PTs" id="2zZ-fg-u45">
                                     <autoresizingMask key="autoresizingMask"/>
@@ -167,7 +167,7 @@
                             <outlet property="delegate" destination="vev-rL-pEz" id="y0H-uO-jlx"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="Zdx-yx-4Wa"/>
+                    <navigationItem key="navigationItem" id="Zdx-yx-4Wa"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1wc-eT-hfs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

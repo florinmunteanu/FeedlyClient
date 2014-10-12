@@ -2,6 +2,7 @@
 import Foundation
 import CoreData
 
+@objc(Subscription)
 class Subscription: NSManagedObject {
 
     @NSManaged var id: String

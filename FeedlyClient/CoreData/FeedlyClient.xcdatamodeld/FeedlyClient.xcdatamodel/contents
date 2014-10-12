@@ -3,7 +3,31 @@
     <entity name="Category" representedClassName="Category" syncable="YES">
         <attribute name="id" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="label" attributeType="String" syncable="YES"/>
+        <relationship name="entries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Entry" inverseName="categories" inverseEntity="Entry" syncable="YES"/>
         <relationship name="subscriptions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Subscription" inverseName="categories" inverseEntity="Subscription" syncable="YES"/>
+    </entity>
+    <entity name="Entry" representedClassName="Entry" syncable="YES">
+        <attribute name="author" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="published" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="title" attributeType="String" syncable="YES"/>
+        <attribute name="unread" attributeType="Boolean" syncable="YES"/>
+        <relationship name="categories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Category" inverseName="entries" inverseEntity="Category" syncable="YES"/>
+        <relationship name="content" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EntryContent" syncable="YES"/>
+        <relationship name="summary" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EntryContent" inverseName="entry" inverseEntity="EntryContent" syncable="YES"/>
+        <relationship name="visual" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EntryVisual" inverseName="entry" inverseEntity="EntryVisual" syncable="YES"/>
+    </entity>
+    <entity name="EntryContent" representedClassName="EntryContent" syncable="YES">
+        <attribute name="content" attributeType="String" syncable="YES"/>
+        <attribute name="direction" attributeType="String" syncable="YES"/>
+        <relationship name="entry" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Entry" inverseName="summary" inverseEntity="Entry" syncable="YES"/>
+    </entity>
+    <entity name="EntryVisual" representedClassName="EntryVisual" syncable="YES">
+        <attribute name="contentType" attributeType="String" syncable="YES"/>
+        <attribute name="height" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="url" attributeType="String" syncable="YES"/>
+        <attribute name="width" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="entry" maxCount="1" deletionRule="Nullify" destinationEntity="Entry" inverseName="visual" inverseEntity="Entry" syncable="YES"/>
     </entity>
     <entity name="Subscription" representedClassName="Subscription" syncable="YES">
         <attribute name="id" attributeType="String" indexed="YES" syncable="YES"/>
@@ -13,7 +37,10 @@
         <relationship name="categories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Category" inverseName="subscriptions" inverseEntity="Category" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Category" positionX="-182" positionY="-124" width="119" height="88"/>
-        <element name="Subscription" positionX="-398" positionY="-139" width="128" height="118"/>
+        <element name="Category" positionX="-396" positionY="-157" width="119" height="103"/>
+        <element name="Subscription" positionX="-218" positionY="-171" width="128" height="118"/>
+        <element name="Entry" positionX="-614" positionY="-169" width="128" height="178"/>
+        <element name="EntryVisual" positionX="-612" positionY="89" width="128" height="118"/>
+        <element name="EntryContent" positionX="-315" positionY="29" width="128" height="88"/>
     </elements>
 </model>

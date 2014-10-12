@@ -29,7 +29,7 @@ class FeedlyEntriesRequests {
                             success(entry)
                         } else {
                             var error = NSError(domain: FeedlyClientError.domain, code: 1500,
-                                userInfo: [NSLocalizedDescriptionKey: "Received an incorrect entry response with lenth <> 1.", NSLocalizedFailureReasonErrorKey: "Entry response was of length 1."])
+                                userInfo: [NSLocalizedDescriptionKey: "Received an incorrect entry response with length <> 1.", NSLocalizedFailureReasonErrorKey: "Entry response was of length 1."])
                             failure(error)                        }
                     } else {
                         
@@ -52,7 +52,7 @@ class FeedlyEntriesRequests {
             // POST /v3/entries/.mget
             
             var manager = AFHTTPRequestOperationManager()
-            manager.requestSerializer = AFHTTPRequestSerializer()
+            manager.requestSerializer = AFJSONRequestSerializer()
             
             if let accessToken = accessToken? {
                 manager.requestSerializer.setValue("OAuth " + accessToken, forHTTPHeaderField: "Authorization")
@@ -61,17 +61,22 @@ class FeedlyEntriesRequests {
             manager.responseSerializer = AFJSONResponseSerializer()
             
             var operation = manager.POST(url,
-                parameters: nil,
-                constructingBodyWithBlock: {
-                    (a: AnyObject!) -> Void in
-                    
-                },
+                parameters: entries,
+                //constructingBodyWithBlock: {
+                //    (a: AnyObject!) -> Void in
+                    //var b: AnyObject = a as AnyObject<AFStreamingMultipartFormData>
+                //},
                 success: {
                     (operation: AFHTTPRequestOperation!, responseObject: AnyObject!) -> Void in
                     
                     if let jsonResult = responseObject as? [Dictionary<String, AnyObject>] {
-                        // TO DO: call callback of FeedlyEntry
                         
+                        var parsedResult = Dictionary<String, FeedlyEntry>(minimumCapacity: jsonResult.count)
+                        for dictionaryEntry in jsonResult {
+                            var parsedEntry = FeedlyEntry(json: dictionaryEntry)
+                            parsedResult[parsedEntry.id] = parsedEntry
+                        }
+                        success(parsedResult)
                     } else {
                         var error = NSError(domain: FeedlyClientError.domain, code: 1502,
                             userInfo: [NSLocalizedDescriptionKey: "Received an incorrect entries response that could not be parsed.", NSLocalizedFailureReasonErrorKey: "Entries response was not in json format or the json format has changed."])

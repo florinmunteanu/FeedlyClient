@@ -54,24 +54,6 @@ class LoginViewController: UIViewController, UIWebViewDelegate {
                     self.activityIndicator.stopAnimating()
                     self.displayAlert(error)
             })
-            /*
-            var userProfileOperation = FeedlyUserProfileRequests.beginGetUserProfile(tokenInfo.accessToken,
-            success: {
-            (userProfile: FeedlyUserProfile) -> Void in
-            if self.delegate != nil {
-            self.delegate!.userLoggedIn(tokenInfo, userProfile: userProfile)
-            self.activityIndicator.stopAnimating()
-            self.dismissViewControllerAnimated(true, completion: nil)
-            }
-            },
-            failure: {
-            (error: NSError) -> Void in
-            self.activityIndicator.stopAnimating()
-            self.displayAlert(error)
-            }
-            )
-            userProfileOperation.addDependency(accessTokenOperation)
-            */
             return false // Do not further process this request
         }
         else {
@@ -99,7 +81,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate {
     }
     
     private func displayAlert(error: NSError) {
-        var alert = UIAlertController(title: "Error", message: "There was an error during authorization process.", preferredStyle: UIAlertControllerStyle.Alert)
+        var alert = UIAlertController(title: "Error", message: "There was an error during the authorization process.", preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
     }

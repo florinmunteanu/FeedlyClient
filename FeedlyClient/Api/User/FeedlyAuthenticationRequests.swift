@@ -70,8 +70,8 @@ class FeedlyAuthenticationRequests {
             ]
             
             var manager = AFHTTPRequestOperationManager()
-            manager.requestSerializer = AFJSONRequestSerializer()
-            manager.responseSerializer = AFJSONResponseSerializer()
+            manager.requestSerializer = AFJSONRequestSerializer() as AFHTTPRequestSerializer
+            manager.responseSerializer = AFJSONResponseSerializer() as AFHTTPResponseSerializer
             
             var operation = manager.POST(url, parameters: parameters,
                 success:  {
@@ -108,8 +108,8 @@ class FeedlyAuthenticationRequests {
             ]
             
             var manager = AFHTTPRequestOperationManager()
-            manager.requestSerializer = AFJSONRequestSerializer()
-            manager.responseSerializer = AFJSONResponseSerializer()
+            manager.requestSerializer = AFJSONRequestSerializer() as AFHTTPRequestSerializer
+            manager.responseSerializer = AFJSONResponseSerializer() as AFHTTPResponseSerializer
             
             var operation = manager.POST(url, parameters: parameters,
                 success: {
@@ -145,8 +145,8 @@ class FeedlyAuthenticationRequests {
             ]
             
             var manager = AFHTTPRequestOperationManager()
-            manager.requestSerializer = AFJSONRequestSerializer()
-            manager.responseSerializer = AFJSONResponseSerializer()
+            manager.requestSerializer = AFJSONRequestSerializer() as AFHTTPRequestSerializer
+            manager.responseSerializer = AFJSONResponseSerializer() as AFHTTPResponseSerializer
             
             var operation = manager.POST(url, parameters: parameters,
                 success: {

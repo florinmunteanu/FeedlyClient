@@ -28,6 +28,13 @@ class CategorySubscriptionsViewController: UITableViewController, NSFetchedResul
         }
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "Entry" {
+            var entryViewController = segue.destinationViewController as EntryViewController
+            entryViewController.entry = sender as? Entry
+        }
+    }
+    
     private func beginLoadStream(categoryId: String) {
         var keychainData = KeychainService.loadData()
         
@@ -150,8 +157,8 @@ class CategorySubscriptionsViewController: UITableViewController, NSFetchedResul
             tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Fade)
         case .Delete:
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        case .Update:
-            self.configureCell(tableView.cellForRowAtIndexPath(indexPath)!, atIndexPath: indexPath)
+        //case .Update:
+            //self.configureCell(tableView.cellForRowAtIndexPath(indexPath)!, atIndexPath: indexPath)
         case .Move:
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
             tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Fade)
@@ -167,7 +174,7 @@ class CategorySubscriptionsViewController: UITableViewController, NSFetchedResul
     // MARK: UITableViewDataSource
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        return self.fetchedResultsController.sections?.count ?? 0
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -181,6 +188,17 @@ class CategorySubscriptionsViewController: UITableViewController, NSFetchedResul
         return cell
     }
     
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        // Return false if you do not want the specified item to be editable.
+        return true
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        var cell = self.tableView(self.tableView, cellForRowAtIndexPath: indexPath)
+        var entry: AnyObject! = self.fetchedResultsController.objectAtIndexPath(indexPath) as Entry
+        self.performSegueWithIdentifier("Entry", sender: entry)
+    }
+    
     // MARK: UITableViewDelegate
     
     override func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
@@ -191,6 +209,6 @@ class CategorySubscriptionsViewController: UITableViewController, NSFetchedResul
     
     func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
         let entry = self.fetchedResultsController.objectAtIndexPath(indexPath) as? Entry
-        cell.textLabel?.text = entry?.title
+        cell.textLabel.text = entry?.title
     }
 }

@@ -23,7 +23,7 @@ class FeedlyStreamsRequests {
                 parameters = options!.toDictionary()
             }
                         
-            manager.responseSerializer = AFJSONResponseSerializer()
+            manager.responseSerializer = AFJSONResponseSerializer() as AFHTTPResponseSerializer
             
             var operation = manager.GET(url, parameters: parameters,
                 success:  {

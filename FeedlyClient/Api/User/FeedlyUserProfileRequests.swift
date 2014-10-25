@@ -13,7 +13,7 @@ class FeedlyUserProfileRequests {
             manager.requestSerializer = AFHTTPRequestSerializer()
             manager.requestSerializer.setValue("OAuth " + accessToken, forHTTPHeaderField: "Authorization")
             
-            manager.responseSerializer = AFJSONResponseSerializer()
+            manager.responseSerializer = AFJSONResponseSerializer() as AFHTTPResponseSerializer
             
             var operation = manager.GET(url, parameters: nil,
                 success:  {

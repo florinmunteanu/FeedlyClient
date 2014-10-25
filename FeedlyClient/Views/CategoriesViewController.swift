@@ -187,6 +187,6 @@ class CategoriesViewController: UITableViewController, NSFetchedResultsControlle
     
     func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
         let category = self.fetchedResultsController.objectAtIndexPath(indexPath) as? Category
-        cell.textLabel?.text = category?.label
+        cell.textLabel.text = category?.label
     }
 }

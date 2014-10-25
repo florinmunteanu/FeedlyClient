@@ -1,5 +1,28 @@
 
 import Foundation
+import WebKit
+
+class EntryViewController : UIViewController {
+    
+    var entry: Entry? = nil
+
+    @IBAction func doneTapped(sender: AnyObject) {
+        self.dismissViewControllerAnimated(false, completion: nil)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
+    //@IBOutlet weak var containerView: UIView!
+    
+    //override func loadView() {
+    //    super.loadView()
+        //self.webView = WKWebView()
+        //self.view2 = self.webView
+        //self.containerView = self.webView!
+    //}
+}
 
 /*
 // Set the current feedly user token

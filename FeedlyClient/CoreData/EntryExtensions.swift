@@ -65,32 +65,36 @@ extension Entry {
         existingEntry.author = feedlyEntry.author ?? ""
         existingEntry.published = feedlyEntry.published.timeIntervalSince1970
         
-        //??? to review
-        if existingEntry.content != NSNull() {
+        if existingEntry.content.managedObjectContext != nil {
             context.deleteObject(existingEntry.content)
         }
-        
-        context.deleteObject(existingEntry.summary)
+        if existingEntry.summary.managedObjectContext != nil {
+            context.deleteObject(existingEntry.summary)
+        }
         
         if feedlyEntry.content != nil {
             existingEntry.content = NSEntityDescription.insertNewObjectForEntityForName("EntryContent", inManagedObjectContext: context) as EntryContent
             
             existingEntry.content.content = feedlyEntry.content!.content
             existingEntry.content.direction = feedlyEntry.content!.direction
-        } else {
+        }
+            /*
+        else {
             existingEntry.content.content = ""
             existingEntry.content.direction = ""
-        }
+        }*/
         
         if feedlyEntry.summary != nil {
             existingEntry.summary = NSEntityDescription.insertNewObjectForEntityForName("EntryContent", inManagedObjectContext: context) as EntryContent
             
             existingEntry.summary.content = feedlyEntry.summary!.content
             existingEntry.summary.direction = feedlyEntry.summary!.direction
-        } else {
+        }
+            /*
+        else {
             existingEntry.summary.content = ""
             existingEntry.summary.direction = ""
-        }
+        }*/
         
         existingEntry.categories = self.mergeCategories(feedlyEntry, forEntry: existingEntry, inManagedObjectContext: context, error: error)
     }

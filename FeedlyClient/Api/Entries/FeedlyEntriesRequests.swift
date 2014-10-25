@@ -17,7 +17,7 @@ class FeedlyEntriesRequests {
                 manager.requestSerializer.setValue("OAuth " + accessToken, forHTTPHeaderField: "Authorization")
             }
             
-            manager.responseSerializer = AFJSONResponseSerializer()
+            manager.responseSerializer = AFJSONResponseSerializer() as AFHTTPResponseSerializer
             
             var operation = manager.GET(url, parameters: nil,
                 success:  {
@@ -52,13 +52,13 @@ class FeedlyEntriesRequests {
             // POST /v3/entries/.mget
             
             var manager = AFHTTPRequestOperationManager()
-            manager.requestSerializer = AFJSONRequestSerializer()
+            manager.requestSerializer = AFJSONRequestSerializer() as AFHTTPRequestSerializer
             
             if let accessToken = accessToken? {
                 manager.requestSerializer.setValue("OAuth " + accessToken, forHTTPHeaderField: "Authorization")
             }
             
-            manager.responseSerializer = AFJSONResponseSerializer()
+            manager.responseSerializer = AFJSONResponseSerializer() as AFHTTPResponseSerializer
             
             var operation = manager.POST(url,
                 parameters: entries,

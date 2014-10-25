@@ -98,7 +98,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         var cell: UITableViewCell
         if let accessToken = keychainData?.accessToken {
             cell = tableView.dequeueReusableCellWithIdentifier("LogoutCell", forIndexPath: indexPath) as UITableViewCell //as LogoutTableViewCell
-            cell.textLabel!.text = keychainData!.userName
+            cell.textLabel.text = keychainData!.userName
             
             self.setLogoutCell(cell, data: keychainData!)
         } else {
@@ -130,7 +130,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func setLogoutCell(cell: UITableViewCell, data: KeychainData) {
-        cell.textLabel!.text = data.userName
+        cell.textLabel.text = data.userName
         var logoutButton = UIButton()
         logoutButton.frame = CGRectMake(0.0, 0.0, 60.0, 25.0)
         logoutButton.backgroundColor = UIColor.redColor()

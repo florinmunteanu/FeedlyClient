@@ -19,7 +19,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate {
     
     override func viewDidAppear(animated: Bool) {
         var url = FeedlyAuthenticationRequests.authenticationUrl()
-        var request = NSURLRequest(URL: NSURL(string: url))
+        var request = NSURLRequest(URL: NSURL(string: url)!)
         self.webView.loadRequest(request)
     }
     

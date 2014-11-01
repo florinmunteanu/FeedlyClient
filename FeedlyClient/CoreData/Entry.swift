@@ -9,6 +9,7 @@ class Entry: NSManagedObject {
     @NSManaged var published: NSTimeInterval
     @NSManaged var title: String
     @NSManaged var author: String
+    @NSManaged var textSummary: String
     @NSManaged var unread: Bool
     @NSManaged var visual: EntryVisual
     @NSManaged var content: EntryContent

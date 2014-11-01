@@ -18,6 +18,9 @@ class CategorySubscriptionsViewController: UITableViewController, NSFetchedResul
         refreshControl.addTarget(self, action: "refresh:", forControlEvents: .ValueChanged)
         
         self.refreshControl = refreshControl
+        
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 75
     }
     
     func refresh(refreshControl: UIRefreshControl) {
@@ -183,7 +186,7 @@ class CategorySubscriptionsViewController: UITableViewController, NSFetchedResul
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("EntryCell", forIndexPath: indexPath) as UITableViewCell
+        var cell = tableView.dequeueReusableCellWithIdentifier("EntryCell", forIndexPath: indexPath) as EntryTableViewCell
         self.configureCell(cell, atIndexPath: indexPath)
         return cell
     }
@@ -207,8 +210,16 @@ class CategorySubscriptionsViewController: UITableViewController, NSFetchedResul
     
     // MARK: Configure cell
     
-    func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
-        let entry = self.fetchedResultsController.objectAtIndexPath(indexPath) as? Entry
-        cell.textLabel.text = entry?.title
+    func configureCell(cell: EntryTableViewCell, atIndexPath indexPath: NSIndexPath) {
+        var entry = self.fetchedResultsController.objectAtIndexPath(indexPath) as? Entry
+        
+        cell.titleLabel.text = entry?.title
+        //cell.titleLabel.numberOfLines = 0
+        //cell.titleLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
+        //cell.titleLabel.font = UIFont(name: "Verdana", size: 3)
+        
+        cell.summaryLabel.text = entry?.textSummary
+
+        cell.authorLabel.text = entry?.author
     }
 }

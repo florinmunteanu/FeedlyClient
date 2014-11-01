@@ -24,7 +24,6 @@ extension Entry {
             self.updateExistingEntry(existingEntry, withFeedlyEntry: feedlyEntry, inManagedObjectContext: context, error: error)
         }
         
-        
         var saveError: NSError? = nil
         context.save(&saveError)
         
@@ -53,6 +52,9 @@ extension Entry {
             
             newEntry.summary.content = feedlyEntry.summary!.content
             newEntry.summary.direction = feedlyEntry.summary!.direction
+            
+            var parser = EntrySummaryParser(summaryHtmlContent: newEntry.summary.content)
+            newEntry.textSummary = parser.parse()
         }
         
         newEntry.categories = self.mergeCategories(feedlyEntry, forEntry: newEntry, inManagedObjectContext: context, error: error)
@@ -78,23 +80,16 @@ extension Entry {
             existingEntry.content.content = feedlyEntry.content!.content
             existingEntry.content.direction = feedlyEntry.content!.direction
         }
-            /*
-        else {
-            existingEntry.content.content = ""
-            existingEntry.content.direction = ""
-        }*/
         
         if feedlyEntry.summary != nil {
             existingEntry.summary = NSEntityDescription.insertNewObjectForEntityForName("EntryContent", inManagedObjectContext: context) as EntryContent
             
             existingEntry.summary.content = feedlyEntry.summary!.content
             existingEntry.summary.direction = feedlyEntry.summary!.direction
+            
+            var parser = EntrySummaryParser(summaryHtmlContent: existingEntry.summary.content)
+            existingEntry.textSummary = parser.parse()
         }
-            /*
-        else {
-            existingEntry.summary.content = ""
-            existingEntry.summary.direction = ""
-        }*/
         
         existingEntry.categories = self.mergeCategories(feedlyEntry, forEntry: existingEntry, inManagedObjectContext: context, error: error)
     }

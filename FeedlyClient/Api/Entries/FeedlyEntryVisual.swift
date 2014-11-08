@@ -11,10 +11,10 @@ class FeedlyEntryVisual {
             self.url = url
         }
         if let width = json["width"] as AnyObject! as? Int {
-            self.width = width
+            self.width = Int32(width)
         }
         if let height = json["height"] as AnyObject! as? Int {
-            self.height = height
+            self.height = Int32(height)
         }
         if let contentType = json["contentType"] as AnyObject! as? String {
             self.contentType = contentType
@@ -23,9 +23,9 @@ class FeedlyEntryVisual {
     
     var url: String = ""
     
-    var width: Int = 0
+    var width: Int32 = 0
     
-    var height: Int = 0
+    var height: Int32 = 0
     
     var contentType: String = ""
 }

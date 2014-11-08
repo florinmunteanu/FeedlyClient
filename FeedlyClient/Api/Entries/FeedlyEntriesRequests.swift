@@ -62,10 +62,6 @@ class FeedlyEntriesRequests {
             
             var operation = manager.POST(url,
                 parameters: entries,
-                //constructingBodyWithBlock: {
-                //    (a: AnyObject!) -> Void in
-                    //var b: AnyObject = a as AnyObject<AFStreamingMultipartFormData>
-                //},
                 success: {
                     (operation: AFHTTPRequestOperation!, responseObject: AnyObject!) -> Void in
                     

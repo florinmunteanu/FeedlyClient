@@ -17,11 +17,36 @@ extension Entry {
             return
         }
         
-        if (matches == nil || matches?.count == 0) {
+        if matches == nil || matches?.count == 0 {
             self.insertNewEntry(feedlyEntry, inManagedObjectContext: context, error: error)
         } else {
             var existingEntry = matches?.last as Entry;
             self.updateExistingEntry(existingEntry, withFeedlyEntry: feedlyEntry, inManagedObjectContext: context, error: error)
+        }
+        
+        var saveError: NSError? = nil
+        context.save(&saveError)
+        
+        if saveError != nil && error != nil {
+            error.memory = saveError
+        }
+    }
+    
+    internal class func updateThumbnail(entryId: String, thumbnail: NSData, inManagedObjectContext context: NSManagedObjectContext, error: NSErrorPointer) {
+        
+        var fetchRequest = NSFetchRequest(entityName: "Entry")
+        fetchRequest.predicate = NSPredicate(format: "id=%@", entryId)
+        
+        var fetchError: NSError? = nil
+        var matches = context.executeFetchRequest(fetchRequest, error: &fetchError)
+        
+        if fetchError != nil && error != nil {
+            error.memory = fetchError
+            return
+        }
+        if matches != nil && matches?.count == 1 {
+            var existingEntry = matches?.last as Entry
+            existingEntry.thumbnail = thumbnail
         }
         
         var saveError: NSError? = nil
@@ -56,6 +81,14 @@ extension Entry {
             var parser = EntrySummaryParser(summaryHtmlContent: newEntry.summary.content)
             newEntry.textSummary = parser.parse()
         }
+        if feedlyEntry.visual != nil {
+            newEntry.visual = NSEntityDescription.insertNewObjectForEntityForName("EntryVisual", inManagedObjectContext: context) as EntryVisual
+            
+            newEntry.visual.url = feedlyEntry.visual!.url
+            newEntry.visual.width = feedlyEntry.visual!.width
+            newEntry.visual.height = feedlyEntry.visual!.height
+            newEntry.visual.contentType = feedlyEntry.visual!.contentType
+        }
         
         newEntry.categories = self.mergeCategories(feedlyEntry, forEntry: newEntry, inManagedObjectContext: context, error: error)
     }
@@ -73,6 +106,9 @@ extension Entry {
         if existingEntry.summary.managedObjectContext != nil {
             context.deleteObject(existingEntry.summary)
         }
+        if existingEntry.visual.managedObjectContext != nil {
+            context.deleteObject(existingEntry.visual)
+        }
         
         if feedlyEntry.content != nil {
             existingEntry.content = NSEntityDescription.insertNewObjectForEntityForName("EntryContent", inManagedObjectContext: context) as EntryContent
@@ -89,6 +125,15 @@ extension Entry {
             
             var parser = EntrySummaryParser(summaryHtmlContent: existingEntry.summary.content)
             existingEntry.textSummary = parser.parse()
+        }
+        
+        if feedlyEntry.visual != nil {
+            existingEntry.visual = NSEntityDescription.insertNewObjectForEntityForName("EntryVisual", inManagedObjectContext: context) as EntryVisual
+            
+            existingEntry.visual.url = feedlyEntry.visual!.url
+            existingEntry.visual.width = feedlyEntry.visual!.width
+            existingEntry.visual.height = feedlyEntry.visual!.height
+            existingEntry.visual.contentType = feedlyEntry.visual!.contentType
         }
         
         existingEntry.categories = self.mergeCategories(feedlyEntry, forEntry: existingEntry, inManagedObjectContext: context, error: error)

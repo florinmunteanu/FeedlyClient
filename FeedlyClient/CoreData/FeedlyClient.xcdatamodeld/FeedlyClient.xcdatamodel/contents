@@ -11,6 +11,7 @@
         <attribute name="id" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="published" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="textSummary" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="thumbnail" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="title" attributeType="String" syncable="YES"/>
         <attribute name="unread" attributeType="Boolean" syncable="YES"/>
         <relationship name="categories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Category" inverseName="entries" inverseEntity="Category" syncable="YES"/>
@@ -39,7 +40,7 @@
     </entity>
     <elements>
         <element name="Category" positionX="-396" positionY="-157" width="119" height="103"/>
-        <element name="Entry" positionX="-614" positionY="-169" width="128" height="193"/>
+        <element name="Entry" positionX="-614" positionY="-169" width="128" height="208"/>
         <element name="EntryContent" positionX="-315" positionY="29" width="128" height="88"/>
         <element name="EntryVisual" positionX="-612" positionY="89" width="128" height="118"/>
         <element name="Subscription" positionX="-218" positionY="-171" width="128" height="118"/>

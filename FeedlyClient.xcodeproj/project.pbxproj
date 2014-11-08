@@ -24,6 +24,8 @@
 		4E6ADAF71975A05000D3C72C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6ADAF61975A05000D3C72C /* AppDelegate.swift */; };
 		4E6ADAFC1975A05000D3C72C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E6ADAFB1975A05000D3C72C /* Images.xcassets */; };
 		4E6ADB081975A05100D3C72C /* FeedlyClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6ADB071975A05100D3C72C /* FeedlyClientTests.swift */; };
+		4E70E9D71A06A9D100ED5688 /* ImagesDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E70E9D61A06A9D100ED5688 /* ImagesDownloader.swift */; };
+		4E70E9D91A06C27F00ED5688 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E70E9D81A06C27F00ED5688 /* ImageIO.framework */; };
 		4E757E7419A1C0AC00CEF5DD /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E757E7319A1C0AC00CEF5DD /* KeychainService.swift */; };
 		4EA3FEDB199A9B8800B84C0F /* FeedlyClientError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3FEDA199A9B8800B84C0F /* FeedlyClientError.swift */; };
 		4EA3FEDF199AA9FA00B84C0F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EA3FEDE199AA9FA00B84C0F /* Security.framework */; };
@@ -99,6 +101,8 @@
 		4E6ADB011975A05100D3C72C /* FeedlyClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FeedlyClientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E6ADB061975A05100D3C72C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4E6ADB071975A05100D3C72C /* FeedlyClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedlyClientTests.swift; sourceTree = "<group>"; };
+		4E70E9D61A06A9D100ED5688 /* ImagesDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImagesDownloader.swift; path = Downloader/ImagesDownloader.swift; sourceTree = "<group>"; };
+		4E70E9D81A06C27F00ED5688 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		4E757E7319A1C0AC00CEF5DD /* KeychainService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		4EA3FEDA199A9B8800B84C0F /* FeedlyClientError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedlyClientError.swift; sourceTree = "<group>"; };
 		4EA3FEDE199AA9FA00B84C0F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -147,6 +151,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E70E9D91A06C27F00ED5688 /* ImageIO.framework in Frameworks */,
 				4E3F0CAA19BC9A9F00E66E07 /* UIKit.framework in Frameworks */,
 				4ECDA7CE19B1A10D0025E2B8 /* WebKit.framework in Frameworks */,
 				4EA3FEDF199AA9FA00B84C0F /* Security.framework in Frameworks */,
@@ -280,6 +285,7 @@
 				4EFFAE7D19916EE60031B5F0 /* CoreData */,
 				4EDD1C0C1975A349004C346D /* Api */,
 				4E3162AB1A04FCBF00E9E477 /* Parser */,
+				4E70E9D51A06A90E00ED5688 /* Downloader */,
 				4E36590219D6C2BD001BEE78 /* Keychain */,
 				4EDD1C0D1975A365004C346D /* Views */,
 				4E6ADAF61975A05000D3C72C /* AppDelegate.swift */,
@@ -316,6 +322,14 @@
 				4E6ADB061975A05100D3C72C /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4E70E9D51A06A90E00ED5688 /* Downloader */ = {
+			isa = PBXGroup;
+			children = (
+				4E70E9D61A06A9D100ED5688 /* ImagesDownloader.swift */,
+			);
+			name = Downloader;
 			sourceTree = "<group>";
 		};
 		4ECDA81919B1AB9C0025E2B8 /* Categories */ = {
@@ -393,6 +407,7 @@
 		A8596F41331E496D9BBDBFC8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4E70E9D81A06C27F00ED5688 /* ImageIO.framework */,
 				4E3F0CA919BC9A9F00E66E07 /* UIKit.framework */,
 				4ECDA7CD19B1A10D0025E2B8 /* WebKit.framework */,
 				4EA3FEDE199AA9FA00B84C0F /* Security.framework */,
@@ -585,6 +600,7 @@
 				4EEEAD6219FBD60E00956C56 /* EntriesPageViewController.swift in Sources */,
 				4ECDA81D19B1ABDF0025E2B8 /* FeedlyCategory.swift in Sources */,
 				4ECDA80C19B1A9D40025E2B8 /* FeedlyEntriesRequests.swift in Sources */,
+				4E70E9D71A06A9D100ED5688 /* ImagesDownloader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

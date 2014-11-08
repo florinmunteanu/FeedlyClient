@@ -10,6 +10,7 @@ class Entry: NSManagedObject {
     @NSManaged var title: String
     @NSManaged var author: String
     @NSManaged var textSummary: String
+    @NSManaged var thumbnail: NSData
     @NSManaged var unread: Bool
     @NSManaged var visual: EntryVisual
     @NSManaged var content: EntryContent

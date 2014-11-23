@@ -18,9 +18,6 @@
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QVM-UL-QYM" id="2x8-Px-z8p">
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="zzV-4V-6qO" kind="showDetail" identifier="Subscriptions" id="pTR-tY-ZZq"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -139,7 +136,7 @@
                 <splitViewController id="xvR-WF-tSy" sceneMemberID="viewController">
                     <connections>
                         <segue destination="Mcq-r4-UMq" kind="relationship" relationship="masterViewController" id="NZ2-O1-XoC"/>
-                        <segue destination="zzV-4V-6qO" kind="relationship" relationship="detailViewController" id="VE8-ka-lcg"/>
+                        <segue destination="vev-rL-pEz" kind="relationship" relationship="detailViewController" id="LUq-Ko-nLr"/>
                     </connections>
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Kd-Sw-GM4" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -149,7 +146,7 @@
         <!--Category Subscriptions View Controller-->
         <scene sceneID="90k-mY-IzR">
             <objects>
-                <tableViewController id="vev-rL-pEz" customClass="CategorySubscriptionsViewController" customModule="FeedlyClient" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="Subscriptions" id="vev-rL-pEz" customClass="CategorySubscriptionsViewController" customModule="FeedlyClient" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Lra-T4-Fp0">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -174,7 +171,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1wc-eT-hfs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1263" y="698"/>
+            <point key="canvasLocation" x="103" y="371"/>
         </scene>
         <!--Entry View Controller-->
         <scene sceneID="7A7-TB-not">
@@ -220,23 +217,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ttu-QF-A8F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2045" y="691"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Vr1-kh-iVo">
-            <objects>
-                <navigationController id="zzV-4V-6qO" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="88y-om-Ka8">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="vev-rL-pEz" kind="relationship" relationship="rootViewController" id="OOc-R5-pDC"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="2fT-Pe-zzA" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="365" y="698"/>
+            <point key="canvasLocation" x="815" y="371"/>
         </scene>
         <!--Entries Page View Controller-->
         <scene sceneID="Mch-ho-93c">
@@ -258,7 +239,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="laP-vj-b04" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2799" y="691"/>
+            <point key="canvasLocation" x="1649" y="371"/>
         </scene>
         <!--Entry Page Content View Controller-->
         <scene sceneID="iVI-22-Fcl">
@@ -290,7 +271,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eJq-Zg-Z2d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2799" y="1337"/>
+            <point key="canvasLocation" x="1999" y="1201"/>
         </scene>
         <!--Web View Controller-->
         <scene sceneID="Nms-2U-He8">
@@ -309,10 +290,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EOF-gM-Qpe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3495" y="1337"/>
+            <point key="canvasLocation" x="2759" y="1201"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="pTR-tY-ZZq"/>
-    </inferredMetricsTieBreakers>
 </document>

@@ -2,7 +2,7 @@
 import Foundation
 import CoreData
 
-class CategorySubscriptionsViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+class __CategorySubscriptionsViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
     // On refresh: Get Stream by categoryId, then get entries by entries ids returned by stream.
     

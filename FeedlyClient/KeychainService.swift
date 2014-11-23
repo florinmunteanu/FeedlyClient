@@ -38,8 +38,8 @@ class KeychainService : NSObject {
     }
     
     /*
-     *  Internal methods for querying the keychain.
-     */
+    *  Internal methods for querying the keychain.
+    */
     private class func save(service: NSString, data: NSData) {
         // Instantiate a new default keychain query
         var keychainQuery = NSMutableDictionary(objects: [kSecClassGenericPasswordValue, service, userAccount, data], forKeys: [kSecClassValue, kSecAttrServiceValue, kSecAttrAccountValue, kSecValueDataValue])
@@ -62,20 +62,23 @@ class KeychainService : NSObject {
         // Search for the keychain items
         let status: OSStatus = SecItemCopyMatching(keychainQuery, &dataTypeRef)
         
-        let opaque = dataTypeRef?.toOpaque()
-        
-        var contentsOfKeychain: KeychainData?
-        
-        if let op = opaque? {
-            let retrievedData = Unmanaged<NSData>.fromOpaque(op).takeUnretainedValue()
+        if status == errSecSuccess {
             
-            // Convert the data retrieved from the keychain into an instance of KeychainData
-
-            contentsOfKeychain = KeychainData.fromJson(retrievedData, error: nil)
-        } else {
-            println("Nothing was retrieved from the keychain. Status code \(status)")
+            let opaque = dataTypeRef?.toOpaque()
+            var contentsOfKeychain: KeychainData?
+            
+            if let op = opaque? {
+                let retrievedData = Unmanaged<NSData>.fromOpaque(op).takeUnretainedValue()
+                
+                // Convert the data retrieved from the keychain into an instance of KeychainData
+                
+                contentsOfKeychain = KeychainData.fromJson(retrievedData, error: nil)
+            } else {
+                println("Nothing was retrieved from the keychain. Status code \(status)")
+            }
+            return contentsOfKeychain
         }
         
-        return contentsOfKeychain
+        return nil
     }
 }

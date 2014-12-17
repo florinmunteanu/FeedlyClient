@@ -82,7 +82,7 @@ class CategoriesViewController: UITableViewController, NSFetchedResultsControlle
                 var category = self.fetchedResultsController.objectAtIndexPath(cellIndexPath!) as Category
                 
                 var controller = segue.destinationViewController as UINavigationController
-                var childController = controller.viewControllers[0] as CategorySubscriptionsViewController
+                var childController = controller.viewControllers[0] as CategoryEntriesCollectionViewController
                 childController.managedObjectContext = self.managedObjectContext
                 childController.categoryId = category.id
             }

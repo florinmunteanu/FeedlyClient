@@ -146,36 +146,6 @@
             </objects>
             <point key="canvasLocation" x="-446" y="-414"/>
         </scene>
-        <!--Category Subscriptions View Controller-->
-        <scene sceneID="90k-mY-IzR">
-            <objects>
-                <tableViewController id="vev-rL-pEz" customClass="CategorySubscriptionsViewController" customModule="FeedlyClient" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Lra-T4-Fp0">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="EntryCell" id="ptr-i6-PTs" customClass="EntryTableViewCell" customModule="FeedlyClient" customModuleProvider="target">
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ptr-i6-PTs" id="2zZ-fg-u45">
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="FLl-A5-Cjz" kind="presentation" identifier="Entry" id="YmZ-SB-4Hu"/>
-                                </connections>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="vev-rL-pEz" id="eCM-By-O6Z"/>
-                            <outlet property="delegate" destination="vev-rL-pEz" id="y0H-uO-jlx"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" id="Zdx-yx-4Wa"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1wc-eT-hfs" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1263" y="698"/>
-        </scene>
         <!--Entry View Controller-->
         <scene sceneID="7A7-TB-not">
             <objects>
@@ -191,7 +161,7 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tp1-LQ-pdF">
                                 <rect key="frame" x="0.0" y="44" width="600" height="556"/>
                                 <connections>
-                                    <segue destination="XD2-Kw-zWy" kind="embed" id="B1A-zC-Obw"/>
+                                    <segue destination="XD2-Kw-zWy" kind="embed" identifier="Entries" id="B1A-zC-Obw"/>
                                 </connections>
                             </containerView>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z5e-nh-3vj">
@@ -217,10 +187,13 @@
                             <constraint firstItem="Z5e-nh-3vj" firstAttribute="leading" secondItem="pm8-y2-u1Q" secondAttribute="leading" id="hOB-5d-XDD"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="container" destination="tp1-LQ-pdF" id="equ-Ey-afM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ttu-QF-A8F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2045" y="691"/>
+            <point key="canvasLocation" x="1973" y="703"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Vr1-kh-iVo">
@@ -231,12 +204,51 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="vev-rL-pEz" kind="relationship" relationship="rootViewController" id="OOc-R5-pDC"/>
+                        <segue destination="vi0-VO-qoL" kind="relationship" relationship="rootViewController" id="s82-S7-Oxu"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2fT-Pe-zzA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="365" y="698"/>
+            <point key="canvasLocation" x="329" y="698"/>
+        </scene>
+        <!--Category Entries Collection View Controller-->
+        <scene sceneID="Jp6-Kl-sIl">
+            <objects>
+                <collectionViewController id="vi0-VO-qoL" customClass="CategoryEntriesCollectionViewController" customModule="FeedlyClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="URv-bf-qL5">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="lDD-g4-eKH">
+                            <size key="itemSize" width="50" height="50"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="EntryCell" id="afy-Vf-d9n" customClass="EntryCollectionViewCell" customModule="FeedlyClient" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <connections>
+                                    <segue destination="FLl-A5-Cjz" kind="presentation" identifier="Entry" id="Qm7-xs-FJ6"/>
+                                </connections>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="vi0-VO-qoL" id="TPA-aM-Ven"/>
+                            <outlet property="delegate" destination="vi0-VO-qoL" id="OEt-Hs-FUe"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" id="oar-pN-k80"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xoi-4T-QXL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1156" y="698"/>
         </scene>
         <!--Entries Page View Controller-->
         <scene sceneID="Mch-ho-93c">
@@ -258,7 +270,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="laP-vj-b04" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2799" y="691"/>
+            <point key="canvasLocation" x="2721" y="703"/>
         </scene>
         <!--Entry Page Content View Controller-->
         <scene sceneID="iVI-22-Fcl">
@@ -275,7 +287,7 @@
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p1r-6b-j0l">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <connections>
-                                    <segue destination="4Pm-D3-Q6n" kind="embed" id="ssi-QE-0d3"/>
+                                    <segue destination="4Pm-D3-Q6n" kind="embed" identifier="EntryWebView" id="ssi-QE-0d3"/>
                                 </connections>
                             </containerView>
                         </subviews>
@@ -290,7 +302,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eJq-Zg-Z2d" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2799" y="1337"/>
+            <point key="canvasLocation" x="1967" y="1445"/>
         </scene>
         <!--Web View Controller-->
         <scene sceneID="Nms-2U-He8">
@@ -309,7 +321,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EOF-gM-Qpe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3495" y="1337"/>
+            <point key="canvasLocation" x="2711" y="1445"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

@@ -1,19 +1,13 @@
-//
-//  EntriesPageViewController.swift
-//  FeedlyClient
-//
-//  Created by Florin Munteanu on 25/10/14.
-//  Copyright (c) 2014 Florin Munteanu. All rights reserved.
-//
 
 import UIKit
 
 class EntriesPageViewController: UIPageViewController, UIPageViewControllerDataSource {
     
-    var pageViewController: UIPageViewController?
-    var currentIndex: Int = 0
+    private var pageViewController: UIPageViewController?
+    private var currentIndex: Int = 0
     
-    var pageTitles = ["God vs Man", "Cool Breeze", "Fire Sky"]
+    var selectedEntry: Entry? = nil
+    var entries: [Entry]? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,24 +27,13 @@ class EntriesPageViewController: UIPageViewController, UIPageViewControllerDataS
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
-    
-    /*
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    // Get the new view controller using segue.destinationViewController.
-    // Pass the selected object to the new view controller.
-    }
-    */
     
     // MARK: UIPageViewControllerDataSource
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
         
-        var index = (viewController as EntryPageContentViewController).pageIndex
+        var index = (viewController as EntryPageContentViewController).index
         if (index == 0) || (index == NSNotFound) {
             return nil
         }
@@ -62,14 +45,14 @@ class EntriesPageViewController: UIPageViewController, UIPageViewControllerDataS
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
         
-        var index = (viewController as EntryPageContentViewController).pageIndex
+        var index = (viewController as EntryPageContentViewController).index
         if index == NSNotFound {
             return nil
         }
         
         index++
         
-        if (index == self.pageTitles.count) {
+        if index == self.entries?.count {
             return nil
         }
         
@@ -77,22 +60,22 @@ class EntriesPageViewController: UIPageViewController, UIPageViewControllerDataS
     }
     
     func viewControllerAtIndex(index: Int) -> EntryPageContentViewController? {
-        if self.pageTitles.count == 0 || index >= self.pageTitles.count {
+        if self.entries == nil || index >= self.entries!.count {
             return nil
         }
 
         // Create a new view controller and pass suitable data.
         let pageContentViewController = self.storyboard!.instantiateViewControllerWithIdentifier("EntryPageContentViewController") as EntryPageContentViewController
         
-        pageContentViewController.titleText = self.pageTitles[index]
-        pageContentViewController.pageIndex = index
+        pageContentViewController.entry = self.entries?[index]
+        pageContentViewController.index = index
         self.currentIndex = index
         
         return pageContentViewController
     }
     
     func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {
-        return self.pageTitles.count
+        return self.entries?.count ?? 0
     }
     
     func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int {

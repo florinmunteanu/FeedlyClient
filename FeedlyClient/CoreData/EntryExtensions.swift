@@ -65,6 +65,7 @@ extension Entry {
         newEntry.unread = feedlyEntry.unread
         newEntry.author = feedlyEntry.author ?? ""
         newEntry.published = feedlyEntry.published.timeIntervalSince1970
+        newEntry.url = feedlyEntry.origin.htmlUrl
         
         if feedlyEntry.content != nil {
             newEntry.content = NSEntityDescription.insertNewObjectForEntityForName("EntryContent", inManagedObjectContext: context) as EntryContent

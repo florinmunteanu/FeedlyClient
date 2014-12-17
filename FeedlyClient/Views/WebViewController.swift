@@ -4,12 +4,31 @@ import WebKit
 
 class WebViewController: UIViewController {
     
-    var webView: WKWebView?
+    private var webView: WKWebView?
+    
+    var entry: Entry? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.webView!.loadRequest(NSURLRequest(URL: NSURL(string: "http://www.google.ro")!))
+        if self.entry != nil {
+            var keychainData = KeychainService.loadData()
+            
+            if let token = keychainData?.accessToken {
+                
+                FeedlyEntriesRequests.beginGetEntry(self.entry!.id, accessToken: token,
+                    success: {
+                        (feedlyEntry: FeedlyEntry) -> Void in
+                        self.webView!.loadRequest(NSURLRequest(URL: NSURL(string: feedlyEntry.origin.htmlUrl)!))
+                    }, failure: {
+                        (error: NSError) -> Void in
+                        
+                })
+                
+                //self.webView!.loadHTMLString(self.entry!.content.content, baseURL: nil)
+                
+            }
+        }
     }
     
     override func loadView() {
@@ -19,18 +38,5 @@ class WebViewController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
-    
-    
-    /*
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    // Get the new view controller using segue.destinationViewController.
-    // Pass the selected object to the new view controller.
-    }
-    */
-
 }

@@ -1,7 +1,7 @@
 
 import UIKit
 
-class EntryTableViewCell: UITableViewCell {
+class EntryCollectionViewCell: UICollectionViewCell {
     
     var titleLabel = UILabel()
     var summaryLabel = UILabel()

@@ -16,5 +16,5 @@ class Entry: NSManagedObject {
     @NSManaged var content: EntryContent
     @NSManaged var summary: EntryContent
     @NSManaged var categories: NSSet
-
+    @NSManaged var url: String
 }

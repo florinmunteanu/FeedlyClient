@@ -2,9 +2,11 @@
 import Foundation
 import CoreData
 
-class CategorySubscriptionsViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+class CategoryEntriesCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, NSFetchedResultsControllerDelegate {
     
-    // On refresh: Get Stream by categoryId, then get entries by entries ids returned by stream.
+    private let reuseIdentifier = "EntryCell"
+    private let sectionInsets = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
+    private var refreshControl: UIRefreshControl?
     
     var managedObjectContext: NSManagedObjectContext? = nil
     
@@ -16,11 +18,9 @@ class CategorySubscriptionsViewController: UITableViewController, NSFetchedResul
         var refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl.addTarget(self, action: "refresh:", forControlEvents: .ValueChanged)
-        
         self.refreshControl = refreshControl
-        
-        self.tableView.rowHeight = 75//UITableViewAutomaticDimension
-        //self.tableView.estimatedRowHeight = 75
+        self.collectionView.addSubview(refreshControl)
+        self.collectionView.alwaysBounceVertical = true
     }
     
     func refresh(refreshControl: UIRefreshControl) {
@@ -33,10 +33,19 @@ class CategorySubscriptionsViewController: UITableViewController, NSFetchedResul
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "Entry" {
-            var entryViewController = segue.destinationViewController as EntryViewController
-            entryViewController.entry = sender as? Entry
+            let entryViewController = segue.destinationViewController as EntryViewController
+            
+            if let selectedCell = sender as? EntryCollectionViewCell {
+                if let indexPath = self.collectionView.indexPathForCell(selectedCell) {
+                    let entry = self.fetchedResultsController.objectAtIndexPath(indexPath) as Entry
+                    entryViewController.selectedEntry = entry
+                    entryViewController.entries = [entry]
+                }
+            }
         }
     }
+    
+    // On refresh: Get Stream by categoryId, then get entries by entries ids returned by stream.
     
     private func beginLoadStream(categoryId: String) {
         var keychainData = KeychainService.loadData()
@@ -75,7 +84,8 @@ class CategorySubscriptionsViewController: UITableViewController, NSFetchedResul
                 self.updateEntries(entriesDictionary, error: &error)
                 
                 self.endRefreshing()
-                self.tableView.reloadData()
+                self.collectionView.reloadData()
+                
                 if error != nil {
                     Alerts.displayError("An error occurred while refreshing the entries. Please try again.", onUIViewController: self)
                 }
@@ -150,16 +160,50 @@ class CategorySubscriptionsViewController: UITableViewController, NSFetchedResul
         return _fetchedResultsController!
     }
     
+    // MARK: UICollectionViewDataSource
+    
+    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return self.fetchedResultsController.sections?.count ?? 0
+    }
+    
+    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        let sectionInfo = self.fetchedResultsController.sections![section] as NSFetchedResultsSectionInfo
+        return sectionInfo.numberOfObjects
+    }
+    
+    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(self.reuseIdentifier, forIndexPath: indexPath) as EntryCollectionViewCell
+        self.configureCell(cell, atIndexPath: indexPath)
+        return cell
+    }
+    
+    // MARK: UICollectionViewDelegateFlowLayout
+    
+    func collectionView(collectionView: UICollectionView!, layout collectionViewLayout: UICollectionViewLayout!, sizeForItemAtIndexPath indexPath: NSIndexPath!) -> CGSize {
+        
+        if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
+            return CGSize(width: self.collectionView.frame.width / 3, height: 200)
+        } else {
+            return CGSize(width: self.collectionView.frame.width, height: 75)
+        }
+    }
+    
+    func collectionView(collectionView: UICollectionView!, layout collectionViewLayout: UICollectionViewLayout!, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+        return sectionInsets
+    }
+    
+    // MARK: NSFetchedResultsControllerDelegate
+    
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
-        self.tableView.beginUpdates()
+        //self.collectionView.beginUpdates()
     }
     
     func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
         switch type {
         case .Insert:
-            self.tableView.insertSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
+            self.collectionView.insertSections(NSIndexSet(index: sectionIndex))
         case .Delete:
-            self.tableView.deleteSections(NSIndexSet(index: sectionIndex), withRowAnimation: .Fade)
+            self.collectionView.deleteSections(NSIndexSet(index: sectionIndex))
         default:
             return
         }
@@ -168,64 +212,65 @@ class CategorySubscriptionsViewController: UITableViewController, NSFetchedResul
     func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath) {
         switch type {
         case .Insert:
-            tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Fade)
+            self.collectionView.insertItemsAtIndexPaths([newIndexPath])
         case .Delete:
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        case .Update:
-            if let cell = tableView.cellForRowAtIndexPath(indexPath) as? EntryTableViewCell {
-                self.configureCell(cell, atIndexPath: indexPath)
-            }
+            self.collectionView.deleteItemsAtIndexPaths([indexPath])
+            //case .Update:
+            //if let cell = tableView.cellForRowAtIndexPath(indexPath) as? EntryTableViewCell {
+            //    self.configureCell(cell, atIndexPath: indexPath)
+            //}
             //self.configureCell(self.tableView(self.tableView, cellForRowAtIndexPath: indexPath), atIndexPath: indexPath)
             //self.configureCell(tableView.cellForRowAtIndexPath(indexPath)! as EntryTableViewCell, atIndexPath: indexPath)
         case .Move:
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-            tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Fade)
+            self.collectionView.deleteItemsAtIndexPaths([indexPath])
+            self.collectionView.insertItemsAtIndexPaths([newIndexPath])
         default:
             return
         }
     }
     
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
-        self.tableView.endUpdates()
+        //self.collectionView.endUpdates()
     }
-    
+    /*
     // MARK: UITableViewDataSource
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return self.fetchedResultsController.sections?.count ?? 0
+    return self.fetchedResultsController.sections?.count ?? 0
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let sectionInfo = self.fetchedResultsController.sections![section] as NSFetchedResultsSectionInfo
-        return sectionInfo.numberOfObjects
+    let sectionInfo = self.fetchedResultsController.sections![section] as NSFetchedResultsSectionInfo
+    return sectionInfo.numberOfObjects
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("EntryCell", forIndexPath: indexPath) as EntryTableViewCell
-        self.configureCell(cell, atIndexPath: indexPath)
-        return cell
+    var cell = tableView.dequeueReusableCellWithIdentifier("EntryCell", forIndexPath: indexPath) as EntryTableViewCell
+    self.configureCell(cell, atIndexPath: indexPath)
+    return cell
     }
     
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    // Return false if you do not want the specified item to be editable.
+    return true
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        var cell = self.tableView(self.tableView, cellForRowAtIndexPath: indexPath)
-        var entry: AnyObject! = self.fetchedResultsController.objectAtIndexPath(indexPath) as Entry
-        self.performSegueWithIdentifier("Entry", sender: entry)
+    var cell = self.tableView(self.tableView, cellForRowAtIndexPath: indexPath)
+    var entry: AnyObject! = self.fetchedResultsController.objectAtIndexPath(indexPath) as Entry
+    self.performSegueWithIdentifier("Entry", sender: entry)
     }
-    
+    */
     // MARK: UITableViewDelegate
-    
+    /*
     override func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
-        
+    
     }
+    */
     
     // MARK: Configure cell
     
-    func configureCell(cell: EntryTableViewCell, atIndexPath indexPath: NSIndexPath) {
+    func configureCell(cell: EntryCollectionViewCell, atIndexPath indexPath: NSIndexPath) {
         var entry = self.fetchedResultsController.objectAtIndexPath(indexPath) as? Entry
         
         cell.titleLabel.text = entry?.title
@@ -233,10 +278,8 @@ class CategorySubscriptionsViewController: UITableViewController, NSFetchedResul
         cell.authorLabel.text = entry?.author
         if let thumbnail = entry?.thumbnail {
             cell.thumbnailImageView.image = UIImage(data: thumbnail)
-            //cell.imageView.image = UIImage(data: thumbnail)
         } else {
             cell.thumbnailImageView.image = nil
-            //cell.imageView.image = nil
         }
     }
 }

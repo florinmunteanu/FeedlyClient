@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         controller.managedObjectContext = self.managedObjectContext
         
         let childNavigationController = splitViewController.childViewControllers[1] as UINavigationController
-        let detailController = childNavigationController.topViewController as CategorySubscriptionsViewController
+        let detailController = childNavigationController.topViewController as CategoryEntriesCollectionViewController
         detailController.managedObjectContext = self.managedObjectContext
     }
     
@@ -74,7 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     func splitViewController(splitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController:UIViewController!, ontoPrimaryViewController primaryViewController:UIViewController!) -> Bool {
         
         if let secondaryAsNavController = secondaryViewController as? UINavigationController {
-            if let topAsDetailController = secondaryAsNavController.topViewController as? CategorySubscriptionsViewController {
+            if let topAsDetailController = secondaryAsNavController.topViewController as? CategoryEntriesCollectionViewController {
                 if topAsDetailController.categoryId == nil {
                     // Return true to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
                     return true

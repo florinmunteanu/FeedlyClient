@@ -82,11 +82,22 @@ class CategoriesViewController: UITableViewController, NSFetchedResultsControlle
                 var category = self.fetchedResultsController.objectAtIndexPath(cellIndexPath!) as Category
                 
                 var controller = segue.destinationViewController as UINavigationController
+                
                 var childController = controller.viewControllers[0] as CategoryEntriesCollectionViewController
                 childController.managedObjectContext = self.managedObjectContext
                 childController.categoryId = category.id
+                childController.categoryName = category.label
+                
+                self.setupNavigationItem(childController)
             }
         }
+    }
+    
+    private func setupNavigationItem(controller: UIViewController) {
+        // http://nshipster.com/uisplitviewcontroller/
+        //
+        controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
+        controller.navigationItem.leftItemsSupplementBackButton = true
     }
     
     // MARK: - Fetched results controller
@@ -187,6 +198,6 @@ class CategoriesViewController: UITableViewController, NSFetchedResultsControlle
     
     func configureCell(cell: UITableViewCell, atIndexPath indexPath: NSIndexPath) {
         let category = self.fetchedResultsController.objectAtIndexPath(indexPath) as? Category
-        cell.textLabel.text = category?.label
+        cell.textLabel!.text = category?.label
     }
 }

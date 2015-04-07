@@ -15,7 +15,7 @@ class WebViewController: UIViewController {
             var keychainData = KeychainService.loadData()
             
             if let token = keychainData?.accessToken {
-                
+                /*
                 FeedlyEntriesRequests.beginGetEntry(self.entry!.id, accessToken: token,
                     success: {
                         (feedlyEntry: FeedlyEntry) -> Void in
@@ -23,7 +23,7 @@ class WebViewController: UIViewController {
                     }, failure: {
                         (error: NSError) -> Void in
                         
-                })
+                })*/
                 
                 //self.webView!.loadHTMLString(self.entry!.content.content, baseURL: nil)
                 

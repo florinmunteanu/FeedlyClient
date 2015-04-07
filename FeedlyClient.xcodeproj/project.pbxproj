@@ -24,11 +24,14 @@
 		4E6ADAF71975A05000D3C72C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6ADAF61975A05000D3C72C /* AppDelegate.swift */; };
 		4E6ADAFC1975A05000D3C72C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E6ADAFB1975A05000D3C72C /* Images.xcassets */; };
 		4E6ADB081975A05100D3C72C /* FeedlyClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6ADB071975A05100D3C72C /* FeedlyClientTests.swift */; };
+		4E6F352B1AC8216400D15FCC /* MyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6F35291AC8216400D15FCC /* MyCollectionViewCell.swift */; };
+		4E6F352C1AC8216400D15FCC /* MyCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E6F352A1AC8216400D15FCC /* MyCollectionViewCell.xib */; };
 		4E70E9D71A06A9D100ED5688 /* ImagesDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E70E9D61A06A9D100ED5688 /* ImagesDownloader.swift */; };
 		4E70E9D91A06C27F00ED5688 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E70E9D81A06C27F00ED5688 /* ImageIO.framework */; };
 		4E757E7419A1C0AC00CEF5DD /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E757E7319A1C0AC00CEF5DD /* KeychainService.swift */; };
 		4EA3FEDB199A9B8800B84C0F /* FeedlyClientError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3FEDA199A9B8800B84C0F /* FeedlyClientError.swift */; };
 		4EA3FEDF199AA9FA00B84C0F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EA3FEDE199AA9FA00B84C0F /* Security.framework */; };
+		4EBDEB381AC76FF600695887 /* EntryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBDEB361AC76FF600695887 /* EntryCell.swift */; };
 		4EC7A87419E9271C0072F3F0 /* Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC7A87319E9271C0072F3F0 /* Alerts.swift */; };
 		4EC7A88219E976F70072F3F0 /* EntryContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC7A88119E976F70072F3F0 /* EntryContent.swift */; };
 		4EC7A88419E976F80072F3F0 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC7A88319E976F80072F3F0 /* Entry.swift */; };
@@ -100,11 +103,14 @@
 		4E6ADB011975A05100D3C72C /* FeedlyClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FeedlyClientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E6ADB061975A05100D3C72C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4E6ADB071975A05100D3C72C /* FeedlyClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedlyClientTests.swift; sourceTree = "<group>"; };
+		4E6F35291AC8216400D15FCC /* MyCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyCollectionViewCell.swift; path = Views/Entries/Cells/MyCollectionViewCell.swift; sourceTree = "<group>"; };
+		4E6F352A1AC8216400D15FCC /* MyCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MyCollectionViewCell.xib; path = Views/Entries/Cells/MyCollectionViewCell.xib; sourceTree = "<group>"; };
 		4E70E9D61A06A9D100ED5688 /* ImagesDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImagesDownloader.swift; path = Downloader/ImagesDownloader.swift; sourceTree = "<group>"; };
 		4E70E9D81A06C27F00ED5688 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		4E757E7319A1C0AC00CEF5DD /* KeychainService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		4EA3FEDA199A9B8800B84C0F /* FeedlyClientError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedlyClientError.swift; sourceTree = "<group>"; };
 		4EA3FEDE199AA9FA00B84C0F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		4EBDEB361AC76FF600695887 /* EntryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EntryCell.swift; path = Views/Entries/Cells/EntryCell.swift; sourceTree = "<group>"; };
 		4EC7A87319E9271C0072F3F0 /* Alerts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Alerts.swift; path = Views/Alerts.swift; sourceTree = "<group>"; };
 		4EC7A88119E976F70072F3F0 /* EntryContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EntryContent.swift; path = CoreData/EntryContent.swift; sourceTree = "<group>"; };
 		4EC7A88319E976F80072F3F0 /* Entry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Entry.swift; path = CoreData/Entry.swift; sourceTree = "<group>"; };
@@ -252,7 +258,10 @@
 		4E456D0519FCCD2E00A8085A /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				4E6F35291AC8216400D15FCC /* MyCollectionViewCell.swift */,
+				4E6F352A1AC8216400D15FCC /* MyCollectionViewCell.xib */,
 				4E51994219FD4A1E0036166F /* EntryCollectionViewCell.swift */,
+				4EBDEB361AC76FF600695887 /* EntryCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -511,6 +520,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E6F352C1AC8216400D15FCC /* MyCollectionViewCell.xib in Resources */,
 				4E6ADAFC1975A05000D3C72C /* Images.xcassets in Resources */,
 				4EDD1C0B1975A214004C346D /* Storyboard.storyboard in Resources */,
 				4E3FAE731986EBAD007DF98D /* LoginViewController.xib in Resources */,
@@ -591,6 +601,7 @@
 				4E3F0CA819BC8A4F00E66E07 /* CategoriesViewController.swift in Sources */,
 				4E476F9D19B6421D0010588D /* FeedlyClient.xcdatamodeld in Sources */,
 				4E456D0319FCCB9200A8085A /* SettingsViewController.swift in Sources */,
+				4E6F352B1AC8216400D15FCC /* MyCollectionViewCell.swift in Sources */,
 				4E36590119D6C2A8001BEE78 /* KeychainData.swift in Sources */,
 				4ECDA80119B1A95E0025E2B8 /* FeedlyUserAccessTokenInfo.swift in Sources */,
 				4EEEAD6019FB891600956C56 /* WebViewController.swift in Sources */,
@@ -604,6 +615,7 @@
 				4ECDA80319B1A95E0025E2B8 /* FeedlyUserProfileRequests.swift in Sources */,
 				4ECDA80019B1A95E0025E2B8 /* FeedlyUserProfile.swift in Sources */,
 				4E757E7419A1C0AC00CEF5DD /* KeychainService.swift in Sources */,
+				4EBDEB381AC76FF600695887 /* EntryCell.swift in Sources */,
 				4E456CFE19FBE36A00A8085A /* EntryPageContentViewController.swift in Sources */,
 				4ECDA81719B1AB5D0025E2B8 /* FeedlyStreamsRequests.swift in Sources */,
 				4ED18CEC197EE4B900EA7522 /* Constants.swift in Sources */,

@@ -13,7 +13,7 @@ class FeedlyEntriesRequests {
             var manager = AFHTTPRequestOperationManager()
             manager.requestSerializer = AFHTTPRequestSerializer()
             
-            if let accessToken = accessToken? {
+            if let accessToken = accessToken {
                 manager.requestSerializer.setValue("OAuth " + accessToken, forHTTPHeaderField: "Authorization")
             }
             
@@ -54,7 +54,7 @@ class FeedlyEntriesRequests {
             var manager = AFHTTPRequestOperationManager()
             manager.requestSerializer = AFJSONRequestSerializer() as AFHTTPRequestSerializer
             
-            if let accessToken = accessToken? {
+            if let accessToken = accessToken {
                 manager.requestSerializer.setValue("OAuth " + accessToken, forHTTPHeaderField: "Authorization")
             }
             

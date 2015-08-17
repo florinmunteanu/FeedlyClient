@@ -37,7 +37,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         if indexPath.section == 0 && indexPath.row == 0 {
             return self.getUserCell(tableView, forIndexPath: indexPath)
         } else {
-            var cell = tableView.dequeueReusableCellWithIdentifier("SettingCell", forIndexPath: indexPath) as UITableViewCell
+            var cell = tableView.dequeueReusableCellWithIdentifier("SettingCell", forIndexPath: indexPath) as! UITableViewCell
             
             return cell
         }
@@ -97,12 +97,12 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         
         var cell: UITableViewCell
         if let accessToken = keychainData?.accessToken {
-            cell = tableView.dequeueReusableCellWithIdentifier("LogoutCell", forIndexPath: indexPath) as UITableViewCell //as LogoutTableViewCell
+            cell = tableView.dequeueReusableCellWithIdentifier("LogoutCell", forIndexPath: indexPath) as! UITableViewCell //as LogoutTableViewCell
             cell.textLabel!.text = keychainData!.userName
             
             self.setLogoutCell(cell, data: keychainData!)
         } else {
-            cell = tableView.dequeueReusableCellWithIdentifier("LoginCell", forIndexPath: indexPath) as UITableViewCell //as LoginTableViewCell
+            cell = tableView.dequeueReusableCellWithIdentifier("LoginCell", forIndexPath: indexPath) as! UITableViewCell //as LoginTableViewCell
             self.setLoginCell(cell)
         }
         

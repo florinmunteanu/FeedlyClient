@@ -19,7 +19,7 @@ extension Category {
         }
         else if matches == nil || matches?.count == 0 {
             
-            var newCategory = NSEntityDescription.insertNewObjectForEntityForName("Category", inManagedObjectContext: context) as Category
+            var newCategory = NSEntityDescription.insertNewObjectForEntityForName("Category", inManagedObjectContext: context) as! Category
             newCategory.id = category.id
             newCategory.label = category.label
             

@@ -70,20 +70,20 @@ class CategoriesViewController: UITableViewController, NSFetchedResultsControlle
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "Settings" {
             
-            var settingsViewController = segue.destinationViewController as SettingsViewController
+            var settingsViewController = segue.destinationViewController as! SettingsViewController
             settingsViewController.managedObjectContext = self.managedObjectContext
             
         } else if segue.identifier == "Subscriptions" {
             
-            var cell = sender as UITableViewCell
+            var cell = sender as! UITableViewCell
             var cellIndexPath = self.tableView.indexPathForCell(cell)
             
             if cellIndexPath != nil {
-                var category = self.fetchedResultsController.objectAtIndexPath(cellIndexPath!) as Category
+                var category = self.fetchedResultsController.objectAtIndexPath(cellIndexPath!) as! Category
                 
-                var controller = segue.destinationViewController as UINavigationController
+                var controller = segue.destinationViewController as! UINavigationController
                 
-                var childController = controller.viewControllers[0] as CategoryEntriesCollectionViewController
+                var childController = controller.viewControllers[0] as! CategoryEntriesCollectionViewController
                 childController.managedObjectContext = self.managedObjectContext
                 childController.categoryId = category.id
                 childController.categoryName = category.label
@@ -151,17 +151,17 @@ class CategoriesViewController: UITableViewController, NSFetchedResultsControlle
         }
     }
     
-    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath) {
+    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
         switch type {
         case .Insert:
-            tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Fade)
+            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
         case .Delete:
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
         case .Update:
-            self.configureCell(tableView.cellForRowAtIndexPath(indexPath)!, atIndexPath: indexPath)
+            self.configureCell(tableView.cellForRowAtIndexPath(indexPath!)!, atIndexPath: indexPath!)
         case .Move:
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-            tableView.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Fade)
+            tableView.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Fade)
+            tableView.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Fade)
         default:
             return
         }
@@ -178,12 +178,12 @@ class CategoriesViewController: UITableViewController, NSFetchedResultsControlle
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let sectionInfo = self.fetchedResultsController.sections![section] as NSFetchedResultsSectionInfo
+        let sectionInfo = self.fetchedResultsController.sections![section] as! NSFetchedResultsSectionInfo
         return sectionInfo.numberOfObjects
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("CategoryCell", forIndexPath: indexPath) as UITableViewCell
+        var cell = tableView.dequeueReusableCellWithIdentifier("CategoryCell", forIndexPath: indexPath) as! UITableViewCell
         self.configureCell(cell, atIndexPath: indexPath)
         return cell
     }

@@ -7,7 +7,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     
     var window: UIWindow?
     
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: NSDictionary?) -> Bool {
+    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         //self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         // Override point for customization after application launch.
         //self.window!.backgroundColor = UIColor.whiteColor()
@@ -23,8 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     func setupContext() {
         // Set NSManagedObjectContext for the initial
         //
-        let splitViewController = self.window!.rootViewController as UISplitViewController
-        let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.count-1] as UINavigationController
+        let splitViewController = self.window!.rootViewController as! UISplitViewController
+        let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.count-1] as! UINavigationController
         
         // http://nshipster.com/uisplitviewcontroller/
         // 
@@ -33,12 +33,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         
         splitViewController.delegate = self
         
-        let masterNavigationController = splitViewController.viewControllers[0] as UINavigationController
-        let controller = masterNavigationController.topViewController as CategoriesViewController
+        let masterNavigationController = splitViewController.viewControllers[0] as! UINavigationController
+        let controller = masterNavigationController.topViewController as! CategoriesViewController
         controller.managedObjectContext = self.managedObjectContext
         
-        let childNavigationController = splitViewController.childViewControllers[1] as UINavigationController
-        let detailController = childNavigationController.topViewController as CategoryEntriesCollectionViewController
+        let childNavigationController = splitViewController.childViewControllers[1] as! UINavigationController
+        let detailController = childNavigationController.topViewController as! CategoryEntriesCollectionViewController
         detailController.managedObjectContext = self.managedObjectContext
     }
     
@@ -94,7 +94,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     lazy var applicationDocumentsDirectory: NSURL = {
         // The directory the application uses to store the Core Data store file. This code uses a directory named "ro.florindanmunteanu.FeedlyClient" in the application's documents Application Support directory.
         let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
-        return urls[urls.count-1] as NSURL
+        return urls[urls.count-1] as! NSURL
         }()
     
     lazy var managedObjectModel: NSManagedObjectModel = {

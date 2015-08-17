@@ -27,9 +27,9 @@ class MyCollectionViewCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         // Set what preferredMaxLayoutWidth you want
-        contentLabel.preferredMaxLayoutWidth = self.bounds.width - 2 * kLabelHorizontalInsets
+        //contentLabel.preferredMaxLayoutWidth = self.bounds.width - 2 * kLabelHorizontalInsets
     }
-    
+/*
     func configCell(title: String, content: String, titleFont: String, contentFont: String) {
         titleLabel.text = title
         contentLabel.text = content
@@ -39,5 +39,5 @@ class MyCollectionViewCell: UICollectionViewCell {
         self.setNeedsLayout()
         self.layoutIfNeeded()
     }
-
+*/
 }

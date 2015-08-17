@@ -36,7 +36,7 @@ class KeychainData {
         
         var deserializationError: NSError? = nil
         
-        var keychainDict = NSJSONSerialization.JSONObjectWithData(data!, options: nil, error: &deserializationError) as Dictionary<String, AnyObject>
+        var keychainDict = NSJSONSerialization.JSONObjectWithData(data!, options: nil, error: &deserializationError) as! Dictionary<String, AnyObject>
         
         if deserializationError != nil && error != nil {
             error.memory = deserializationError
@@ -51,7 +51,7 @@ class KeychainData {
             if keychain.refreshToken == "" {
                 keychain.refreshToken = nil
             }
-            keychain.userName = keychainDict["userName"] as AnyObject? as String
+            keychain.userName = keychainDict["userName"] as! String
             
             return keychain
         }

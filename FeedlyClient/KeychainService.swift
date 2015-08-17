@@ -67,7 +67,7 @@ class KeychainService : NSObject {
             let opaque = dataTypeRef?.toOpaque()
             var contentsOfKeychain: KeychainData?
             
-            if let op = opaque? {
+            if let op = opaque {
                 let retrievedData = Unmanaged<NSData>.fromOpaque(op).takeUnretainedValue()
                 
                 // Convert the data retrieved from the keychain into an instance of KeychainData

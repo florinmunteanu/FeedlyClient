@@ -22,8 +22,8 @@ class CategoryEntriesCollectionViewController: UICollectionViewController, UICol
     // { NSString *reuseIdentifier : UICollectionViewCell *offscreenCell, ... }
     var offscreenCells = Dictionary<String, UICollectionViewCell>()
     
-    let kHorizontalInsets: CGFloat = 10.0
-    let kVerticalInsets: CGFloat = 10.0
+    let kHorizontalInsets: CGFloat = 5.0
+    let kVerticalInsets: CGFloat = 5.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,11 +49,11 @@ class CategoryEntriesCollectionViewController: UICollectionViewController, UICol
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "Entry" {
-            let entryViewController = segue.destinationViewController as EntryViewController
+            let entryViewController = segue.destinationViewController as! EntryViewController
             
             if let selectedCell = sender as? EntryCollectionViewCell {
                 if let indexPath = self.collectionView!.indexPathForCell(selectedCell) {
-                    let entry = self.fetchedResultsController.objectAtIndexPath(indexPath) as Entry
+                    let entry = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Entry
                     entryViewController.selectedEntry = entry
                     entryViewController.entries = [entry]
                 }
@@ -183,14 +183,14 @@ class CategoryEntriesCollectionViewController: UICollectionViewController, UICol
     }
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let sectionInfo = self.fetchedResultsController.sections![section] as NSFetchedResultsSectionInfo
+        let sectionInfo = self.fetchedResultsController.sections![section] as! NSFetchedResultsSectionInfo
         return sectionInfo.numberOfObjects
     }
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         //let cell = collectionView.dequeueReusableCellWithReuseIdentifier(self.reuseIdentifier, forIndexPath: indexPath) as EntryCollectionViewCell
         //self.configureCell(cell, atIndexPath: indexPath)
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(self.reuseIdentifier, forIndexPath: indexPath) as MyCollectionViewCell
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(self.reuseIdentifier, forIndexPath: indexPath) as! MyCollectionViewCell
         self.configureCell(cell, atIndexPath: indexPath)
         
         return cell
@@ -198,7 +198,7 @@ class CategoryEntriesCollectionViewController: UICollectionViewController, UICol
     
     // MARK: UICollectionViewDelegateFlowLayout
     
-    func collectionView(collectionView: UICollectionView!, layout collectionViewLayout: UICollectionViewLayout!, sizeForItemAtIndexPath indexPath: NSIndexPath!) -> CGSize {
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
         
         //var cell = collectionView.dequeueReusableCellWithReuseIdentifier(self.reuseIdentifier, forIndexPath: indexPath) as EntryCell
         //self.configureCell(cell, atIndexPath: indexPath)
@@ -217,7 +217,9 @@ class CategoryEntriesCollectionViewController: UICollectionViewController, UICol
         //    return CGSize(width: self.collectionView!.frame.width, height: 75)
         //}
         // Set up desired width
-        let targetWidth: CGFloat = (collectionView.bounds.width - 3 * kHorizontalInsets) / 2
+        //let targetWidth: CGFloat = (collectionView.bounds.width - 3 * kHorizontalInsets) / 2
+        
+         let targetWidth: CGFloat = 200
         
         // Use fake cell to calculate height
         let reuseIdentifier = self.reuseIdentifier
@@ -246,7 +248,7 @@ class CategoryEntriesCollectionViewController: UICollectionViewController, UICol
         return size
     }
     
-    func collectionView(collectionView: UICollectionView!, layout collectionViewLayout: UICollectionViewLayout!, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
         return sectionInsets
     }
     
@@ -267,12 +269,12 @@ class CategoryEntriesCollectionViewController: UICollectionViewController, UICol
         }
     }
     
-    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath) {
+    func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
         switch type {
         case .Insert:
-            self.collectionView!.insertItemsAtIndexPaths([newIndexPath])
+            self.collectionView!.insertItemsAtIndexPaths([newIndexPath!])
         case .Delete:
-            self.collectionView!.deleteItemsAtIndexPaths([indexPath])
+            self.collectionView!.deleteItemsAtIndexPaths([indexPath!])
             //case .Update:
             //if let cell = tableView.cellForRowAtIndexPath(indexPath) as? EntryTableViewCell {
             //    self.configureCell(cell, atIndexPath: indexPath)
@@ -280,8 +282,8 @@ class CategoryEntriesCollectionViewController: UICollectionViewController, UICol
             //self.configureCell(self.tableView(self.tableView, cellForRowAtIndexPath: indexPath), atIndexPath: indexPath)
             //self.configureCell(tableView.cellForRowAtIndexPath(indexPath)! as EntryTableViewCell, atIndexPath: indexPath)
         case .Move:
-            self.collectionView!.deleteItemsAtIndexPaths([indexPath])
-            self.collectionView!.insertItemsAtIndexPaths([newIndexPath])
+            self.collectionView!.deleteItemsAtIndexPaths([indexPath!])
+            self.collectionView!.insertItemsAtIndexPaths([newIndexPath!])
         default:
             return
         }

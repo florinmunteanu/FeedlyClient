@@ -11,7 +11,7 @@ class EntrySummaryParser : NSObject, NSXMLParserDelegate  {
     
     init(summaryHtmlContent: String) {
         
-        self.parser = NSXMLParser(data: summaryHtmlContent.dataUsingEncoding(NSUTF8StringEncoding))
+        self.parser = NSXMLParser(data: summaryHtmlContent.dataUsingEncoding(NSUTF8StringEncoding)!)
         
         super.init()
         
@@ -26,23 +26,25 @@ class EntrySummaryParser : NSObject, NSXMLParserDelegate  {
     
     // MARK: NSXMLParserDelegate
     
-    func parser(parser: NSXMLParser!, didStartElement elementName: String!, namespaceURI: String!, qualifiedName qName: String!, attributes attributeDict: [NSObject : AnyObject]!) {
+    func parser(parser: NSXMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [NSObject : AnyObject]) {
         if elementName == "p" {
             // found the first paragraph tag (<p>)
             self.foundFirstParagraph = true
         }
     }
     
-    func parser(parser: NSXMLParser!, didEndElement elementName: String!, namespaceURI: String!, qualifiedName qName: String!) {
+    func parser(parser: NSXMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         if self.foundFirstParagraph && elementName == "p" {
             // found the end tag (</p>)
             self.parser.abortParsing()
         }
     }
     
-    func parser(parser: NSXMLParser!, foundCharacters string: String!) {
+    func parser(parser: NSXMLParser, foundCharacters string: String?) {
         if self.foundFirstParagraph {
-            self.summary += string
+            if let s = string {
+                self.summary += s
+            }
         }
     }
 }

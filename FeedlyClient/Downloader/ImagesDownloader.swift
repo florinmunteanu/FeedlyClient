@@ -45,8 +45,8 @@ class ImagesDownloader {
         
         if let imageSource = CGImageSourceCreateWithData(data, nil) {
             let options : [String : AnyObject] = [
-                kCGImageSourceThumbnailMaxPixelSize: 100,
-                kCGImageSourceCreateThumbnailFromImageIfAbsent: true
+                kCGImageSourceThumbnailMaxPixelSize as String: 100,
+                kCGImageSourceCreateThumbnailFromImageIfAbsent as String: true
             ]
             
             let scaledImage = UIImage(CGImage: CGImageSourceCreateThumbnailAtIndex(imageSource, 0, options))

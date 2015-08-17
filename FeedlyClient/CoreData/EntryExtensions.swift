@@ -20,7 +20,7 @@ extension Entry {
         if matches == nil || matches?.count == 0 {
             self.insertNewEntry(feedlyEntry, inManagedObjectContext: context, error: error)
         } else {
-            var existingEntry = matches?.last as Entry;
+            var existingEntry = matches?.last as! Entry;
             self.updateExistingEntry(existingEntry, withFeedlyEntry: feedlyEntry, inManagedObjectContext: context, error: error)
         }
         
@@ -45,7 +45,7 @@ extension Entry {
             return
         }
         if matches != nil && matches?.count == 1 {
-            var existingEntry = matches?.last as Entry
+            var existingEntry = matches?.last as! Entry
             existingEntry.thumbnail = thumbnail
         }
         
@@ -59,7 +59,7 @@ extension Entry {
     
     private class func insertNewEntry(feedlyEntry: FeedlyEntry, inManagedObjectContext context: NSManagedObjectContext, error: NSErrorPointer) {
         
-        var newEntry = NSEntityDescription.insertNewObjectForEntityForName("Entry", inManagedObjectContext: context) as Entry
+        var newEntry = NSEntityDescription.insertNewObjectForEntityForName("Entry", inManagedObjectContext: context) as! Entry
         newEntry.id = feedlyEntry.id
         newEntry.title = feedlyEntry.title
         newEntry.unread = feedlyEntry.unread
@@ -68,13 +68,13 @@ extension Entry {
         newEntry.url = feedlyEntry.origin.htmlUrl
         
         if feedlyEntry.content != nil {
-            newEntry.content = NSEntityDescription.insertNewObjectForEntityForName("EntryContent", inManagedObjectContext: context) as EntryContent
+            newEntry.content = NSEntityDescription.insertNewObjectForEntityForName("EntryContent", inManagedObjectContext: context) as! EntryContent
             
             newEntry.content.content = feedlyEntry.content!.content
             newEntry.content.direction = feedlyEntry.content!.direction
         }
         if feedlyEntry.summary != nil {
-            newEntry.summary = NSEntityDescription.insertNewObjectForEntityForName("EntryContent", inManagedObjectContext: context) as EntryContent
+            newEntry.summary = NSEntityDescription.insertNewObjectForEntityForName("EntryContent", inManagedObjectContext: context) as! EntryContent
             
             newEntry.summary.content = feedlyEntry.summary!.content
             newEntry.summary.direction = feedlyEntry.summary!.direction
@@ -83,7 +83,7 @@ extension Entry {
             newEntry.textSummary = parser.parse()
         }
         if feedlyEntry.visual != nil {
-            newEntry.visual = NSEntityDescription.insertNewObjectForEntityForName("EntryVisual", inManagedObjectContext: context) as EntryVisual
+            newEntry.visual = NSEntityDescription.insertNewObjectForEntityForName("EntryVisual", inManagedObjectContext: context) as! EntryVisual
             
             newEntry.visual.url = feedlyEntry.visual!.url
             newEntry.visual.width = feedlyEntry.visual!.width
@@ -112,14 +112,14 @@ extension Entry {
         }
         
         if feedlyEntry.content != nil {
-            existingEntry.content = NSEntityDescription.insertNewObjectForEntityForName("EntryContent", inManagedObjectContext: context) as EntryContent
+            existingEntry.content = NSEntityDescription.insertNewObjectForEntityForName("EntryContent", inManagedObjectContext: context) as! EntryContent
             
             existingEntry.content.content = feedlyEntry.content!.content
             existingEntry.content.direction = feedlyEntry.content!.direction
         }
         
         if feedlyEntry.summary != nil {
-            existingEntry.summary = NSEntityDescription.insertNewObjectForEntityForName("EntryContent", inManagedObjectContext: context) as EntryContent
+            existingEntry.summary = NSEntityDescription.insertNewObjectForEntityForName("EntryContent", inManagedObjectContext: context) as! EntryContent
             
             existingEntry.summary.content = feedlyEntry.summary!.content
             existingEntry.summary.direction = feedlyEntry.summary!.direction
@@ -129,7 +129,7 @@ extension Entry {
         }
         
         if feedlyEntry.visual != nil {
-            existingEntry.visual = NSEntityDescription.insertNewObjectForEntityForName("EntryVisual", inManagedObjectContext: context) as EntryVisual
+            existingEntry.visual = NSEntityDescription.insertNewObjectForEntityForName("EntryVisual", inManagedObjectContext: context) as! EntryVisual
             
             existingEntry.visual.url = feedlyEntry.visual!.url
             existingEntry.visual.width = feedlyEntry.visual!.width

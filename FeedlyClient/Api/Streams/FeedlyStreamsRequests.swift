@@ -15,7 +15,7 @@ class FeedlyStreamsRequests {
             
             var manager = AFHTTPRequestOperationManager()
             manager.requestSerializer = AFHTTPRequestSerializer()
-            if let accessToken = options?.accessToken? {
+            if let accessToken = options?.accessToken {
                 manager.requestSerializer.setValue("OAuth " + accessToken, forHTTPHeaderField: "Authorization")
             }
             var parameters = Dictionary<String, String>()

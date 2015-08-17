@@ -22,7 +22,7 @@ extension Subscription {
         if (matches == nil || matches?.count == 0) {
             self.insertNewSubscription(feedlySubscription, inManagedObjectContext: context, error: error)
         } else {
-            var existingSubscription = matches?.last as Subscription;
+            var existingSubscription = matches?.last as! Subscription;
             self.updateExistingSubscription(existingSubscription, withFeedlySubscription: feedlySubscription, inManagedObjectContext: context, error: error)
         }
         
@@ -36,7 +36,7 @@ extension Subscription {
     
     private class func insertNewSubscription(feedlySubscription: FeedlySubscription, inManagedObjectContext context: NSManagedObjectContext, error: NSErrorPointer) {
         
-        var newSubscription = NSEntityDescription.insertNewObjectForEntityForName("Subscription", inManagedObjectContext: context) as Subscription
+        var newSubscription = NSEntityDescription.insertNewObjectForEntityForName("Subscription", inManagedObjectContext: context) as! Subscription
         newSubscription.id = feedlySubscription.id
         newSubscription.title = feedlySubscription.title
         newSubscription.website = feedlySubscription.website

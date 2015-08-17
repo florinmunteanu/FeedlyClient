@@ -17,7 +17,7 @@ class EntriesPageViewController: UIPageViewController, UIPageViewControllerDataS
         
         let startingViewController: EntryPageContentViewController = self.viewControllerAtIndex(0)!
         let viewControllers: NSArray = [startingViewController]
-        self.pageViewController!.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: nil)
+        self.pageViewController!.setViewControllers(viewControllers as [AnyObject], direction: .Forward, animated: false, completion: nil)
         self.pageViewController!.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)
         
         self.addChildViewController(self.pageViewController!)
@@ -33,7 +33,7 @@ class EntriesPageViewController: UIPageViewController, UIPageViewControllerDataS
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
         
-        var index = (viewController as EntryPageContentViewController).index
+        var index = (viewController as! EntryPageContentViewController).index
         if (index == 0) || (index == NSNotFound) {
             return nil
         }
@@ -45,7 +45,7 @@ class EntriesPageViewController: UIPageViewController, UIPageViewControllerDataS
     
     func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
         
-        var index = (viewController as EntryPageContentViewController).index
+        var index = (viewController as! EntryPageContentViewController).index
         if index == NSNotFound {
             return nil
         }
@@ -65,7 +65,7 @@ class EntriesPageViewController: UIPageViewController, UIPageViewControllerDataS
         }
 
         // Create a new view controller and pass suitable data.
-        let pageContentViewController = self.storyboard!.instantiateViewControllerWithIdentifier("EntryPageContentViewController") as EntryPageContentViewController
+        let pageContentViewController = self.storyboard!.instantiateViewControllerWithIdentifier("EntryPageContentViewController") as! EntryPageContentViewController
         
         pageContentViewController.entry = self.entries?[index]
         pageContentViewController.index = index

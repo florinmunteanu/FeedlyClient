@@ -3,7 +3,7 @@ import UIKit
 
 class LoginViewController: UIViewController, UIWebViewDelegate {
     
-    override init() {
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: "LoginViewController", bundle: NSBundle.mainBundle())
     }
     
@@ -42,7 +42,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate {
         if self.isAuthorizationCodeRequest(request) {
             
             self.activityIndicator.startAnimating()
-            var code = FeedlyAuthenticationRequests.getAuthenticationCode(request.URL)
+            var code = FeedlyAuthenticationRequests.getAuthenticationCode(request.URL!)
             
             var accessTokenOperation = FeedlyAuthenticationRequests.beginGetAccessToken(code,
                 success: {
@@ -87,8 +87,8 @@ class LoginViewController: UIViewController, UIWebViewDelegate {
     }
     
     private func isAuthorizationCodeRequest(request: NSURLRequest) -> Bool {
-        return request.URL.path != nil &&
-            request.URL.description.rangeOfString("code=") != nil &&
-            request.URL.description.rangeOfString(Constants.redirectUrl) != nil
+        return request.URL!.path != nil &&
+            request.URL!.description.rangeOfString("code=") != nil &&
+            request.URL!.description.rangeOfString(Constants.redirectUrl) != nil
     }
 }

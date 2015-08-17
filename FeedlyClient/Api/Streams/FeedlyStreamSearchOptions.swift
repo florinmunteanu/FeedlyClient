@@ -27,19 +27,19 @@ class FeedlyStreamSearchOptions {
     func toDictionary() -> Dictionary<String, String> {
         var parameters = Dictionary<String, String>()
         
-        if let count = self.count? {
+        if let count = self.count {
             parameters.updateValue(String(count), forKey: "count")
         }
-        if let ranked = self.ranked? {
+        if let ranked = self.ranked {
             parameters.updateValue(ranked, forKey: "ranked")
         }
-        if let unreadOnly = self.unreadOnly? {
+        if let unreadOnly = self.unreadOnly {
             parameters.updateValue(String(unreadOnly), forKey: "unreadOnly")
         }
-        if let newerThan = self.newerThan? {
+        if let newerThan = self.newerThan {
             parameters.updateValue(String(newerThan), forKey: "newerThan")
         }
-        if let continuation = self.continuation? {
+        if let continuation = self.continuation {
             parameters.updateValue(continuation, forKey: "continuation")
         }
         

@@ -12,7 +12,7 @@ struct Constants {
     
     static var clientId = "sandbox"
     
-    static var clientSecret = "YNXZHOH3GPYO6DF7B43K"
+    static var clientSecret = "LTIZYM5VDKHQF1CI085I"
     
     static var redirectUrl = "http://localhost"
     

@@ -18,7 +18,7 @@ class FeedlyUserAccessTokenInfo {
             self.accessToken = accessToken
         }
         if let expiresIn = json[FeedlyAuthParameters.expiresIn] as AnyObject? as? String {
-            if let intValue = expiresIn.toInt() {
+            if let intValue = Int(expiresIn) {
                 self.expiresIn = intValue
             }
         }

@@ -49,7 +49,7 @@ class ImagesDownloader {
                 kCGImageSourceCreateThumbnailFromImageIfAbsent as String: true
             ]
             
-            let scaledImage = UIImage(CGImage: CGImageSourceCreateThumbnailAtIndex(imageSource, 0, options))
+            let scaledImage = UIImage(CGImage: CGImageSourceCreateThumbnailAtIndex(imageSource, 0, options)!)
             return UIImagePNGRepresentation(scaledImage)
         }
         return nil

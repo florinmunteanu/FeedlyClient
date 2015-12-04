@@ -13,7 +13,7 @@ class FeedlyCategory {
         var categories = Array<FeedlyCategory>()
         
         for dict in json {
-            var category = FeedlyCategory()
+            let category = FeedlyCategory()
             
             for (key, value) in dict {
                 if key == "id" {

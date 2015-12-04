@@ -25,17 +25,17 @@ class EntryCollectionViewCell: UICollectionViewCell {
         self.authorLabel.font = UIFont(name: "Helvetica", size: 10)
         self.authorLabel.textColor = UIColor.darkGrayColor()
         
-        self.titleLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.summaryLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.authorLabel.setTranslatesAutoresizingMaskIntoConstraints(false)
-        self.thumbnailImageView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        self.titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.summaryLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.authorLabel.translatesAutoresizingMaskIntoConstraints = false
+        self.thumbnailImageView.translatesAutoresizingMaskIntoConstraints = false
         
         self.contentView.addSubview(self.titleLabel)
         self.contentView.addSubview(self.summaryLabel)
         self.contentView.addSubview(self.authorLabel)
         self.contentView.addSubview(self.thumbnailImageView)
         
-        var viewsDictionary = ["title" : self.titleLabel, "summary" : self.summaryLabel, "author" : self.authorLabel, "thumbnail" : self.thumbnailImageView]
+        let viewsDictionary = ["title" : self.titleLabel, "summary" : self.summaryLabel, "author" : self.authorLabel, "thumbnail" : self.thumbnailImageView]
         
         //picture   title
         //          first 25
@@ -52,24 +52,24 @@ class EntryCollectionViewCell: UICollectionViewCell {
         // http://commandshift.co.uk/blog/2013/01/31/visual-format-language-for-autolayout/
         
         // Vertical alignment
-        self.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-5-[title]-5-[summary]-5-[author]-(>=5)-|", options: NSLayoutFormatOptions(0), metrics: nil, views: viewsDictionary))
-        self.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-5-[thumbnail(50)]-(>=5)-|", options: NSLayoutFormatOptions(0), metrics: nil, views: viewsDictionary))
+        self.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-5-[title]-5-[summary]-5-[author]-(>=5)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: viewsDictionary))
+        self.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|-5-[thumbnail(50)]-(>=5)-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: viewsDictionary))
         
         // Horizontal alignment
-        self.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-5-[thumbnail(50)]-5-[title]-5-|", options: NSLayoutFormatOptions(0), metrics: nil, views: viewsDictionary))
-        self.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-5-[thumbnail]-5-[summary]-5-|", options: NSLayoutFormatOptions(0), metrics: nil, views: viewsDictionary))
-        self.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-5-[thumbnail]-5-[author]-5-|", options: NSLayoutFormatOptions(0), metrics: nil, views: viewsDictionary))
-     /*
-                "H:|-5-[image(40)]-5-[title]-5-|",
-                "H:|-5-[image]-5-[body]-5-|",
-                "V:|-5-[title]-5-[body]-(>=5)-|",
-                "V:|-5-[image(41)]-(>=5)-|"))
-     */
+        self.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-5-[thumbnail(50)]-5-[title]-5-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: viewsDictionary))
+        self.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-5-[thumbnail]-5-[summary]-5-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: viewsDictionary))
+        self.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|-5-[thumbnail]-5-[author]-5-|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: viewsDictionary))
+        /*
+        "H:|-5-[image(40)]-5-[title]-5-|",
+        "H:|-5-[image]-5-[body]-5-|",
+        "V:|-5-[title]-5-[body]-(>=5)-|",
+        "V:|-5-[image(41)]-(>=5)-|"))
+        */
     }
     
     /*
     override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+    super.setSelected(selected, animated: animated)
     }
     
     
@@ -77,23 +77,23 @@ class EntryCollectionViewCell: UICollectionViewCell {
     super.updateConstraints()
     
     }
-
+    
     
     override func layoutSubviews() {
-        if thumbnailImageView.image == nil {
-            self.titleLabel.preferredMaxLayoutWidth = 0
-            self.summaryLabel.preferredMaxLayoutWidth = 0
-            self.thumbnailImageView.frame = CGRectMake(0, 0, 0, 0)
-            
-        } else {
-            //super.layoutSubviews()
-            self.titleLabel.preferredMaxLayoutWidth = self.bounds.size.width - 150
-            self.summaryLabel.preferredMaxLayoutWidth = self.bounds.size.width - 150
-            //super.layoutSubviews()
-            self.thumbnailImageView.frame = CGRectMake(0, 0, 150, 50)
-            //super.layoutSubviews()
-        }
-        super.layoutSubviews()
+    if thumbnailImageView.image == nil {
+    self.titleLabel.preferredMaxLayoutWidth = 0
+    self.summaryLabel.preferredMaxLayoutWidth = 0
+    self.thumbnailImageView.frame = CGRectMake(0, 0, 0, 0)
+    
+    } else {
+    //super.layoutSubviews()
+    self.titleLabel.preferredMaxLayoutWidth = self.bounds.size.width - 150
+    self.summaryLabel.preferredMaxLayoutWidth = self.bounds.size.width - 150
+    //super.layoutSubviews()
+    self.thumbnailImageView.frame = CGRectMake(0, 0, 150, 50)
+    //super.layoutSubviews()
+    }
+    super.layoutSubviews()
     }
     */
 }

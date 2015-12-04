@@ -23,7 +23,7 @@ class EntryViewController : UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "Entries" {
-            var entriesPageViewController = segue.destinationViewController as? EntriesPageViewController
+            let entriesPageViewController = segue.destinationViewController as? EntriesPageViewController
             if entriesPageViewController != nil {
                 entriesPageViewController!.selectedEntry = self.selectedEntry
                 entriesPageViewController!.entries = self.entries

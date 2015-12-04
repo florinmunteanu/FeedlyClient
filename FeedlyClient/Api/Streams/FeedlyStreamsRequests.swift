@@ -8,12 +8,12 @@ class FeedlyStreamsRequests {
     class func beginGetStream(streamId: String, options: FeedlyStreamSearchOptions?, success: (FeedlyStream) -> Void, failure: (NSError) -> Void)
         -> AFHTTPRequestOperation {
             
-            var encodedStreamId = streamId.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet())
-            var url = Constants.apiURL + "/v3/streams/" + encodedStreamId! + "/ids"
+            let encodedStreamId = streamId.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet())
+            let url = Constants.apiURL + "/v3/streams/" + encodedStreamId! + "/ids"
             
             // GET /v3/streams/:streamId/ids
             
-            var manager = AFHTTPRequestOperationManager()
+            let manager = AFHTTPRequestOperationManager()
             manager.requestSerializer = AFHTTPRequestSerializer()
             if let accessToken = options?.accessToken {
                 manager.requestSerializer.setValue("OAuth " + accessToken, forHTTPHeaderField: "Authorization")
@@ -25,16 +25,16 @@ class FeedlyStreamsRequests {
                         
             manager.responseSerializer = AFJSONResponseSerializer() as AFHTTPResponseSerializer
             
-            var operation = manager.GET(url, parameters: parameters,
+            let operation = manager.GET(url, parameters: parameters,
                 success:  {
                     (operation: AFHTTPRequestOperation!, responseObject: AnyObject!) -> Void in
                     
                     if let jsonResult = responseObject as? Dictionary<String, AnyObject> {
-                        var stream = FeedlyStream(json: jsonResult)
+                        let stream = FeedlyStream(json: jsonResult)
                         success(stream)
                     } else {
                         
-                        var error = NSError(domain: FeedlyClientError.domain, code: 1400,
+                        let error = NSError(domain: FeedlyClientError.domain, code: 1400,
                             userInfo: [NSLocalizedDescriptionKey: "Received an incorrect stream response that could not be parsed.", NSLocalizedFailureReasonErrorKey: "Stream response was not in json format or the json format has changed."])
                         failure(error)
                     }

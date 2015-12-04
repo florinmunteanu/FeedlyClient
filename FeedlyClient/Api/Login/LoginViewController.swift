@@ -7,7 +7,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate {
         super.init(nibName: "LoginViewController", bundle: NSBundle.mainBundle())
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
@@ -18,8 +18,8 @@ class LoginViewController: UIViewController, UIWebViewDelegate {
     }
     
     override func viewDidAppear(animated: Bool) {
-        var url = FeedlyAuthenticationRequests.authenticationUrl()
-        var request = NSURLRequest(URL: NSURL(string: url)!)
+        let url = FeedlyAuthenticationRequests.authenticationUrl()
+        let request = NSURLRequest(URL: NSURL(string: url)!)
         self.webView.loadRequest(request)
     }
     
@@ -42,9 +42,9 @@ class LoginViewController: UIViewController, UIWebViewDelegate {
         if self.isAuthorizationCodeRequest(request) {
             
             self.activityIndicator.startAnimating()
-            var code = FeedlyAuthenticationRequests.getAuthenticationCode(request.URL!)
+            let code = FeedlyAuthenticationRequests.getAuthenticationCode(request.URL!)
             
-            var accessTokenOperation = FeedlyAuthenticationRequests.beginGetAccessToken(code,
+            _ = FeedlyAuthenticationRequests.beginGetAccessToken(code,
                 success: {
                     (userToken: FeedlyUserAccessTokenInfo) -> Void in
                     self.beginGetUserProfile(userToken)
@@ -81,7 +81,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate {
     }
     
     private func displayAlert(error: NSError) {
-        var alert = UIAlertController(title: "Error", message: "There was an error during the authorization process.", preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: "Error", message: "There was an error during the authorization process.", preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
         self.presentViewController(alert, animated: true, completion: nil)
     }

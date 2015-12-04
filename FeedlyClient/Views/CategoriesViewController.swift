@@ -9,7 +9,7 @@ class CategoriesViewController: UITableViewController, NSFetchedResultsControlle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var refreshControl = UIRefreshControl()
+        let refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl.addTarget(self, action: "refresh:", forControlEvents: .ValueChanged)
         
@@ -23,20 +23,27 @@ class CategoriesViewController: UITableViewController, NSFetchedResultsControlle
     }
     
     private func beginLoadSubscriptions() {
-        var keychainData = KeychainService.loadData()
+        var keychainData: KeychainData?
+        
+        do {
+            keychainData = try KeychainService.loadData()
+        } catch {
+            self.endRefreshing()
+            Alerts.displayError("An error occurred while refreshing the subscriptions", onUIViewController: self)
+            return
+        }
         
         if let token = keychainData?.accessToken {
-            var subscriptionsOperation = FeedlySubscriptionsRequests.beginGetSubscriptions(token,
+            FeedlySubscriptionsRequests.beginGetSubscriptions(token,
                 success: {
                     (subscriptions: [FeedlySubscription]) -> Void in
-                    var error: NSError? = nil
-                    self.updateSubscriptions(subscriptions, error: &error)
-                    
-                    self.endRefreshing()
-                    //self.tableView.reloadData()
-                    if error != nil {
+                    do {
+                        try self.updateSubscriptions(subscriptions)
+                    } catch {
                         Alerts.displayError("An error occurred while refreshing the subscriptions. Please try again.", onUIViewController: self)
                     }
+                    self.endRefreshing()
+                    //self.tableView.reloadData()
                 },
                 failure: {
                     (error: NSError) -> Void in
@@ -54,15 +61,10 @@ class CategoriesViewController: UITableViewController, NSFetchedResultsControlle
         self.refreshControl?.endRefreshing()
     }
     
-    func updateSubscriptions(subscriptions: [FeedlySubscription], error: NSErrorPointer) {
+    func updateSubscriptions(subscriptions: [FeedlySubscription]) throws {
         if self.managedObjectContext != nil {
-            
             for subscription in subscriptions {
-                Subscription.addOrUpdate(subscription, inManagedObjectContext: self.managedObjectContext!, error: error)
-                // Stop processing on first error
-                if error != nil && error.memory != nil {
-                    return
-                }
+                try Subscription.addOrUpdate(subscription, inManagedObjectContext: self.managedObjectContext!)
             }
         }
     }
@@ -70,20 +72,20 @@ class CategoriesViewController: UITableViewController, NSFetchedResultsControlle
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "Settings" {
             
-            var settingsViewController = segue.destinationViewController as! SettingsViewController
+            let settingsViewController = segue.destinationViewController as! SettingsViewController
             settingsViewController.managedObjectContext = self.managedObjectContext
             
         } else if segue.identifier == "Subscriptions" {
             
-            var cell = sender as! UITableViewCell
-            var cellIndexPath = self.tableView.indexPathForCell(cell)
+            let cell = sender as! UITableViewCell
+            let cellIndexPath = self.tableView.indexPathForCell(cell)
             
             if cellIndexPath != nil {
-                var category = self.fetchedResultsController.objectAtIndexPath(cellIndexPath!) as! Category
+                let category = self.fetchedResultsController.objectAtIndexPath(cellIndexPath!) as! Category
                 
-                var controller = segue.destinationViewController as! UINavigationController
+                let controller = segue.destinationViewController as! UINavigationController
                 
-                var childController = controller.viewControllers[0] as! CategoryEntriesCollectionViewController
+                let childController = controller.viewControllers[0] as! CategoryEntriesCollectionViewController
                 childController.managedObjectContext = self.managedObjectContext
                 childController.categoryId = category.id
                 childController.categoryName = category.label
@@ -106,34 +108,35 @@ class CategoriesViewController: UITableViewController, NSFetchedResultsControlle
     var fetchedResultsController: NSFetchedResultsController {
         if _fetchedResultsController != nil {
             return _fetchedResultsController!
-            }
+        }
+        
+        let fetchRequest = NSFetchRequest()
+        let entity = NSEntityDescription.entityForName("Category", inManagedObjectContext: self.managedObjectContext!)
+        fetchRequest.entity = entity
+        fetchRequest.fetchBatchSize = 20
+        
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "label", ascending: true)]
+        
+        // Edit the section name key path and cache name if appropriate.
+        // nil for section name key path means "no sections".
+        let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext!, sectionNameKeyPath: nil, cacheName: "CategoriesCache")
+        aFetchedResultsController.delegate = self
+        _fetchedResultsController = aFetchedResultsController
+        
+        //var error: NSError? = nil
+        do {
+            try _fetchedResultsController!.performFetch()
+        } catch {
             
-            let fetchRequest = NSFetchRequest()
-            let entity = NSEntityDescription.entityForName("Category", inManagedObjectContext: self.managedObjectContext!)
-            fetchRequest.entity = entity
-            
-            fetchRequest.fetchBatchSize = 20
-            
-            let sortDescriptor = NSSortDescriptor(key: "label", ascending: true)
-            let sortDescriptors = [sortDescriptor]
-            
-            fetchRequest.sortDescriptors = [sortDescriptor]
-            
-            // Edit the section name key path and cache name if appropriate.
-            // nil for section name key path means "no sections".
-            let aFetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.managedObjectContext!, sectionNameKeyPath: nil, cacheName: "CategoriesCache")
-            aFetchedResultsController.delegate = self
-            _fetchedResultsController = aFetchedResultsController
-            
-            var error: NSError? = nil
-            if _fetchedResultsController!.performFetch(&error) == false {
-                // Replace this implementation with code to handle the error appropriately.
-                // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                //println("Unresolved error \(error), \(error.userInfo)")
-                //abort()
-            }
-            
-            return _fetchedResultsController!
+        }
+        //if  == false {
+        // Replace this implementation with code to handle the error appropriately.
+        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+        //println("Unresolved error \(error), \(error.userInfo)")
+        //abort()
+        //}
+        
+        return _fetchedResultsController!
     }
     
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
@@ -178,12 +181,12 @@ class CategoriesViewController: UITableViewController, NSFetchedResultsControlle
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let sectionInfo = self.fetchedResultsController.sections![section] as! NSFetchedResultsSectionInfo
+        let sectionInfo = self.fetchedResultsController.sections![section]
         return sectionInfo.numberOfObjects
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("CategoryCell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("CategoryCell", forIndexPath: indexPath)
         self.configureCell(cell, atIndexPath: indexPath)
         return cell
     }

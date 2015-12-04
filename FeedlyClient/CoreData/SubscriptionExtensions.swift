@@ -6,65 +6,47 @@ extension Subscription {
     
     /// Adds a new subscription or updates an existing one.
     ///
-    internal class func addOrUpdate(feedlySubscription: FeedlySubscription, inManagedObjectContext context: NSManagedObjectContext, error: NSErrorPointer) {
+    internal class func addOrUpdate(feedlySubscription: FeedlySubscription, inManagedObjectContext context: NSManagedObjectContext) throws {
         
-        var fetchRequest = NSFetchRequest(entityName: "Subscription")
+        let fetchRequest = NSFetchRequest(entityName: "Subscription")
         fetchRequest.predicate = NSPredicate(format: "id=%@", feedlySubscription.id)
         
-        var fetchError: NSError? = nil
-        var matches = context.executeFetchRequest(fetchRequest, error: &fetchError)
+        let matches = try context.executeFetchRequest(fetchRequest)
         
-        if fetchError != nil && error != nil {
-            error.memory = fetchError
-            return
-        }
-        
-        if (matches == nil || matches?.count == 0) {
-            self.insertNewSubscription(feedlySubscription, inManagedObjectContext: context, error: error)
+        if (matches.count == 0) {
+            try self.insertNewSubscription(feedlySubscription, inManagedObjectContext: context)
         } else {
-            var existingSubscription = matches?.last as! Subscription;
-            self.updateExistingSubscription(existingSubscription, withFeedlySubscription: feedlySubscription, inManagedObjectContext: context, error: error)
+            let existingSubscription = matches.last as! Subscription;
+            try self.updateExistingSubscription(existingSubscription, withFeedlySubscription: feedlySubscription, inManagedObjectContext: context)
         }
         
-        var saveError: NSError? = nil
-        context.save(&saveError)
-        
-        if saveError != nil && error != nil {
-            error.memory = saveError
-        }
+        try context.save()
     }
     
-    private class func insertNewSubscription(feedlySubscription: FeedlySubscription, inManagedObjectContext context: NSManagedObjectContext, error: NSErrorPointer) {
+    private class func insertNewSubscription(feedlySubscription: FeedlySubscription, inManagedObjectContext context: NSManagedObjectContext) throws {
         
-        var newSubscription = NSEntityDescription.insertNewObjectForEntityForName("Subscription", inManagedObjectContext: context) as! Subscription
+        let newSubscription = NSEntityDescription.insertNewObjectForEntityForName("Subscription", inManagedObjectContext: context) as! Subscription
         newSubscription.id = feedlySubscription.id
         newSubscription.title = feedlySubscription.title
         newSubscription.website = feedlySubscription.website
         
-        newSubscription.categories = self.mergeCategories(feedlySubscription, forSubscription: newSubscription, inManagedObjectContext: context, error: error)
+        newSubscription.categories = try self.mergeCategories(feedlySubscription, forSubscription: newSubscription, inManagedObjectContext: context)
     }
     
-    private class func updateExistingSubscription(existingSubscription: Subscription, withFeedlySubscription feedlySubscription: FeedlySubscription, inManagedObjectContext context: NSManagedObjectContext, error: NSErrorPointer) {
+    private class func updateExistingSubscription(existingSubscription: Subscription, withFeedlySubscription feedlySubscription: FeedlySubscription, inManagedObjectContext context: NSManagedObjectContext) throws {
         
         existingSubscription.title = feedlySubscription.title
         existingSubscription.website = feedlySubscription.website
         
-        existingSubscription.categories = self.mergeCategories(feedlySubscription, forSubscription: existingSubscription, inManagedObjectContext: context, error: error)
+        existingSubscription.categories = try self.mergeCategories(feedlySubscription, forSubscription: existingSubscription, inManagedObjectContext: context)
     }
     
-    private class func mergeCategories(feedlySubscription: FeedlySubscription, forSubscription subscription: Subscription, inManagedObjectContext context: NSManagedObjectContext, error: NSErrorPointer) -> NSSet {
+    private class func mergeCategories(feedlySubscription: FeedlySubscription, forSubscription subscription: Subscription, inManagedObjectContext context: NSManagedObjectContext) throws -> NSSet {
         
-        var categories = NSMutableSet()
+        let categories = NSMutableSet()
         for category in feedlySubscription.categories {
+            let category = try Category.getOrAdd(category, inManagedObjectContext: context)
             
-            var categoryError: NSError? = nil
-            var category = Category.getOrAdd(category, inManagedObjectContext: context, error: &categoryError)
-            
-            if categoryError != nil && error != nil {
-                // At first error we encounter, return the current collection
-                error.memory = categoryError
-                return categories
-            }
             if category != nil {
                 categories.addObject(category!)
             }

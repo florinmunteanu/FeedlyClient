@@ -20,21 +20,18 @@ let kSecReturnDataValue = kSecReturnData as NSString
 let kSecMatchLimitOneValue = kSecMatchLimitOne as NSString
 
 class KeychainService : NSObject {
-    class func saveData(data: KeychainData) {
-        var jsonData = data.toJson(nil)
-        
-        if jsonData != nil {
-            self.save(serviceIdentifier, data: jsonData!)
-        }
+    class func saveData(data: KeychainData) throws {
+        let jsonData = try data.toJson()
+        KeychainService.save(serviceIdentifier, data: jsonData)
     }
     
-    class func loadData() -> KeychainData? {
-        return self.load(serviceIdentifier)
+    class func loadData() throws -> KeychainData? {
+        return try KeychainService.load(serviceIdentifier)
     }
     
-    class func clearData() {
-        var emptyData = KeychainData()
-        KeychainService.saveData(emptyData)
+    class func clearData() throws {
+        let emptyData = KeychainData()
+        try KeychainService.saveData(emptyData)
     }
     
     /*
@@ -42,7 +39,7 @@ class KeychainService : NSObject {
     */
     private class func save(service: NSString, data: NSData) {
         // Instantiate a new default keychain query
-        var keychainQuery = NSMutableDictionary(objects: [kSecClassGenericPasswordValue, service, userAccount, data], forKeys: [kSecClassValue, kSecAttrServiceValue, kSecAttrAccountValue, kSecValueDataValue])
+        let keychainQuery = NSMutableDictionary(objects: [kSecClassGenericPasswordValue, service, userAccount, data], forKeys: [kSecClassValue, kSecAttrServiceValue, kSecAttrAccountValue, kSecValueDataValue])
         
         // Delete any existing items
         SecItemDelete(keychainQuery as CFDictionaryRef)
@@ -51,34 +48,51 @@ class KeychainService : NSObject {
         var status: OSStatus = SecItemAdd(keychainQuery as CFDictionaryRef, nil)
     }
     
-    private class func load(service: NSString) -> KeychainData? {
+    private class func load(service: NSString) throws -> KeychainData? {
         // Instantiate a new default keychain query
         // Tell the query to return a result
         // Limit our results to one item
-        var keychainQuery: NSMutableDictionary = NSMutableDictionary(objects: [kSecClassGenericPasswordValue, service, userAccount, kCFBooleanTrue, kSecMatchLimitOneValue], forKeys: [kSecClassValue, kSecAttrServiceValue, kSecAttrAccountValue, kSecReturnDataValue, kSecMatchLimitValue])
         
-        var dataTypeRef: Unmanaged<AnyObject>?
+        let keychainQuery: NSMutableDictionary = NSMutableDictionary(objects: [kSecClassGenericPasswordValue, service, userAccount, kCFBooleanTrue, kSecMatchLimitOneValue], forKeys: [kSecClassValue, kSecAttrServiceValue, kSecAttrAccountValue, kSecReturnDataValue, kSecMatchLimitValue])
         
-        // Search for the keychain items
-        let status: OSStatus = SecItemCopyMatching(keychainQuery, &dataTypeRef)
+        var dataTypeRef: AnyObject?
+        
+        let status: OSStatus = withUnsafeMutablePointer(&dataTypeRef) { SecItemCopyMatching(keychainQuery as CFDictionaryRef, UnsafeMutablePointer($0)) }
         
         if status == errSecSuccess {
-            
-            let opaque = dataTypeRef?.toOpaque()
-            var contentsOfKeychain: KeychainData?
-            
-            if let op = opaque {
-                let retrievedData = Unmanaged<NSData>.fromOpaque(op).takeUnretainedValue()
-                
-                // Convert the data retrieved from the keychain into an instance of KeychainData
-                
-                contentsOfKeychain = KeychainData.fromJson(retrievedData, error: nil)
-            } else {
-                println("Nothing was retrieved from the keychain. Status code \(status)")
+            let retrievedData = dataTypeRef as? NSData
+            // Convert the data retrieved from the keychain into an instance of KeychainData
+            if retrievedData == nil {
+                return nil
             }
+            
+            let contentsOfKeychain: KeychainData? = try KeychainData.fromJson(retrievedData)
             return contentsOfKeychain
         }
         
+        //let dataTypeRef: UnsafeMutablePointer<AnyObject?>
+        
+        // Search for the keychain items
+        //let status: OSStatus = SecItemCopyMatching(keychainQuery, dataTypeRef)
+        /*
+        if status == errSecSuccess {
+        
+        dataTypeRef as? NSData
+        let opaque = Unmanaged.toOpaque(dataTypeRef) //dataTypeRef.toOpaque()
+        var contentsOfKeychain: KeychainData?
+        
+        if let op = opaque {
+        let retrievedData = Unmanaged<NSData>.fromOpaque(op).takeUnretainedValue()
+        
+        // Convert the data retrieved from the keychain into an instance of KeychainData
+        
+        contentsOfKeychain = try KeychainData.fromJson(retrievedData, error: nil)
+        } else {
+        print("Nothing was retrieved from the keychain. Status code \(status)")
+        }
+        return contentsOfKeychain
+        }
+        */
         return nil
     }
 }

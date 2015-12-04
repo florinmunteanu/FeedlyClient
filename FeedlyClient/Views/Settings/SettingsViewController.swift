@@ -33,11 +33,11 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-                
+        
         if indexPath.section == 0 && indexPath.row == 0 {
             return self.getUserCell(tableView, forIndexPath: indexPath)
         } else {
-            var cell = tableView.dequeueReusableCellWithIdentifier("SettingCell", forIndexPath: indexPath) as! UITableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier("SettingCell", forIndexPath: indexPath)
             
             return cell
         }
@@ -63,10 +63,10 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     //func delayContentTouches(cell: UITableViewCell) {
     //    for view in cell.subviews {
-        //class_getName(view)
-            //NSStringFromClass(view.class)
-        //let myObject: view.Type = view.self
-            
+    //class_getName(view)
+    //NSStringFromClass(view.class)
+    //let myObject: view.Type = view.self
+    
     //    }
     //}
     
@@ -84,25 +84,29 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     /*
     func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        if section == 0 {
-            return "v1.0"
-        }
-        return ""
+    if section == 0 {
+    return "v1.0"
+    }
+    return ""
     }*/
     
     // MARK: Cells
     
     func getUserCell(tableView: UITableView, forIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var keychainData = KeychainService.loadData()
+        var keychainData: KeychainData?
+        do {
+            keychainData = try KeychainService.loadData()
+        } catch {
+        }
         
         var cell: UITableViewCell
-        if let accessToken = keychainData?.accessToken {
-            cell = tableView.dequeueReusableCellWithIdentifier("LogoutCell", forIndexPath: indexPath) as! UITableViewCell //as LogoutTableViewCell
+        if let _ = keychainData?.accessToken {
+            cell = tableView.dequeueReusableCellWithIdentifier("LogoutCell", forIndexPath: indexPath) //as LogoutTableViewCell
             cell.textLabel!.text = keychainData!.userName
             
             self.setLogoutCell(cell, data: keychainData!)
         } else {
-            cell = tableView.dequeueReusableCellWithIdentifier("LoginCell", forIndexPath: indexPath) as! UITableViewCell //as LoginTableViewCell
+            cell = tableView.dequeueReusableCellWithIdentifier("LoginCell", forIndexPath: indexPath) //as LoginTableViewCell
             self.setLoginCell(cell)
         }
         
@@ -116,8 +120,8 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func setLoginCell(cell: UITableViewCell) {
-       
-        var loginButton = UIButton()
+        
+        let loginButton = UIButton()
         loginButton.frame = cell.bounds
         loginButton.backgroundColor = UIColor.blueColor()
         
@@ -131,20 +135,20 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func setLogoutCell(cell: UITableViewCell, data: KeychainData) {
         cell.textLabel!.text = data.userName
-        var logoutButton = UIButton()
+        let logoutButton = UIButton()
         logoutButton.frame = CGRectMake(0.0, 0.0, 60.0, 25.0)
         logoutButton.backgroundColor = UIColor.redColor()
         
         logoutButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
         logoutButton.setTitle("Logout", forState: UIControlState.Normal)
         cell.accessoryView = logoutButton
-      
+        
         logoutButton.addTarget(self, action: "logout:", forControlEvents: UIControlEvents.TouchUpInside)
     }
     
     // MARK: Login / Logout
     func login(loginButton: UIButton) {
-        var loginController = LoginViewController()
+        let loginController = LoginViewController()
         loginController.delegate = self
         self.presentViewController(loginController, animated: false,
             completion: {() -> Void in
@@ -153,13 +157,21 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func logout(logoutButton: UIButton) {
-        var keychainData = KeychainService.loadData()
+        var keychainData: KeychainData?
+        do {
+            keychainData = try KeychainService.loadData()
+        } catch {
+        }
         
         if let refreshToken = keychainData?.refreshToken {
             FeedlyAuthenticationRequests.beginRevokeRefreshToken(refreshToken,
                 success: {
                     () -> Void in
-                    KeychainService.clearData()
+                    do {
+                        try KeychainService.clearData()
+                    } catch {
+                    }
+                    
                     self.refreshUserCell()
                 },
                 failure: {
@@ -170,7 +182,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     private func displayLogoutError(error: NSError) {
-        var alert = UIAlertController(title: "Error", message: "There was an error during logout process.", preferredStyle: UIAlertControllerStyle.Alert)
+        let alert = UIAlertController(title: "Error", message: "There was an error during logout process.", preferredStyle: UIAlertControllerStyle.Alert)
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
         
         self.presentViewController(alert, animated: true, completion: nil)
@@ -181,12 +193,17 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func userLoggedIn(userAccessTokenInfo: FeedlyUserAccessTokenInfo, userProfile: FeedlyUserProfile) {
         
-        var data = KeychainData()
+        let data = KeychainData()
         data.accessToken = userAccessTokenInfo.accessToken
         data.refreshToken = userAccessTokenInfo.refreshToken
         data.userName = userProfile.fullName
         
-        KeychainService.saveData(data)
+        do {
+            try KeychainService.saveData(data)
+        } catch {
+            
+        }
+        
         self.refreshUserCell()
     }
 }

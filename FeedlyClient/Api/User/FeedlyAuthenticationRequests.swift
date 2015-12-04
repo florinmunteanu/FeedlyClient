@@ -6,7 +6,7 @@ class FeedlyAuthenticationRequests {
     class func authenticationUrl() -> String{
         /* Correct URL: http://sandbox.feedly.com/v3/auth/auth?client_id=sandbox&redirect_uri=https%3A%2F%2Flocalhost&scope=https%3A%2F%2Fcloud.feedly.com%2Fsubscriptions&response_type=code */
         
-        var queryParameters = [
+        let queryParameters = [
             FeedlyAuthParameters.responseType : "code",
             FeedlyAuthParameters.clientId     : Constants.clientId,
             FeedlyAuthParameters.redirectUri  : Constants.redirectUrl.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet()),
@@ -15,7 +15,7 @@ class FeedlyAuthenticationRequests {
         
         var url = String(format: Constants.apiURL + "/v3/auth/auth?")
         
-        for (index, entry) in enumerate(queryParameters) {
+        for (index, entry) in queryParameters.enumerate() {
             url = url.stringByAppendingFormat(index == queryParameters.count - 1 ? "%@=%@" : "%@=%@&", entry.0, entry.1!)
         }
         return url
@@ -25,9 +25,9 @@ class FeedlyAuthenticationRequests {
         // Should receive an url in the form of:
         // https://your.redirect.uri/feedlyCallback?code=AQAA7rJ7InAiOjEsImEiOiJmZWVk…&state=state.passed.in
         
-        var queryComponents = url.query!.componentsSeparatedByString("&")
+        let queryComponents = url.query!.componentsSeparatedByString("&")
         
-        var pairs = queryComponents.map({
+        let pairs = queryComponents.map({
             (component: String) -> (field: String, value: String) in
             let pair = component.componentsSeparatedByString("=")
             if pair.count == 2 {
@@ -45,7 +45,7 @@ class FeedlyAuthenticationRequests {
     class func beginGetAccessToken(authenticationCode: String, success: (FeedlyUserAccessTokenInfo) -> Void, failure: (NSError) -> Void)
         -> AFHTTPRequestOperation {
             
-            var url = String(format: Constants.apiURL + "/v3/auth/token")
+            let url = String(format: Constants.apiURL + "/v3/auth/token")
             
             /*
             POST https://sandbox.feedly.com/v3/auth/token
@@ -60,7 +60,7 @@ class FeedlyAuthenticationRequests {
             }
             
             */
-            var parameters = [
+            let parameters = [
                 FeedlyAuthParameters.code         : authenticationCode,
                 FeedlyAuthParameters.clientId     : Constants.clientId,
                 FeedlyAuthParameters.clientSecret : Constants.clientSecret,
@@ -69,21 +69,21 @@ class FeedlyAuthenticationRequests {
                 FeedlyAuthParameters.grantType    : "authorization_code"
             ]
             
-            var manager = AFHTTPRequestOperationManager()
+            let manager = AFHTTPRequestOperationManager()
             manager.requestSerializer = AFJSONRequestSerializer() as AFHTTPRequestSerializer
             manager.responseSerializer = AFJSONResponseSerializer() as AFHTTPResponseSerializer
             
-            var operation = manager.POST(url, parameters: parameters,
+            let operation = manager.POST(url, parameters: parameters,
                 success:  {
                     (operation: AFHTTPRequestOperation!, responseObject: AnyObject!) -> Void in
                     
                     if let jsonResult = responseObject as? Dictionary<String, AnyObject> {
-                        var userToken = FeedlyUserAccessTokenInfo(json: jsonResult)
+                        let userToken = FeedlyUserAccessTokenInfo(json: jsonResult)
                         success(userToken)
                         
                     } else {
                         
-                        var error = NSError(domain: FeedlyClientError.domain, code: 1000,
+                        let error = NSError(domain: FeedlyClientError.domain, code: 1000,
                             userInfo: [NSLocalizedDescriptionKey: "Received an incorrect access token that could not be parsed.", NSLocalizedFailureReasonErrorKey: "Access token response was not in json format or the json format has changed."])
                         failure(error)
                     }
@@ -98,28 +98,28 @@ class FeedlyAuthenticationRequests {
     class func beginGetRefreshToken(refreshToken: String, success: (FeedlyRefreshAccessToken) -> Void, failure: (NSError) -> Void)
         -> AFHTTPRequestOperation {
             
-            var url = String(format: Constants.apiURL + "/v3/auth/token")
+            let url = String(format: Constants.apiURL + "/v3/auth/token")
             
-            var parameters = [
+            let parameters = [
                 FeedlyAuthParameters.refreshToken : refreshToken,
                 FeedlyAuthParameters.clientId     : Constants.clientId,
                 FeedlyAuthParameters.clientSecret : Constants.clientSecret,
                 FeedlyAuthParameters.grantType    : "refresh_token"
             ]
             
-            var manager = AFHTTPRequestOperationManager()
+            let manager = AFHTTPRequestOperationManager()
             manager.requestSerializer = AFJSONRequestSerializer() as AFHTTPRequestSerializer
             manager.responseSerializer = AFJSONResponseSerializer() as AFHTTPResponseSerializer
             
-            var operation = manager.POST(url, parameters: parameters,
+            let operation = manager.POST(url, parameters: parameters,
                 success: {
                     (operation: AFHTTPRequestOperation!, responseObject: AnyObject!) -> Void in
                     
                     if let jsonResult = responseObject as? Dictionary<String, String> {
-                        var refreshToken = FeedlyRefreshAccessToken(json: jsonResult)
+                        _ = FeedlyRefreshAccessToken(json: jsonResult)
                     } else {
                         
-                        var error = NSError(domain: FeedlyClientError.domain, code: 1001,
+                        let error = NSError(domain: FeedlyClientError.domain, code: 1001,
                             userInfo: [NSLocalizedDescriptionKey: "Received an incorrect refresh token response that could not be parsed.", NSLocalizedFailureReasonErrorKey: "Refresh token response was not in json format or the json format has changed."])
                         failure(error)
                     }
@@ -135,20 +135,20 @@ class FeedlyAuthenticationRequests {
     class func beginRevokeRefreshToken(refreshToken: String, success: () -> Void, failure: (NSError) -> Void)
         -> AFHTTPRequestOperation {
             
-            var url = String(format: Constants.apiURL + "/v3/auth/token")
+            let url = String(format: Constants.apiURL + "/v3/auth/token")
             
-            var parameters = [
+            let parameters = [
                 FeedlyAuthParameters.refreshToken : refreshToken,
                 FeedlyAuthParameters.clientId     : Constants.clientId,
                 FeedlyAuthParameters.clientSecret : Constants.clientSecret,
                 FeedlyAuthParameters.grantType    : "revoke_token"
             ]
             
-            var manager = AFHTTPRequestOperationManager()
+            let manager = AFHTTPRequestOperationManager()
             manager.requestSerializer = AFJSONRequestSerializer() as AFHTTPRequestSerializer
             manager.responseSerializer = AFJSONResponseSerializer() as AFHTTPResponseSerializer
             
-            var operation = manager.POST(url, parameters: parameters,
+            let operation = manager.POST(url, parameters: parameters,
                 success: {
                     (operation: AFHTTPRequestOperation!, responseObject: AnyObject!) -> Void  in
                     success()

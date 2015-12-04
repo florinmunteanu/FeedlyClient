@@ -16,7 +16,7 @@ class FeedlyStreamSearchOptions {
     var ranked: String?
     
     // Optional boolean default value is false.
-    var unreadOnly: Boolean?
+    var unreadOnly: DarwinBoolean?
     
     // Optional long timestamp in ms.
     var newerThan: Int64?

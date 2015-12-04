@@ -16,7 +16,7 @@ class EntryPageContentViewController: UIViewController {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "EntryWebView" {
-            var entryWebViewController = segue.destinationViewController as? WebViewController
+            let entryWebViewController = segue.destinationViewController as? WebViewController
             if entryWebViewController != nil {
                 entryWebViewController?.entry = self.entry
             }

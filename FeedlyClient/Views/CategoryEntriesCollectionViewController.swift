@@ -28,14 +28,14 @@ class CategoryEntriesCollectionViewController: UICollectionViewController, UICol
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var refreshControl = UIRefreshControl()
+        let refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl.addTarget(self, action: "refresh:", forControlEvents: .ValueChanged)
         self.refreshControl = refreshControl
         self.collectionView!.addSubview(refreshControl)
         self.collectionView!.alwaysBounceVertical = true
         
-        var myCellNib = UINib(nibName: "MyCollectionViewCell", bundle: nil)
+        let myCellNib = UINib(nibName: "MyCollectionViewCell", bundle: nil)
         self.collectionView!.registerNib(myCellNib, forCellWithReuseIdentifier: self.reuseIdentifier)
     }
     
@@ -64,12 +64,18 @@ class CategoryEntriesCollectionViewController: UICollectionViewController, UICol
     // On refresh: Get Stream by categoryId, then get entries by entries ids returned by stream.
     
     private func beginLoadStream(categoryId: String) {
-        var keychainData = KeychainService.loadData()
+        var keychainData: KeychainData?
         
-        if let token = keychainData?.accessToken {
-            if let categoryId = self.categoryId {
-                
-                var options = FeedlyStreamSearchOptions()
+        do {
+            keychainData = try KeychainService.loadData()
+        } catch {
+            Alerts.displayError("An error occurred while refreshing the entries. Please try again.", onUIViewController: self)
+            return
+        }
+        
+        if let token = keychainData?.accessToken,
+            categoryId = self.categoryId {
+                let options = FeedlyStreamSearchOptions()
                 options.accessToken = token
                 
                 FeedlyStreamsRequests.beginGetStream(categoryId, options: options,
@@ -87,7 +93,6 @@ class CategoryEntriesCollectionViewController: UICollectionViewController, UICol
                         self.endRefreshing()
                         Alerts.displayError("An error occurred while refreshing the entries. Please try again.", onUIViewController: self)
                 })
-            }
         }
     }
     
@@ -96,13 +101,17 @@ class CategoryEntriesCollectionViewController: UICollectionViewController, UICol
             success: {
                 (entriesDictionary: Dictionary<String, FeedlyEntry>) -> Void in
                 
-                var error: NSError? = nil
-                self.updateEntries(entriesDictionary, error: &error)
+                var errorOccurred = false
+                do {
+                    try self.updateEntries(entriesDictionary)
+                } catch {
+                    errorOccurred = true
+                }
                 
                 self.endRefreshing()
                 self.collectionView!.reloadData()
                 
-                if error != nil {
+                if errorOccurred {
                     Alerts.displayError("An error occurred while refreshing the entries. Please try again.", onUIViewController: self)
                 }
                 
@@ -114,22 +123,33 @@ class CategoryEntriesCollectionViewController: UICollectionViewController, UICol
         })
     }
     
-    func updateEntries(entries: Dictionary<String, FeedlyEntry>, error: NSErrorPointer) {
+    func updateEntries(entries: Dictionary<String, FeedlyEntry>) throws {
         if self.managedObjectContext != nil {
-            
             for entry in entries {
-                Entry.addOrUpdate(entry.1, inManagedObjectContext: self.managedObjectContext!, error: error)
-                // Stop processing on first error
-                if error != nil && error.memory != nil {
-                    return
-                }
-                if let visual = entry.1.visual {
-                    ImagesDownloader.sharedInstance.queueImage(visual.url, entryId: entry.1.id,
-                        success: {
-                            (entryId, thumbnailImage) -> Void in
-                            Entry.updateThumbnail(entryId, thumbnail: thumbnailImage, inManagedObjectContext: self.managedObjectContext!, error: error)
-                    })
-                }
+                try self.updateEntry(entry)
+            }
+        }
+    }
+    
+    func updateEntry(entry: (String, FeedlyEntry)) throws {
+        try Entry.addOrUpdate(entry.1, inManagedObjectContext: self.managedObjectContext!)
+        
+        if let visual = entry.1.visual {
+            ImagesDownloader.sharedInstance.queueImage(visual.url, entryId: entry.1.id,
+                success: {
+                    (entryId, thumbnailImage) -> Void in
+                    self.tryUpdateThumbnail(thumbnailImage, entryId: entryId, numberOfRetries: 2)
+            })
+        }
+    }
+    
+    func tryUpdateThumbnail(thumbnailImage: NSData, entryId: String, var numberOfRetries: uint = 2) {
+        while numberOfRetries > 0 {
+            do {
+                try Entry.updateThumbnail(entryId, thumbnail: thumbnailImage, inManagedObjectContext: self.managedObjectContext!)
+                numberOfRetries = 0
+            } catch {
+                numberOfRetries--
             }
         }
     }
@@ -155,8 +175,6 @@ class CategoryEntriesCollectionViewController: UICollectionViewController, UICol
         fetchRequest.fetchBatchSize = 20
         
         let sortDescriptor = NSSortDescriptor(key: "published", ascending: false)
-        let sortDescriptors = [sortDescriptor]
-        
         fetchRequest.sortDescriptors = [sortDescriptor]
         
         // Edit the section name key path and cache name if appropriate.
@@ -165,12 +183,10 @@ class CategoryEntriesCollectionViewController: UICollectionViewController, UICol
         aFetchedResultsController.delegate = self
         _fetchedResultsController = aFetchedResultsController
         
-        var error: NSError? = nil
-        if _fetchedResultsController!.performFetch(&error) == false {
-            // Replace this implementation with code to handle the error appropriately.
-            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            //println("Unresolved error \(error), \(error.userInfo)")
-            //abort()
+        do {
+            try _fetchedResultsController!.performFetch()
+        } catch {
+            
         }
         
         return _fetchedResultsController!
@@ -183,7 +199,7 @@ class CategoryEntriesCollectionViewController: UICollectionViewController, UICol
     }
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let sectionInfo = self.fetchedResultsController.sections![section] as! NSFetchedResultsSectionInfo
+        let sectionInfo = self.fetchedResultsController.sections![section]
         return sectionInfo.numberOfObjects
     }
     
@@ -219,7 +235,7 @@ class CategoryEntriesCollectionViewController: UICollectionViewController, UICol
         // Set up desired width
         //let targetWidth: CGFloat = (collectionView.bounds.width - 3 * kHorizontalInsets) / 2
         
-         let targetWidth: CGFloat = 200
+        let targetWidth: CGFloat = 200
         
         // Use fake cell to calculate height
         let reuseIdentifier = self.reuseIdentifier
@@ -332,20 +348,20 @@ class CategoryEntriesCollectionViewController: UICollectionViewController, UICol
     
     /*
     func configureCell(cell: EntryCollectionViewCell, atIndexPath indexPath: NSIndexPath) {
-        var entry = self.fetchedResultsController.objectAtIndexPath(indexPath) as? Entry
-        
-        cell.titleLabel.text = entry?.title
-        cell.summaryLabel.text = entry?.textSummary
-        cell.authorLabel.text = entry?.author
-        if let thumbnail = entry?.thumbnail {
-            cell.thumbnailImageView.image = UIImage(data: thumbnail)
-        } else {
-            cell.thumbnailImageView.image = nil
-        }
+    var entry = self.fetchedResultsController.objectAtIndexPath(indexPath) as? Entry
+    
+    cell.titleLabel.text = entry?.title
+    cell.summaryLabel.text = entry?.textSummary
+    cell.authorLabel.text = entry?.author
+    if let thumbnail = entry?.thumbnail {
+    cell.thumbnailImageView.image = UIImage(data: thumbnail)
+    } else {
+    cell.thumbnailImageView.image = nil
+    }
     }*/
     
     func configureCell(cell: MyCollectionViewCell, atIndexPath indexPath: NSIndexPath) {
-        var entry = self.fetchedResultsController.objectAtIndexPath(indexPath) as? Entry
+        let entry = self.fetchedResultsController.objectAtIndexPath(indexPath) as? Entry
         
         //cell.titleLabel.text = entry?.title
         //cell.subtitleLabel.text = entry?.textSummary

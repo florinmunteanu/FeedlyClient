@@ -16,8 +16,8 @@ class EntriesPageViewController: UIPageViewController, UIPageViewControllerDataS
         self.pageViewController!.dataSource = self
         
         let startingViewController: EntryPageContentViewController = self.viewControllerAtIndex(0)!
-        let viewControllers: NSArray = [startingViewController]
-        self.pageViewController!.setViewControllers(viewControllers as [AnyObject], direction: .Forward, animated: false, completion: nil)
+        let viewControllers: [UIViewController] = [startingViewController]
+        self.pageViewController!.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: nil)
         self.pageViewController!.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)
         
         self.addChildViewController(self.pageViewController!)

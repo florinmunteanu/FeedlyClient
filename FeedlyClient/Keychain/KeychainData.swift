@@ -11,49 +11,39 @@ class KeychainData {
     
     var userName: String = ""
     
-    func toJson(error: NSErrorPointer) -> NSData? {
+    func toJson() throws -> NSData {
         
-        var dictionary = [
+        let dictionary = [
             "accessToken"  : self.accessToken ?? "",
             "refreshToken" : self.refreshToken ?? "",
             "userName"     : self.userName
         ]
         
-        var serializationError: NSError? = nil
+        let data = try NSJSONSerialization.dataWithJSONObject(dictionary, options: NSJSONWritingOptions.PrettyPrinted)
         
-        var data = NSJSONSerialization.dataWithJSONObject(dictionary, options: NSJSONWritingOptions.PrettyPrinted, error: &serializationError)
-        
-        if serializationError != nil && error != nil {
-            error.memory = serializationError
-        }
         return data
     }
     
-    class func fromJson(data: NSData?, error: NSErrorPointer) -> KeychainData? {
-        if data == nil {
-            return nil
+    class func fromJson(data: NSData?) throws -> KeychainData {
+        
+        var keychainDict = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions()) as! Dictionary<String, AnyObject>
+        
+        let keychain = KeychainData()
+        
+        keychain.accessToken = keychainDict["accessToken"] as AnyObject? as? String
+        
+        if keychain.accessToken == "" {
+            keychain.accessToken = nil
         }
         
-        var deserializationError: NSError? = nil
+        keychain.refreshToken = keychainDict["refreshToken"] as AnyObject? as? String
         
-        var keychainDict = NSJSONSerialization.JSONObjectWithData(data!, options: nil, error: &deserializationError) as! Dictionary<String, AnyObject>
-        
-        if deserializationError != nil && error != nil {
-            error.memory = deserializationError
-            return nil
-        } else {
-            var keychain = KeychainData()
-            keychain.accessToken = keychainDict["accessToken"] as AnyObject? as? String
-            if keychain.accessToken == "" {
-                keychain.accessToken = nil
-            }
-            keychain.refreshToken = keychainDict["refreshToken"] as AnyObject? as? String
-            if keychain.refreshToken == "" {
-                keychain.refreshToken = nil
-            }
-            keychain.userName = keychainDict["userName"] as! String
-            
-            return keychain
+        if keychain.refreshToken == "" {
+            keychain.refreshToken = nil
         }
+        
+        keychain.userName = keychainDict["userName"] as! String
+        
+        return keychain
     }
 }

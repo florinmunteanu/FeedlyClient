@@ -4,62 +4,42 @@ import CoreData
 
 extension Entry {
     
-    internal class func addOrUpdate(feedlyEntry: FeedlyEntry, inManagedObjectContext context: NSManagedObjectContext, error: NSErrorPointer) {
+    internal class func addOrUpdate(feedlyEntry: FeedlyEntry, inManagedObjectContext context: NSManagedObjectContext) throws {
         
-        var fetchRequest = NSFetchRequest(entityName: "Entry")
+        let fetchRequest = NSFetchRequest(entityName: "Entry")
         fetchRequest.predicate = NSPredicate(format: "id=%@", feedlyEntry.id)
         
-        var fetchError: NSError? = nil
-        var matches = context.executeFetchRequest(fetchRequest, error: &fetchError)
+        let matches = try context.executeFetchRequest(fetchRequest)
         
-        if fetchError != nil && error != nil {
-            error.memory = fetchError
-            return
-        }
-        
-        if matches == nil || matches?.count == 0 {
-            self.insertNewEntry(feedlyEntry, inManagedObjectContext: context, error: error)
+        if matches.count == 0 {
+            try self.insertNewEntry(feedlyEntry, inManagedObjectContext: context)
         } else {
-            var existingEntry = matches?.last as! Entry;
-            self.updateExistingEntry(existingEntry, withFeedlyEntry: feedlyEntry, inManagedObjectContext: context, error: error)
+            let existingEntry = matches.last as! Entry;
+            try self.updateExistingEntry(existingEntry, withFeedlyEntry: feedlyEntry, inManagedObjectContext: context)
         }
-        
-        var saveError: NSError? = nil
-        context.save(&saveError)
-        
-        if saveError != nil && error != nil {
-            error.memory = saveError
-        }
+
+        try context.save()
     }
     
-    internal class func updateThumbnail(entryId: String, thumbnail: NSData, inManagedObjectContext context: NSManagedObjectContext, error: NSErrorPointer) {
+    internal class func updateThumbnail(entryId: String, thumbnail: NSData, inManagedObjectContext context: NSManagedObjectContext) throws {
         
-        var fetchRequest = NSFetchRequest(entityName: "Entry")
+        let fetchRequest = NSFetchRequest(entityName: "Entry")
         fetchRequest.predicate = NSPredicate(format: "id=%@", entryId)
         
-        var fetchError: NSError? = nil
-        var matches = context.executeFetchRequest(fetchRequest, error: &fetchError)
+        let matches = try context.executeFetchRequest(fetchRequest)
         
-        if fetchError != nil && error != nil {
-            error.memory = fetchError
-            return
-        }
-        if matches != nil && matches?.count == 1 {
-            var existingEntry = matches?.last as! Entry
+        if matches.count == 1 {
+            let existingEntry = matches.last as! Entry
             existingEntry.thumbnail = thumbnail
         }
-        
-        var saveError: NSError? = nil
-        context.save(&saveError)
-        
-        if saveError != nil && error != nil {
-            error.memory = saveError
-        }
+
+        try context.save()
     }
     
-    private class func insertNewEntry(feedlyEntry: FeedlyEntry, inManagedObjectContext context: NSManagedObjectContext, error: NSErrorPointer) {
+    private class func insertNewEntry(feedlyEntry: FeedlyEntry, inManagedObjectContext context: NSManagedObjectContext) throws {
         
-        var newEntry = NSEntityDescription.insertNewObjectForEntityForName("Entry", inManagedObjectContext: context) as! Entry
+        let newEntry = NSEntityDescription.insertNewObjectForEntityForName("Entry", inManagedObjectContext: context) as! Entry
+        
         newEntry.id = feedlyEntry.id
         newEntry.title = feedlyEntry.title
         newEntry.unread = feedlyEntry.unread
@@ -79,7 +59,7 @@ extension Entry {
             newEntry.summary.content = feedlyEntry.summary!.content
             newEntry.summary.direction = feedlyEntry.summary!.direction
             
-            var parser = EntrySummaryParser(summaryHtmlContent: newEntry.summary.content)
+            let parser = EntrySummaryParser(summaryHtmlContent: newEntry.summary.content)
             newEntry.textSummary = parser.parse()
         }
         if feedlyEntry.visual != nil {
@@ -91,10 +71,10 @@ extension Entry {
             newEntry.visual.contentType = feedlyEntry.visual!.contentType
         }
         
-        newEntry.categories = self.mergeCategories(feedlyEntry, forEntry: newEntry, inManagedObjectContext: context, error: error)
+        newEntry.categories = try self.mergeCategories(feedlyEntry, forEntry: newEntry, inManagedObjectContext: context)
     }
     
-    private class func updateExistingEntry(existingEntry: Entry, withFeedlyEntry feedlyEntry: FeedlyEntry, inManagedObjectContext context: NSManagedObjectContext, error: NSErrorPointer) {
+    private class func updateExistingEntry(existingEntry: Entry, withFeedlyEntry feedlyEntry: FeedlyEntry, inManagedObjectContext context: NSManagedObjectContext) throws {
         
         existingEntry.title = feedlyEntry.title
         existingEntry.unread = feedlyEntry.unread
@@ -124,7 +104,7 @@ extension Entry {
             existingEntry.summary.content = feedlyEntry.summary!.content
             existingEntry.summary.direction = feedlyEntry.summary!.direction
             
-            var parser = EntrySummaryParser(summaryHtmlContent: existingEntry.summary.content)
+            let parser = EntrySummaryParser(summaryHtmlContent: existingEntry.summary.content)
             existingEntry.textSummary = parser.parse()
         }
         
@@ -137,23 +117,17 @@ extension Entry {
             existingEntry.visual.contentType = feedlyEntry.visual!.contentType
         }
         
-        existingEntry.categories = self.mergeCategories(feedlyEntry, forEntry: existingEntry, inManagedObjectContext: context, error: error)
+        existingEntry.categories = try self.mergeCategories(feedlyEntry, forEntry: existingEntry, inManagedObjectContext: context)
     }
     
-    private class func mergeCategories(feedlyEntry: FeedlyEntry, forEntry entry: Entry, inManagedObjectContext context: NSManagedObjectContext, error: NSErrorPointer) -> NSSet {
+    private class func mergeCategories(feedlyEntry: FeedlyEntry, forEntry entry: Entry, inManagedObjectContext context: NSManagedObjectContext) throws -> NSSet {
         
-        var categories = NSMutableSet()
+        let categories = NSMutableSet()
         if feedlyEntry.categories != nil {
             for category in feedlyEntry.categories! {
                 
-                var categoryError: NSError? = nil
-                var category = Category.getOrAdd(category, inManagedObjectContext: context, error: &categoryError)
-                
-                if categoryError != nil && error != nil {
-                    // At first error we encounter, return the current collection
-                    error.memory = categoryError
-                    return categories
-                }
+                let category = try Category.getOrAdd(category, inManagedObjectContext: context)
+
                 if category != nil {
                     categories.addObject(category!)
                 }

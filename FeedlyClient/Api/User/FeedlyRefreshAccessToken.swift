@@ -13,7 +13,7 @@ class FeedlyRefreshAccessToken {
             self.accessToken = accessToken
         }
         if let expiresIn = json[FeedlyAuthParameters.expiresIn] {
-            if let intValue = expiresIn.toInt() {
+            if let intValue = Int(expiresIn) {
                 self.expiresIn = intValue
             }
         }

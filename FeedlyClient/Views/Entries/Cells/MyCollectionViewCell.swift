@@ -1,12 +1,9 @@
 
 import UIKit
 
-// Check System Version
-//let isIOS7: Bool = !isIOS8
-//let isIOS8: Bool = floor(NSFoundationVersionNumber) > NSFoundationVersionNumber_iOS_7_1
-
+// http://bcdilumonline.blogspot.ro/2015/03/add-uicollectionview-to-xib-with-custom.html
 class MyCollectionViewCell: UICollectionViewCell {
-
+    
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var contentLabel: UILabel!
     
@@ -15,11 +12,6 @@ class MyCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
-        /*if isIOS7 {
-            // Need set autoresizingMask to let contentView always occupy this view's bounds, key for iOS7
-            self.contentView.autoresizingMask = UIViewAutoresizing.FlexibleHeight | UIViewAutoresizing.FlexibleWidth
-        }*/
         self.layer.masksToBounds = true
     }
     
@@ -29,15 +21,21 @@ class MyCollectionViewCell: UICollectionViewCell {
         // Set what preferredMaxLayoutWidth you want
         //contentLabel.preferredMaxLayoutWidth = self.bounds.width - 2 * kLabelHorizontalInsets
     }
-/*
-    func configCell(title: String, content: String, titleFont: String, contentFont: String) {
+    
+    func configCell(title: String, content: String) {
         titleLabel.text = title
         contentLabel.text = content
         
-        titleLabel.font = UIFont(name: titleFont, size: 18)
-        contentLabel.font = UIFont(name: contentFont, size: 16)
+        if content == ""{
+            
+        }
+        if title == "" {
+            
+        }
+        //titleLabel.font = UIFont(name: titleFont, size: 18)
+        //contentLabel.font = UIFont(name: contentFont, size: 16)
         self.setNeedsLayout()
         self.layoutIfNeeded()
     }
-*/
+    
 }

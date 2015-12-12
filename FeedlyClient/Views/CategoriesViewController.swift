@@ -85,7 +85,7 @@ class CategoriesViewController: UITableViewController, NSFetchedResultsControlle
                 
                 let controller = segue.destinationViewController as! UINavigationController
                 
-                let childController = controller.viewControllers[0] as! CategoryEntriesCollectionViewController
+                let childController = controller.viewControllers[0] as! CategoryEntriesTableViewController
                 childController.managedObjectContext = self.managedObjectContext
                 childController.categoryId = category.id
                 childController.categoryName = category.label

@@ -21,7 +21,7 @@
 		4E456CFE19FBE36A00A8085A /* EntryPageContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E456CFD19FBE36A00A8085A /* EntryPageContentViewController.swift */; };
 		4E456D0319FCCB9200A8085A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E456D0219FCCB9200A8085A /* SettingsViewController.swift */; };
 		4E476F9D19B6421D0010588D /* FeedlyClient.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4E476F9B19B6421D0010588D /* FeedlyClient.xcdatamodeld */; };
-		4E51994319FD4A1E0036166F /* EntryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E51994219FD4A1E0036166F /* EntryCollectionViewCell.swift */; };
+		4E51994319FD4A1E0036166F /* EntryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E51994219FD4A1E0036166F /* EntryTableViewCell.swift */; };
 		4E6ADAF71975A05000D3C72C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6ADAF61975A05000D3C72C /* AppDelegate.swift */; };
 		4E6ADAFC1975A05000D3C72C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E6ADAFB1975A05000D3C72C /* Images.xcassets */; };
 		4E6ADB081975A05100D3C72C /* FeedlyClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6ADB071975A05100D3C72C /* FeedlyClientTests.swift */; };
@@ -32,7 +32,6 @@
 		4E757E7419A1C0AC00CEF5DD /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E757E7319A1C0AC00CEF5DD /* KeychainService.swift */; };
 		4EA3FEDB199A9B8800B84C0F /* FeedlyClientError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA3FEDA199A9B8800B84C0F /* FeedlyClientError.swift */; };
 		4EA3FEDF199AA9FA00B84C0F /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EA3FEDE199AA9FA00B84C0F /* Security.framework */; };
-		4EBDEB381AC76FF600695887 /* EntryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EBDEB361AC76FF600695887 /* EntryCell.swift */; };
 		4EC7A87419E9271C0072F3F0 /* Alerts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC7A87319E9271C0072F3F0 /* Alerts.swift */; };
 		4EC7A88219E976F70072F3F0 /* EntryContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC7A88119E976F70072F3F0 /* EntryContent.swift */; };
 		4EC7A88419E976F80072F3F0 /* Entry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EC7A88319E976F80072F3F0 /* Entry.swift */; };
@@ -60,7 +59,7 @@
 		4ECDA82119B1AC100025E2B8 /* FeedlySubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ECDA81F19B1AC100025E2B8 /* FeedlySubscription.swift */; };
 		4ECDA82219B1AC100025E2B8 /* FeedlySubcriptionsRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ECDA82019B1AC100025E2B8 /* FeedlySubcriptionsRequests.swift */; };
 		4ECDA82419B38C1C0025E2B8 /* FeedlyUserLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ECDA82319B38C1C0025E2B8 /* FeedlyUserLogin.swift */; };
-		4ECDA82819B392070025E2B8 /* CategoryEntriesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ECDA82719B392070025E2B8 /* CategoryEntriesCollectionViewController.swift */; };
+		4ECDA82819B392070025E2B8 /* CategoryEntriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ECDA82719B392070025E2B8 /* CategoryEntriesTableViewController.swift */; };
 		4ECDA82D19B3B2E80025E2B8 /* SearchOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ECDA82C19B3B2E80025E2B8 /* SearchOptions.swift */; };
 		4ECDA82F19B3B3760025E2B8 /* FeedlyFeedsSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ECDA82E19B3B3760025E2B8 /* FeedlyFeedsSearch.swift */; };
 		4ED18CEC197EE4B900EA7522 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED18CEB197EE4B900EA7522 /* Constants.swift */; };
@@ -98,7 +97,7 @@
 		4E456CFD19FBE36A00A8085A /* EntryPageContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EntryPageContentViewController.swift; path = Views/EntryPageContentViewController.swift; sourceTree = "<group>"; };
 		4E456D0219FCCB9200A8085A /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsViewController.swift; path = Views/Settings/SettingsViewController.swift; sourceTree = "<group>"; };
 		4E476F9C19B6421D0010588D /* FeedlyClient.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FeedlyClient.xcdatamodel; sourceTree = "<group>"; };
-		4E51994219FD4A1E0036166F /* EntryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EntryCollectionViewCell.swift; path = Views/Entries/Cells/EntryCollectionViewCell.swift; sourceTree = "<group>"; };
+		4E51994219FD4A1E0036166F /* EntryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EntryTableViewCell.swift; path = Views/Entries/Cells/EntryTableViewCell.swift; sourceTree = "<group>"; };
 		4E6ADAF11975A05000D3C72C /* FeedlyClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FeedlyClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E6ADAF51975A05000D3C72C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4E6ADAF61975A05000D3C72C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -113,7 +112,6 @@
 		4E757E7319A1C0AC00CEF5DD /* KeychainService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		4EA3FEDA199A9B8800B84C0F /* FeedlyClientError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedlyClientError.swift; sourceTree = "<group>"; };
 		4EA3FEDE199AA9FA00B84C0F /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
-		4EBDEB361AC76FF600695887 /* EntryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EntryCell.swift; path = Views/Entries/Cells/EntryCell.swift; sourceTree = "<group>"; };
 		4EC7A87319E9271C0072F3F0 /* Alerts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Alerts.swift; path = Views/Alerts.swift; sourceTree = "<group>"; };
 		4EC7A88119E976F70072F3F0 /* EntryContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EntryContent.swift; path = CoreData/EntryContent.swift; sourceTree = "<group>"; };
 		4EC7A88319E976F80072F3F0 /* Entry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Entry.swift; path = CoreData/Entry.swift; sourceTree = "<group>"; };
@@ -141,7 +139,7 @@
 		4ECDA81F19B1AC100025E2B8 /* FeedlySubscription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedlySubscription.swift; path = Api/Subscriptions/FeedlySubscription.swift; sourceTree = "<group>"; };
 		4ECDA82019B1AC100025E2B8 /* FeedlySubcriptionsRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedlySubcriptionsRequests.swift; path = Api/Subscriptions/FeedlySubcriptionsRequests.swift; sourceTree = "<group>"; };
 		4ECDA82319B38C1C0025E2B8 /* FeedlyUserLogin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedlyUserLogin.swift; path = Api/Login/FeedlyUserLogin.swift; sourceTree = "<group>"; };
-		4ECDA82719B392070025E2B8 /* CategoryEntriesCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CategoryEntriesCollectionViewController.swift; path = Views/CategoryEntriesCollectionViewController.swift; sourceTree = "<group>"; };
+		4ECDA82719B392070025E2B8 /* CategoryEntriesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CategoryEntriesTableViewController.swift; path = Views/CategoryEntriesTableViewController.swift; sourceTree = "<group>"; };
 		4ECDA82C19B3B2E80025E2B8 /* SearchOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchOptions.swift; path = Api/Search/SearchOptions.swift; sourceTree = "<group>"; };
 		4ECDA82E19B3B3760025E2B8 /* FeedlyFeedsSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedlyFeedsSearch.swift; path = Api/Search/FeedlyFeedsSearch.swift; sourceTree = "<group>"; };
 		4ED18CEB197EE4B900EA7522 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -253,7 +251,7 @@
 				4EF9422E1A2A769A00C637B0 /* PageView */,
 				4E456D0519FCCD2E00A8085A /* Cells */,
 				4ECDA7CF19B1A87C0025E2B8 /* EntryViewController.swift */,
-				4ECDA82719B392070025E2B8 /* CategoryEntriesCollectionViewController.swift */,
+				4ECDA82719B392070025E2B8 /* CategoryEntriesTableViewController.swift */,
 			);
 			name = Entries;
 			sourceTree = "<group>";
@@ -263,8 +261,7 @@
 			children = (
 				4E6F35291AC8216400D15FCC /* MyCollectionViewCell.swift */,
 				4E6F352A1AC8216400D15FCC /* MyCollectionViewCell.xib */,
-				4E51994219FD4A1E0036166F /* EntryCollectionViewCell.swift */,
-				4EBDEB361AC76FF600695887 /* EntryCell.swift */,
+				4E51994219FD4A1E0036166F /* EntryTableViewCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -616,7 +613,7 @@
 				4E3F0CAE19BCD16300E66E07 /* Subscription.swift in Sources */,
 				4E3F0CAC19BCD16300E66E07 /* Category.swift in Sources */,
 				4ECDA81119B1A9D40025E2B8 /* FeedlyEntry.swift in Sources */,
-				4ECDA82819B392070025E2B8 /* CategoryEntriesCollectionViewController.swift in Sources */,
+				4ECDA82819B392070025E2B8 /* CategoryEntriesTableViewController.swift in Sources */,
 				4E6ADAF71975A05000D3C72C /* AppDelegate.swift in Sources */,
 				4ECDA7D019B1A87C0025E2B8 /* EntryViewController.swift in Sources */,
 				4EC7A88219E976F70072F3F0 /* EntryContent.swift in Sources */,
@@ -646,11 +643,10 @@
 				4ECDA80319B1A95E0025E2B8 /* FeedlyUserProfileRequests.swift in Sources */,
 				4ECDA80019B1A95E0025E2B8 /* FeedlyUserProfile.swift in Sources */,
 				4E757E7419A1C0AC00CEF5DD /* KeychainService.swift in Sources */,
-				4EBDEB381AC76FF600695887 /* EntryCell.swift in Sources */,
 				4E456CFE19FBE36A00A8085A /* EntryPageContentViewController.swift in Sources */,
 				4ECDA81719B1AB5D0025E2B8 /* FeedlyStreamsRequests.swift in Sources */,
 				4ED18CEC197EE4B900EA7522 /* Constants.swift in Sources */,
-				4E51994319FD4A1E0036166F /* EntryCollectionViewCell.swift in Sources */,
+				4E51994319FD4A1E0036166F /* EntryTableViewCell.swift in Sources */,
 				4ECDA81019B1A9D40025E2B8 /* FeedlyEntryContent.swift in Sources */,
 				4EEEAD6219FBD60E00956C56 /* EntriesPageViewController.swift in Sources */,
 				4ECDA81D19B1ABDF0025E2B8 /* FeedlyCategory.swift in Sources */,

@@ -25,6 +25,7 @@ class ImagesDownloader {
         if imageUrl == "" || imageUrl == "none" {
             return
         }
+        
         self.queue.addOperationWithBlock({
             () -> Void in
             if let url = NSURL(string: imageUrl) {

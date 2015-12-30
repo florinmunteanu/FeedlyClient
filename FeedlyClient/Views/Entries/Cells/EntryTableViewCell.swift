@@ -4,9 +4,9 @@ import UIKit
 class EntryTableViewCell: UITableViewCell {
     
     enum Views: String {
-        case Title   = "title"
-        case Summary = "summary"
-        case Author  = "author"
+        case Title     = "title"
+        case Summary   = "summary"
+        case Author    = "author"
         case Thumbnail = "thumbnail"
     }
     
@@ -52,9 +52,9 @@ class EntryTableViewCell: UITableViewCell {
         self.setupViews()
         
         let viewsDictionary = [
-            Views.Title.rawValue          : self.titleLabel,
-            Views.Summary.rawValue        : self.summaryLabel,
-            Views.Author.rawValue         : self.authorLabel,
+            Views.Title.rawValue     : self.titleLabel,
+            Views.Summary.rawValue   : self.summaryLabel,
+            Views.Author.rawValue    : self.authorLabel,
             Views.Thumbnail.rawValue : self.thumbnailImageView]
         
         var metrics = [
@@ -83,9 +83,9 @@ class EntryTableViewCell: UITableViewCell {
         "V:|-5-[title]-5-[summary]-5-[author]-(>=5)-|",
         "V:|-5-[thumbnail(50)]-(>=5)-|"))
         
-        "H:|-5-[thumbnail(50)]-5-[title]-5-|",
-        "H:|-5-[thumbnail]-5-[summary]-5-|",
-        "H:|-5-[thumbnail]-5-[author]-5-|"
+        "H:|-5-[thumbnail(50)]-5-[title]  -5-|",
+        "H:|-5-[thumbnail]    -5-[summary]-5-|",
+        "H:|-5-[thumbnail]    -5-[author] -5-|"
         */
         
         let verticalAlignments = [
@@ -141,34 +141,4 @@ class EntryTableViewCell: UITableViewCell {
     private func setupThumbnailLabel() {
         self.thumbnailImageView.translatesAutoresizingMaskIntoConstraints = false
     }
-    
-    /*
-    override func setSelected(selected: Bool, animated: Bool) {
-    super.setSelected(selected, animated: animated)
-    }
-    
-    
-    override func updateConstraints() {
-    super.updateConstraints()
-    
-    }
-    
-    
-    override func layoutSubviews() {
-    if thumbnailImageView.image == nil {
-    self.titleLabel.preferredMaxLayoutWidth = 0
-    self.summaryLabel.preferredMaxLayoutWidth = 0
-    self.thumbnailImageView.frame = CGRectMake(0, 0, 0, 0)
-    
-    } else {
-    //super.layoutSubviews()
-    self.titleLabel.preferredMaxLayoutWidth = self.bounds.size.width - 150
-    self.summaryLabel.preferredMaxLayoutWidth = self.bounds.size.width - 150
-    //super.layoutSubviews()
-    self.thumbnailImageView.frame = CGRectMake(0, 0, 150, 50)
-    //super.layoutSubviews()
-    }
-    super.layoutSubviews()
-    }
-    */
 }

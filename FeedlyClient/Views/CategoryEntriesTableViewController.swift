@@ -4,7 +4,6 @@ import CoreData
 
 class CategoryEntriesTableViewController: UITableViewController,  NSFetchedResultsControllerDelegate {
     
-    //private let reuseIdentifier = "MyCollectionViewCell"
     private let sectionInsets = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
     
     var managedObjectContext: NSManagedObjectContext? = nil
@@ -17,29 +16,8 @@ class CategoryEntriesTableViewController: UITableViewController,  NSFetchedResul
         }
     }
     
-    // A dictionary of offscreen cells that are used within the sizeForItemAtIndexPath method to handle the size calculations. These are never drawn onscreen. The dictionary is in the format:
-    // { NSString *reuseIdentifier : UICollectionViewCell *offscreenCell, ... }
-    //var offscreenCells = Dictionary<String, UICollectionViewCell>()
-    
-    //let kHorizontalInsets: CGFloat = 5.0
-    //let kVerticalInsets: CGFloat = 5.0
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //let refreshControl = UIRefreshControl()
-        //self.refreshControl = UIRefreshControl()
-        //self.refreshControl!.attributedTitle = NSAttributedString(string: "Pull to refresh")
-        //self.refreshControl!.addTarget(self, action: "refresh:", forControlEvents: .ValueChanged)
-        //self.refreshControl = refreshControl
-        //self.collectionView!.addSubview(refreshControl)
-        //self.collectionView!.alwaysBounceVertical = true
-        
-        //let myCellNib = UINib(nibName: "MyCollectionViewCell", bundle: nil)
-        //self.collectionView!.registerNib(myCellNib, forCellWithReuseIdentifier: self.reuseIdentifier)
-        
-        //self.tableView!.addSubview(refreshControl)
-        //self.tableView!.alwaysBounceVertical = true
         
         let refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
@@ -203,89 +181,10 @@ class CategoryEntriesTableViewController: UITableViewController,  NSFetchedResul
         return _fetchedResultsController!
     }
     
-    // MARK: UICollectionViewDataSource
-    /*
-    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
-    return self.fetchedResultsController.sections?.count ?? 0
-    }
-    
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    let sectionInfo = self.fetchedResultsController.sections![section]
-    return sectionInfo.numberOfObjects
-    }
-    
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-    //let cell = collectionView.dequeueReusableCellWithReuseIdentifier(self.reuseIdentifier, forIndexPath: indexPath) as EntryCollectionViewCell
-    //self.configureCell(cell, atIndexPath: indexPath)
-    let cell = collectionView.dequeueReusableCellWithReuseIdentifier(self.reuseIdentifier, forIndexPath: indexPath) as! MyCollectionViewCell
-    self.configureCell(cell, atIndexPath: indexPath)
-    
-    return cell
-    }
-    */
-    // MARK: UICollectionViewDelegateFlowLayout
-    
-    /*
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        
-        //let cell = collectionView.dequeueReusableCellWithReuseIdentifier(self.reuseIdentifier, forIndexPath: indexPath) as? MyCollectionViewCell
-        //self.configureCell(cell, atIndexPath: indexPath)
-        //if cell != nil {
-        //    cell!.setNeedsLayout()
-        //    cell!.layoutIfNeeded()
-        //}
-        //var size: CGSize = cell.contentView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize)
-        //size.width = ceil(size.width)
-        //size.height = ceil(size.height)
-        
-        if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
-            return CGSize(width: self.collectionView!.frame.width, height: 200)
-            //return size
-        } else {
-            return CGSize(width: self.collectionView!.frame.width, height: 75)
-        }
-        // Set up desired width
-        //let targetWidth: CGFloat = (collectionView.bounds.width - 3 * kHorizontalInsets) / 2
-        
-        //let targetWidth: CGFloat = 200
-        
-        // Use fake cell to calculate height
-        //let reuseIdentifier = self.reuseIdentifier
-        //var cell: MyCollectionViewCell? = self.offscreenCells[reuseIdentifier] as? MyCollectionViewCell
-        //if cell == nil {
-        //    cell = NSBundle.mainBundle().loadNibNamed("MyCollectionViewCell", owner: self, options: nil)[0] as? MyCollectionViewCell
-        //self.offscreenCells[reuseIdentifier] = cell
-        //}
-        
-        // Config cell and let system determine size
-        //cell!.configCell(titleData[indexPath.item], content: contentData[indexPath.item], titleFont: fontArray[indexPath.item] as String, contentFont: fontArray[indexPath.item] as String)
-        
-        //self.configureCell(cell!, atIndexPath: indexPath)
-        
-        // Cell's size is determined in nib file, need to set it's width (in this case), and inside, use this cell's width to set label's preferredMaxLayoutWidth, thus, height can be determined, this size will be returned for real cell initialization
-        //cell!.bounds = CGRectMake(0, 0, targetWidth, cell!.bounds.height)
-        //cell!.contentView.bounds = cell!.bounds
-        
-        // Layout subviews, this will let labels on this cell to set preferredMaxLayoutWidth
-        //cell!.setNeedsLayout()
-        //cell!.layoutIfNeeded()
-        
-        //var size = cell!.contentView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize)
-        // Still need to force the width, since width can be smalled due to break mode of labels
-        //size.width = targetWidth
-        //return size
-    }
-
-    
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-        return sectionInsets
-    }
-*/    
-    
     // MARK: NSFetchedResultsControllerDelegate
     
     func controllerWillChangeContent(controller: NSFetchedResultsController) {
-        //self.collectionView!.beginUpdates()
+        self.tableView!.beginUpdates()
     }
     
     func controller(controller: NSFetchedResultsController, didChangeSection sectionInfo: NSFetchedResultsSectionInfo, atIndex sectionIndex: Int, forChangeType type: NSFetchedResultsChangeType) {
@@ -302,25 +201,33 @@ class CategoryEntriesTableViewController: UITableViewController,  NSFetchedResul
     func controller(controller: NSFetchedResultsController, didChangeObject anObject: AnyObject, atIndexPath indexPath: NSIndexPath?, forChangeType type: NSFetchedResultsChangeType, newIndexPath: NSIndexPath?) {
         switch type {
         case .Insert:
-            self.tableView!.insertRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Automatic)
+            if let insertedIndexPath = newIndexPath {
+                self.tableView!.insertRowsAtIndexPaths([insertedIndexPath], withRowAnimation: .Automatic)
+            }
+            
         case .Delete:
-            self.tableView!.deleteRowsAtIndexPaths([newIndexPath!], withRowAnimation: .Automatic)
-            //case .Update:
-            //if let cell = tableView.cellForRowAtIndexPath(indexPath) as? EntryTableViewCell {
-            //    self.configureCell(cell, atIndexPath: indexPath)
-            //}
-            //self.configureCell(self.tableView(self.tableView, cellForRowAtIndexPath: indexPath), atIndexPath: indexPath)
-            //self.configureCell(tableView.cellForRowAtIndexPath(indexPath)! as EntryTableViewCell, atIndexPath: indexPath)
+            if let deletedIndexPath = indexPath {
+                self.tableView!.deleteRowsAtIndexPaths([deletedIndexPath], withRowAnimation: .Automatic)
+            }
+            
+        case .Update:
+            if let updatedIndexPath = indexPath,
+                cell = tableView.cellForRowAtIndexPath(updatedIndexPath) as? EntryTableViewCell {
+                    self.configureCell(cell, atIndexPath: updatedIndexPath)
+            }
+            
         case .Move:
-            self.tableView!.deleteRowsAtIndexPaths([indexPath!], withRowAnimation: .Automatic)
-            self.tableView!.insertRowsAtIndexPaths([indexPath!], withRowAnimation: .Automatic)
-        default:
-            return
+            if let deletedIndexPath = indexPath {
+                self.tableView!.deleteRowsAtIndexPaths([deletedIndexPath], withRowAnimation: .Automatic)
+            }
+            if let newIndexPath = newIndexPath {
+                self.tableView!.insertRowsAtIndexPaths([newIndexPath], withRowAnimation: .Automatic)
+            }
         }
     }
     
     func controllerDidChangeContent(controller: NSFetchedResultsController) {
-        //self.collectionView!.
+        self.tableView!.endUpdates()
     }
     
     // MARK: UITableViewDataSource
@@ -375,27 +282,4 @@ class CategoryEntriesTableViewController: UITableViewController,  NSFetchedResul
         }
         //cell.layoutIfNeeded()
     }
-    
-    /*
-    func configureCell(cell: MyCollectionViewCell, atIndexPath indexPath: NSIndexPath) {
-    let entry = self.fetchedResultsController.objectAtIndexPath(indexPath) as? Entry
-    
-    var title = ""
-    var content = ""
-    if let t = entry?.title {
-    title = t
-    }
-    if let c = entry?.textSummary {
-    content = c
-    }
-    cell.configCell(title, content: content)
-    //cell.titleLabel.text = entry?.title
-    //cell.subtitleLabel.text = entry?.textSummary
-    //cell.contentLabel.text = entry?.textSummary
-    
-    //cell.titleLabel.text = entry?.title
-    //cell.summaryLabel.text = entry?.textSummary
-    //cell.authorLabel.text = entry?.author
-    //cell.thumbnailImageView.image
-    }*/
 }

@@ -23,6 +23,18 @@ extension Subscription {
         try context.save()
     }
     
+    internal class func deleteAllSubscriptions(inManagedObjectContext context: NSManagedObjectContext) throws {
+        
+        let fetchRequest = NSFetchRequest(entityName: "Subscription")
+        let allSubscriptions = try context.executeFetchRequest(fetchRequest)
+        
+        for subscription in allSubscriptions {
+            context.deleteObject(subscription as! NSManagedObject)
+        }
+        
+        try context.save()
+    }
+    
     private class func insertNewSubscription(feedlySubscription: FeedlySubscription, inManagedObjectContext context: NSManagedObjectContext) throws {
         
         let newSubscription = NSEntityDescription.insertNewObjectForEntityForName("Subscription", inManagedObjectContext: context) as! Subscription
@@ -52,9 +64,5 @@ extension Subscription {
             }
         }
         return categories
-    }
-    
-    class func beginDownloadLogosAndSave(subscription: Subscription, inManagedObjectContext context: NSManagedObjectContext, error: NSErrorPointer) {
-        
     }
 }

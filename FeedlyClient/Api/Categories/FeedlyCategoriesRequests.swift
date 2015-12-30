@@ -4,21 +4,23 @@ import Foundation
 class FeedlyCategoriesRequests {
     
     class func beginGetCategories(accessToken: String, success: ([FeedlyCategory]) -> Void, failure: (NSError) -> Void)
-        -> AFHTTPRequestOperation {
+        -> NSURLSessionDataTask? {
             
             let url = Constants.apiURL + "/v3/categories"
             
             // GET https://sandbox.feedly.com/v3/categories
             
-            let manager = AFHTTPRequestOperationManager()
+            let manager = AFHTTPSessionManager()
             manager.requestSerializer = AFHTTPRequestSerializer()
             manager.requestSerializer.setValue("OAuth " + accessToken, forHTTPHeaderField: "Authorization")
             
             manager.responseSerializer = AFJSONResponseSerializer() as AFHTTPResponseSerializer
             
-            let operation = manager.GET(url, parameters: nil,
+            let task = manager.GET(url,
+                parameters: nil,
+                progress: nil,
                 success:  {
-                    (operation: AFHTTPRequestOperation!, responseObject: AnyObject!) -> Void  in
+                    (task: NSURLSessionDataTask!, responseObject: AnyObject?) -> Void  in
                     
                     if let jsonResult = responseObject as? [Dictionary<String, String>] {
                         let categories = FeedlyCategory.fromJson(jsonResult)
@@ -31,9 +33,10 @@ class FeedlyCategoriesRequests {
                     }
                 },
                 failure: {
-                    (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+                    (task: NSURLSessionDataTask?, error: NSError!) -> Void in
                     failure(error)
             })
-            return operation
+            
+            return task
     }
 }

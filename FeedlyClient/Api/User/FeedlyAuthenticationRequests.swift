@@ -43,7 +43,7 @@ class FeedlyAuthenticationRequests {
     }
     
     class func beginGetAccessToken(authenticationCode: String, success: (FeedlyUserAccessTokenInfo) -> Void, failure: (NSError) -> Void)
-        -> AFHTTPRequestOperation {
+        -> NSURLSessionDataTask? {
             
             let url = String(format: Constants.apiURL + "/v3/auth/token")
             
@@ -69,13 +69,15 @@ class FeedlyAuthenticationRequests {
                 FeedlyAuthParameters.grantType    : "authorization_code"
             ]
             
-            let manager = AFHTTPRequestOperationManager()
+            let manager = AFHTTPSessionManager()
             manager.requestSerializer = AFJSONRequestSerializer() as AFHTTPRequestSerializer
             manager.responseSerializer = AFJSONResponseSerializer() as AFHTTPResponseSerializer
             
-            let operation = manager.POST(url, parameters: parameters,
-                success:  {
-                    (operation: AFHTTPRequestOperation!, responseObject: AnyObject!) -> Void in
+            let task = manager.POST(url,
+                parameters: parameters,
+                progress: nil,
+                success: {
+                    (task: NSURLSessionDataTask!, responseObject: AnyObject?) -> Void in
                     
                     if let jsonResult = responseObject as? Dictionary<String, AnyObject> {
                         let userToken = FeedlyUserAccessTokenInfo(json: jsonResult)
@@ -89,14 +91,14 @@ class FeedlyAuthenticationRequests {
                     }
                 },
                 failure: {
-                    (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+                    (task: NSURLSessionDataTask?, error: NSError!) -> Void in
                     failure(error)
             })
-            return operation
+            return task
     }
     
     class func beginGetRefreshToken(refreshToken: String, success: (FeedlyRefreshAccessToken) -> Void, failure: (NSError) -> Void)
-        -> AFHTTPRequestOperation {
+        -> NSURLSessionDataTask? {
             
             let url = String(format: Constants.apiURL + "/v3/auth/token")
             
@@ -107,13 +109,15 @@ class FeedlyAuthenticationRequests {
                 FeedlyAuthParameters.grantType    : "refresh_token"
             ]
             
-            let manager = AFHTTPRequestOperationManager()
+            let manager = AFHTTPSessionManager()
             manager.requestSerializer = AFJSONRequestSerializer() as AFHTTPRequestSerializer
             manager.responseSerializer = AFJSONResponseSerializer() as AFHTTPResponseSerializer
             
-            let operation = manager.POST(url, parameters: parameters,
+            let task = manager.POST(url,
+                parameters: parameters,
+                progress: nil,
                 success: {
-                    (operation: AFHTTPRequestOperation!, responseObject: AnyObject!) -> Void in
+                    (task: NSURLSessionDataTask!, responseObject: AnyObject?) -> Void in
                     
                     if let jsonResult = responseObject as? Dictionary<String, String> {
                         _ = FeedlyRefreshAccessToken(json: jsonResult)
@@ -125,15 +129,15 @@ class FeedlyAuthenticationRequests {
                     }
                 },
                 failure: {
-                    (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+                    (task: NSURLSessionDataTask?, error: NSError!) -> Void in
                     failure(error)
             })
             
-            return operation
+            return task
     }
     
     class func beginRevokeRefreshToken(refreshToken: String, success: () -> Void, failure: (NSError) -> Void)
-        -> AFHTTPRequestOperation {
+        -> NSURLSessionDataTask? {
             
             let url = String(format: Constants.apiURL + "/v3/auth/token")
             
@@ -144,21 +148,23 @@ class FeedlyAuthenticationRequests {
                 FeedlyAuthParameters.grantType    : "revoke_token"
             ]
             
-            let manager = AFHTTPRequestOperationManager()
+            let manager = AFHTTPSessionManager()
             manager.requestSerializer = AFJSONRequestSerializer() as AFHTTPRequestSerializer
             manager.responseSerializer = AFJSONResponseSerializer() as AFHTTPResponseSerializer
             
-            let operation = manager.POST(url, parameters: parameters,
+            let task = manager.POST(url,
+                parameters: parameters,
+                progress: nil,
                 success: {
-                    (operation: AFHTTPRequestOperation!, responseObject: AnyObject!) -> Void  in
+                    (task: NSURLSessionDataTask!, responseObject: AnyObject?) -> Void  in
                     success()
                 },
                 failure: {
-                    (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+                    (task: NSURLSessionDataTask?, error: NSError!) -> Void in
                     failure(error)
             })
             
-            return operation
+            return task
     }
 }
 

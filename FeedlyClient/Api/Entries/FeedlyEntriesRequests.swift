@@ -4,13 +4,14 @@ import Foundation
 class FeedlyEntriesRequests {
     
     class func beginGetEntry(entryId: String, accessToken: String?, success: (FeedlyEntry) -> Void, failure: (NSError) -> Void)
-        -> AFHTTPRequestOperation {
+        -> NSURLSessionDataTask? {
+            
             let encodedEntryId = entryId.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet())
             let url = Constants.apiURL + "/v3/entries/" + encodedEntryId!
             
             // GET /v3/entries/:entryId
             
-            let manager = AFHTTPRequestOperationManager()
+            let manager = AFHTTPSessionManager()
             manager.requestSerializer = AFHTTPRequestSerializer()
             
             if let accessToken = accessToken {
@@ -19,9 +20,11 @@ class FeedlyEntriesRequests {
             
             manager.responseSerializer = AFJSONResponseSerializer() as AFHTTPResponseSerializer
             
-            let operation = manager.GET(url, parameters: nil,
-                success:  {
-                    (operation: AFHTTPRequestOperation!, responseObject: AnyObject!) -> Void in
+            let task = manager.GET(url,
+                parameters: nil,
+                progress: nil,
+                success: {
+                    (task: NSURLSessionDataTask!, responseObject: AnyObject?) -> Void in
                     
                     if let jsonResult = responseObject as? [Dictionary<String, AnyObject>] {
                         if jsonResult.count == 1 {
@@ -39,19 +42,20 @@ class FeedlyEntriesRequests {
                     }
                 },
                 failure: {
-                    (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+                    (task: NSURLSessionDataTask?, error: NSError!) -> Void in
                     failure(error)
             })
-            return operation
+            
+            return task
     }
     
     class func beginGetEntries(entries: [String], accessToken: String?, success: (Dictionary<String, FeedlyEntry>) -> Void, failure: (NSError) -> Void)
-        -> AFHTTPRequestOperation {
+        -> NSURLSessionDataTask? {
             
             let url = String(format: Constants.apiURL + "/v3/entries/.mget")
             // POST /v3/entries/.mget
             
-            let manager = AFHTTPRequestOperationManager()
+            let manager = AFHTTPSessionManager()
             manager.requestSerializer = AFJSONRequestSerializer() as AFHTTPRequestSerializer
             
             if let accessToken = accessToken {
@@ -60,10 +64,11 @@ class FeedlyEntriesRequests {
             
             manager.responseSerializer = AFJSONResponseSerializer() as AFHTTPResponseSerializer
             
-            let operation = manager.POST(url,
+            let task = manager.POST(url,
                 parameters: entries,
+                progress: nil,
                 success: {
-                    (operation: AFHTTPRequestOperation!, responseObject: AnyObject!) -> Void in
+                    (task: NSURLSessionDataTask!, responseObject: AnyObject?) -> Void in
                     
                     if let jsonResult = responseObject as? [Dictionary<String, AnyObject>] {
                         
@@ -80,10 +85,10 @@ class FeedlyEntriesRequests {
                     }
                 },
                 failure: {
-                    (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
+                    (task: NSURLSessionDataTask?, error: NSError!) -> Void in
                     failure(error)
             })
             
-            return operation
+            return task
     }
 }

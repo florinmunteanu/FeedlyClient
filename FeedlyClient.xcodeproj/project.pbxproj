@@ -64,7 +64,6 @@
 		4ECDA82F19B3B3760025E2B8 /* FeedlyFeedsSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ECDA82E19B3B3760025E2B8 /* FeedlyFeedsSearch.swift */; };
 		4ED18CEC197EE4B900EA7522 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED18CEB197EE4B900EA7522 /* Constants.swift */; };
 		4ED6221219B97A28001CFA68 /* UniversalStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4ED6221119B97A28001CFA68 /* UniversalStoryboard.storyboard */; };
-		4EDD1C0B1975A214004C346D /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EDD1C0A1975A214004C346D /* Storyboard.storyboard */; };
 		4EEEAD6019FB891600956C56 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EEEAD5F19FB891500956C56 /* WebViewController.swift */; };
 		4EEEAD6219FBD60E00956C56 /* EntriesPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EEEAD6119FBD60E00956C56 /* EntriesPageViewController.swift */; };
 		A875EA6EC1994DBCB7A401F5 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DCF2C68A0C64F758B3366A1 /* libPods.a */; };
@@ -144,7 +143,6 @@
 		4ECDA82E19B3B3760025E2B8 /* FeedlyFeedsSearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedlyFeedsSearch.swift; path = Api/Search/FeedlyFeedsSearch.swift; sourceTree = "<group>"; };
 		4ED18CEB197EE4B900EA7522 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4ED6221119B97A28001CFA68 /* UniversalStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UniversalStoryboard.storyboard; sourceTree = "<group>"; };
-		4EDD1C0A1975A214004C346D /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		4EDD1C0E1975C530004C346D /* bridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bridge.h; sourceTree = "<group>"; };
 		4EEEAD5F19FB891500956C56 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebViewController.swift; path = Views/WebViewController.swift; sourceTree = "<group>"; };
 		4EEEAD6119FBD60E00956C56 /* EntriesPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EntriesPageViewController.swift; path = Views/EntriesPageViewController.swift; sourceTree = "<group>"; };
@@ -298,7 +296,6 @@
 				4E6ADAF61975A05000D3C72C /* AppDelegate.swift */,
 				4E6ADAFB1975A05000D3C72C /* Images.xcassets */,
 				4E6ADAF41975A05000D3C72C /* Supporting Files */,
-				4EDD1C0A1975A214004C346D /* Storyboard.storyboard */,
 				4ED6221119B97A28001CFA68 /* UniversalStoryboard.storyboard */,
 				4EA3FEDA199A9B8800B84C0F /* FeedlyClientError.swift */,
 				4EDD1C0E1975C530004C346D /* bridge.h */,
@@ -535,7 +532,6 @@
 				4E144C151C11E65300148DED /* Launch Screen.storyboard in Resources */,
 				4E6F352C1AC8216400D15FCC /* MyCollectionViewCell.xib in Resources */,
 				4E6ADAFC1975A05000D3C72C /* Images.xcassets in Resources */,
-				4EDD1C0B1975A214004C346D /* Storyboard.storyboard in Resources */,
 				4E3FAE731986EBAD007DF98D /* LoginViewController.xib in Resources */,
 				4ED6221219B97A28001CFA68 /* UniversalStoryboard.storyboard in Resources */,
 			);

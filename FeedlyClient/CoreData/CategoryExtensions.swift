@@ -26,4 +26,15 @@ extension Category {
             return matches.last as? Category;
         }
     }
+    
+    class func deleteAllCategories(inManagedObjectContext context: NSManagedObjectContext) throws {
+        let fetchRequest = NSFetchRequest(entityName: "Category")
+        let allCategories = try context.executeFetchRequest(fetchRequest)
+        
+        for category in allCategories {
+            context.deleteObject(category as! NSManagedObject)
+        }
+        
+        try context.save()
+    }
 }

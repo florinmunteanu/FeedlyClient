@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6252" systemVersion="14B25" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15C50" minimumToolsVersion="Xcode 4.3">
     <entity name="Category" representedClassName="Category" syncable="YES">
         <attribute name="id" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="label" attributeType="String" syncable="YES"/>
-        <relationship name="entries" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Entry" inverseName="categories" inverseEntity="Entry" syncable="YES"/>
+        <relationship name="entries" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Entry" inverseName="categories" inverseEntity="Entry" syncable="YES"/>
         <relationship name="subscriptions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Subscription" inverseName="categories" inverseEntity="Subscription" syncable="YES"/>
     </entity>
     <entity name="Entry" representedClassName="Entry" syncable="YES">
@@ -16,9 +16,9 @@
         <attribute name="unread" attributeType="Boolean" syncable="YES"/>
         <attribute name="url" attributeType="String" syncable="YES"/>
         <relationship name="categories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Category" inverseName="entries" inverseEntity="Category" syncable="YES"/>
-        <relationship name="content" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EntryContent" syncable="YES"/>
-        <relationship name="summary" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EntryContent" inverseName="entry" inverseEntity="EntryContent" syncable="YES"/>
-        <relationship name="visual" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="EntryVisual" inverseName="entry" inverseEntity="EntryVisual" syncable="YES"/>
+        <relationship name="content" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="EntryContent" syncable="YES"/>
+        <relationship name="summary" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="EntryContent" inverseName="entry" inverseEntity="EntryContent" syncable="YES"/>
+        <relationship name="visual" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="EntryVisual" inverseName="entry" inverseEntity="EntryVisual" syncable="YES"/>
     </entity>
     <entity name="EntryContent" representedClassName="EntryContent" syncable="YES">
         <attribute name="content" attributeType="String" syncable="YES"/>

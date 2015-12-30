@@ -26,7 +26,7 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         if section == 0 {
             return 1
         } else if section == 1 {
-            return 0
+            return 1
         } else {
             return 0
         }
@@ -36,6 +36,8 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         
         if indexPath.section == 0 && indexPath.row == 0 {
             return self.getUserCell(tableView, forIndexPath: indexPath)
+        } else if indexPath.section == 1 && indexPath.row == 0 {
+            return self.getDeleteDataCell(tableView, forIndexPath: indexPath)
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier("SettingCell", forIndexPath: indexPath)
             
@@ -79,6 +81,8 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0 {
             return "User"
+        } else if section == 1 {
+            return "Data"
         }
         return ""
     }
@@ -146,6 +150,29 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         logoutButton.addTarget(self, action: "logout:", forControlEvents: UIControlEvents.TouchUpInside)
     }
     
+    func getDeleteDataCell(tableView: UITableView, forIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("DeleteData", forIndexPath: indexPath)
+        self.setDeleteDataCell(cell)
+        
+        return cell
+    }
+    
+    func setDeleteDataCell(cell: UITableViewCell) {
+        let deleteButton = UIButton()
+        
+        let topPadding: CGFloat = 5
+        let leftPadding: CGFloat = 25
+        deleteButton.frame = CGRectMake(leftPadding, topPadding, cell.bounds.size.width - 2 * leftPadding, cell.bounds.size.height - 2 * topPadding)
+        
+        deleteButton.backgroundColor = UIColor.redColor()
+        
+        deleteButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        deleteButton.setTitle("Delete data", forState: UIControlState.Normal)
+        deleteButton.addTarget(self, action: "deleteData:", forControlEvents: UIControlEvents.TouchUpInside)
+        cell.contentView.addSubview(deleteButton)
+        cell.accessoryView = nil
+    }
+    
     // MARK: Login / Logout
     func login(loginButton: UIButton) {
         let loginController = LoginViewController()
@@ -178,6 +205,15 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
                     (error: NSError) -> Void in
                     self.displayLogoutError(error)
             })
+        }
+    }
+    
+    func deleteData(deleteDataButton: UIButton) {
+        do {
+            try Category.deleteAllCategories(inManagedObjectContext: managedObjectContext!)
+            try Subscription.deleteAllSubscriptions(inManagedObjectContext: managedObjectContext!)
+        } catch {
+            Alerts.displayError("An error occurred while deleting the data.", onUIViewController: self)
         }
     }
     

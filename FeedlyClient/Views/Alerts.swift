@@ -11,4 +11,8 @@ class Alerts {
         
         viewController.presentViewController(alert, animated: true, completion: nil)
     }
+    
+    internal class func success(message: String, onUIViewController viewController: UIViewController) {
+        TSMessage.showNotificationInViewController(viewController, title: "Success", subtitle: message, type: TSMessageNotificationType.Success, duration: 3.0, canBeDismissedByUser: true)
+    }
 }

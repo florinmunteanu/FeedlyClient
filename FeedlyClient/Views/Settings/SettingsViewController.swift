@@ -215,6 +215,8 @@ class SettingsViewController: UIViewController, UITableViewDataSource, UITableVi
         } catch {
             Alerts.displayError("An error occurred while deleting the data.", onUIViewController: self)
         }
+        
+        Alerts.success("Data was deleted.", onUIViewController: self)
     }
     
     private func displayLogoutError(error: NSError) {

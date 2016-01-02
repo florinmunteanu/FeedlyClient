@@ -252,11 +252,12 @@ class CategoryEntriesTableViewController: UITableViewController,  NSFetchedResul
         return true
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    //override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         //var cell = self.tableView(self.tableView, cellForRowAtIndexPath: indexPath)
-        //var entry: AnyObject! = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Entry
+        //let entry: AnyObject! = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Entry
+        
         //self.performSegueWithIdentifier("Entry", sender: entry)
-    }
+    //}
     
     // MARK: UITableViewDelegate
     /*

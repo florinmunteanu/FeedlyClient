@@ -3,6 +3,10 @@ import UIKit
 
 class EntriesPageViewController: UIPageViewController, UIPageViewControllerDataSource {
     
+    enum EntriesError: ErrorType {
+        case NoEntries
+    }
+    
     private var pageViewController: UIPageViewController?
     private var currentIndex: Int = 0
     
@@ -15,14 +19,16 @@ class EntriesPageViewController: UIPageViewController, UIPageViewControllerDataS
         self.pageViewController = UIPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
         self.pageViewController!.dataSource = self
         
-        let startingViewController: EntryPageContentViewController = self.viewControllerAtIndex(0)!
-        let viewControllers: [UIViewController] = [startingViewController]
-        self.pageViewController!.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: nil)
-        self.pageViewController!.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)
-        
-        self.addChildViewController(self.pageViewController!)
-        self.view.addSubview(self.pageViewController!.view)
-        self.pageViewController!.didMoveToParentViewController(self)
+        if let startingViewController: EntryPageContentViewController = self.viewControllerAtIndex(0) {
+            
+            let viewControllers: [UIViewController] = [startingViewController]
+            self.pageViewController!.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: nil)
+            self.pageViewController!.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)
+            
+            self.addChildViewController(self.pageViewController!)
+            self.view.addSubview(self.pageViewController!.view)
+            self.pageViewController!.didMoveToParentViewController(self)
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -39,7 +45,7 @@ class EntriesPageViewController: UIPageViewController, UIPageViewControllerDataS
         }
         
         index--
-
+        
         return self.viewControllerAtIndex(index)
     }
     
@@ -59,11 +65,12 @@ class EntriesPageViewController: UIPageViewController, UIPageViewControllerDataS
         return self.viewControllerAtIndex(index)
     }
     
-    func viewControllerAtIndex(index: Int) -> EntryPageContentViewController? {
+    func viewControllerAtIndex(index: Int)-> EntryPageContentViewController? {
         if self.entries == nil || index >= self.entries!.count {
             return nil
+            //throw EntriesError.NoEntries
         }
-
+        
         // Create a new view controller and pass suitable data.
         let pageContentViewController = self.storyboard!.instantiateViewControllerWithIdentifier("EntryPageContentViewController") as! EntryPageContentViewController
         

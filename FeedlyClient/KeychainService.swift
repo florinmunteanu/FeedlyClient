@@ -29,6 +29,21 @@ class KeychainService : NSObject {
         return try KeychainService.load(serviceIdentifier)
     }
     
+    class func loadDataSafe() -> KeychainData {
+        var keychainData: KeychainData?
+        
+        do {
+            keychainData = try loadData()
+        } catch {
+        }
+        
+        if keychainData == nil {
+            keychainData = KeychainData()
+        }
+        
+        return keychainData!
+    }
+    
     class func clearData() throws {
         let emptyData = KeychainData()
         try KeychainService.saveData(emptyData)
@@ -70,29 +85,6 @@ class KeychainService : NSObject {
             return contentsOfKeychain
         }
         
-        //let dataTypeRef: UnsafeMutablePointer<AnyObject?>
-        
-        // Search for the keychain items
-        //let status: OSStatus = SecItemCopyMatching(keychainQuery, dataTypeRef)
-        /*
-        if status == errSecSuccess {
-        
-        dataTypeRef as? NSData
-        let opaque = Unmanaged.toOpaque(dataTypeRef) //dataTypeRef.toOpaque()
-        var contentsOfKeychain: KeychainData?
-        
-        if let op = opaque {
-        let retrievedData = Unmanaged<NSData>.fromOpaque(op).takeUnretainedValue()
-        
-        // Convert the data retrieved from the keychain into an instance of KeychainData
-        
-        contentsOfKeychain = try KeychainData.fromJson(retrievedData, error: nil)
-        } else {
-        print("Nothing was retrieved from the keychain. Status code \(status)")
-        }
-        return contentsOfKeychain
-        }
-        */
         return nil
     }
 }

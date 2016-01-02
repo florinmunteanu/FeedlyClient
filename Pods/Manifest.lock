@@ -15,16 +15,19 @@ PODS:
   - AFNetworking/UIKit (3.0.4):
     - AFNetworking/NSURLSession
   - HexColors (2.2.1)
+  - SVProgressHUD (1.1.3)
   - TSMessages (0.9.12):
     - HexColors (~> 2.2.0)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.0)
+  - SVProgressHUD
   - TSMessages
 
 SPEC CHECKSUMS:
   AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
   HexColors: abfd172e329dab59888614ccba6f216cec59289d
+  SVProgressHUD: 748080e4f36e603f6c02aec292664239df5279c1
   TSMessages: c8cc7b80f2a833af533872cd02010cac061532cc
 
 COCOAPODS: 0.39.0

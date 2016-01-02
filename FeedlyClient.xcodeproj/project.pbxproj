@@ -66,6 +66,7 @@
 		4ED6221219B97A28001CFA68 /* UniversalStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4ED6221119B97A28001CFA68 /* UniversalStoryboard.storyboard */; };
 		4EEEAD6019FB891600956C56 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EEEAD5F19FB891500956C56 /* WebViewController.swift */; };
 		4EEEAD6219FBD60E00956C56 /* EntriesPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EEEAD6119FBD60E00956C56 /* EntriesPageViewController.swift */; };
+		4EFA2F1F1C380CDF00BF3A09 /* ProgressHud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EFA2F1E1C380CDF00BF3A09 /* ProgressHud.swift */; };
 		A875EA6EC1994DBCB7A401F5 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DCF2C68A0C64F758B3366A1 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -146,6 +147,7 @@
 		4EDD1C0E1975C530004C346D /* bridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bridge.h; sourceTree = "<group>"; };
 		4EEEAD5F19FB891500956C56 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebViewController.swift; path = Views/WebViewController.swift; sourceTree = "<group>"; };
 		4EEEAD6119FBD60E00956C56 /* EntriesPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EntriesPageViewController.swift; path = Views/EntriesPageViewController.swift; sourceTree = "<group>"; };
+		4EFA2F1E1C380CDF00BF3A09 /* ProgressHud.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProgressHud.swift; path = Views/ProgressHud.swift; sourceTree = "<group>"; };
 		BE406C8FD8ED71A92753A363 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -394,6 +396,7 @@
 				4E456D0419FCCB9D00A8085A /* Entries */,
 				4E254AB719E1CFBB00B7938C /* Settings */,
 				4EC7A87319E9271C0072F3F0 /* Alerts.swift */,
+				4EFA2F1E1C380CDF00BF3A09 /* ProgressHud.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -625,6 +628,7 @@
 				4E3F0CA819BC8A4F00E66E07 /* CategoriesViewController.swift in Sources */,
 				4E476F9D19B6421D0010588D /* FeedlyClient.xcdatamodeld in Sources */,
 				4E456D0319FCCB9200A8085A /* SettingsViewController.swift in Sources */,
+				4EFA2F1F1C380CDF00BF3A09 /* ProgressHud.swift in Sources */,
 				4E6F352B1AC8216400D15FCC /* MyCollectionViewCell.swift in Sources */,
 				4E36590119D6C2A8001BEE78 /* KeychainData.swift in Sources */,
 				4ECDA80119B1A95E0025E2B8 /* FeedlyUserAccessTokenInfo.swift in Sources */,

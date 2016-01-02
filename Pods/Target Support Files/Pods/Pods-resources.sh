@@ -58,6 +58,7 @@ install_resource()
   esac
 }
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_resource "SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle"
   install_resource "TSMessages/Pod/Assets/NotificationBackgroundError.png"
   install_resource "TSMessages/Pod/Assets/NotificationBackgroundError@2x.png"
   install_resource "TSMessages/Pod/Assets/NotificationBackgroundErrorIcon.png"
@@ -77,6 +78,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "TSMessages/Pod/Assets/TSMessagesDefaultDesign.json"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_resource "SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle"
   install_resource "TSMessages/Pod/Assets/NotificationBackgroundError.png"
   install_resource "TSMessages/Pod/Assets/NotificationBackgroundError@2x.png"
   install_resource "TSMessages/Pod/Assets/NotificationBackgroundErrorIcon.png"

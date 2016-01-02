@@ -3,7 +3,11 @@ import Foundation
 
 class FeedlyEntriesRequests {
     
-    class func beginGetEntry(entryId: String, accessToken: String?, success: (FeedlyEntry) -> Void, failure: (NSError) -> Void)
+    class func beginGetEntry(entryId: String,
+        accessToken: String?,
+        progress: ((NSProgress) -> Void)?,
+        success: (FeedlyEntry) -> Void,
+        failure: (NSError) -> Void)
         -> NSURLSessionDataTask? {
             
             let encodedEntryId = entryId.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet())
@@ -22,7 +26,12 @@ class FeedlyEntriesRequests {
             
             let task = manager.GET(url,
                 parameters: nil,
-                progress: nil,
+                progress: {
+                    (downloadProgress: NSProgress) -> Void in
+                    if progress != nil {
+                        progress!(downloadProgress)
+                    }
+                },
                 success: {
                     (task: NSURLSessionDataTask!, responseObject: AnyObject?) -> Void in
                     

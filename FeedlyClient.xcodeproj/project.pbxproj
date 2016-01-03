@@ -67,6 +67,7 @@
 		4EEEAD6019FB891600956C56 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EEEAD5F19FB891500956C56 /* WebViewController.swift */; };
 		4EEEAD6219FBD60E00956C56 /* EntriesPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EEEAD6119FBD60E00956C56 /* EntriesPageViewController.swift */; };
 		4EFA2F1F1C380CDF00BF3A09 /* ProgressHud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EFA2F1E1C380CDF00BF3A09 /* ProgressHud.swift */; };
+		4EFA2F211C381B0200BF3A09 /* CssRules.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EFA2F201C381B0200BF3A09 /* CssRules.swift */; };
 		A875EA6EC1994DBCB7A401F5 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DCF2C68A0C64F758B3366A1 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -148,6 +149,7 @@
 		4EEEAD5F19FB891500956C56 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebViewController.swift; path = Views/WebViewController.swift; sourceTree = "<group>"; };
 		4EEEAD6119FBD60E00956C56 /* EntriesPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EntriesPageViewController.swift; path = Views/EntriesPageViewController.swift; sourceTree = "<group>"; };
 		4EFA2F1E1C380CDF00BF3A09 /* ProgressHud.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProgressHud.swift; path = Views/ProgressHud.swift; sourceTree = "<group>"; };
+		4EFA2F201C381B0200BF3A09 /* CssRules.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CssRules.swift; sourceTree = "<group>"; };
 		BE406C8FD8ED71A92753A363 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -407,6 +409,7 @@
 				4E456CFD19FBE36A00A8085A /* EntryPageContentViewController.swift */,
 				4EEEAD6119FBD60E00956C56 /* EntriesPageViewController.swift */,
 				4EEEAD5F19FB891500956C56 /* WebViewController.swift */,
+				4EFA2F201C381B0200BF3A09 /* CssRules.swift */,
 			);
 			name = PageView;
 			sourceTree = "<group>";
@@ -621,6 +624,7 @@
 				4E3F0CB219BCD25E00E66E07 /* CategoryExtensions.swift in Sources */,
 				4ECDA80E19B1A9D40025E2B8 /* FeedlyEntryOrigin.swift in Sources */,
 				4ECDA81C19B1ABDF0025E2B8 /* FeedlyCategoriesRequests.swift in Sources */,
+				4EFA2F211C381B0200BF3A09 /* CssRules.swift in Sources */,
 				4ECDA80519B1A95E0025E2B8 /* FeedlyAuthParameters.swift in Sources */,
 				4ECDA80419B1A95E0025E2B8 /* FeedlyAuthenticationRequests.swift in Sources */,
 				4ECDA80219B1A95E0025E2B8 /* FeedlyRefreshAccessToken.swift in Sources */,

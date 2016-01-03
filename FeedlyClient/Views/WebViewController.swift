@@ -20,11 +20,12 @@ class WebViewController: UIViewController {
         self.webView = WKWebView()
         self.view = self.webView!
         
-        self.webView!.addObserver(self, forKeyPath: "estimatedProgress", options: NSKeyValueObservingOptions.New, context: nil)
+        self.addObservers();
     }
     
     deinit {
-        self.webView!.removeObserver(self, forKeyPath: "estimatedProgress")
+        ProgressHud.endProgress()
+        self.removeObservers();
     }
     
     override func didReceiveMemoryWarning() {
@@ -56,9 +57,9 @@ class WebViewController: UIViewController {
     
     private func presentEntry(feedlyEntry: FeedlyEntry) {
         if isContentEmpty(feedlyEntry) {
-            self.webView!.loadRequest(NSURLRequest(URL: NSURL(string: feedlyEntry.origin.htmlUrl)!))
+            self.loadOriginalUrl(feedlyEntry)
         } else{
-            self.webView!.loadHTMLString(feedlyEntry.content!.content, baseURL: nil)
+            self.loadEntryContent(feedlyEntry)
         }
     }
     
@@ -67,6 +68,34 @@ class WebViewController: UIViewController {
             return feedContent.content.isEmpty
         }
         return true
+    }
+    
+    private func loadOriginalUrl(feedlyEntry: FeedlyEntry) {
+        self.clearScripts()
+        self.webView!.loadRequest(NSURLRequest(URL: NSURL(string: feedlyEntry.origin.htmlUrl)!))
+    }
+    
+    private func loadEntryContent(feedlyEntry: FeedlyEntry) {
+        self.addScripts()
+        self.webView!.loadHTMLString(feedlyEntry.content!.content, baseURL: nil)
+    }
+    
+    private func addScripts() {
+        let cssRule = CssRules.createFontScript("Serif, Arial", fontSizeInPixels: "50")
+        let script = WKUserScript(source: cssRule, injectionTime: .AtDocumentStart, forMainFrameOnly: true)
+        self.webView!.configuration.userContentController.addUserScript(script)
+    }
+    
+    private func clearScripts() {
+        self.webView!.configuration.userContentController.removeAllUserScripts()
+    }
+    
+    private func addObservers() {
+        self.webView!.addObserver(self, forKeyPath: "estimatedProgress", options: NSKeyValueObservingOptions.New, context: nil)
+    }
+    
+    private func removeObservers() {
+        self.webView!.removeObserver(self, forKeyPath: "estimatedProgress")
     }
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {

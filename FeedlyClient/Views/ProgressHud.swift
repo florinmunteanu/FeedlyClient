@@ -12,6 +12,8 @@ class ProgressHud {
     }
     
     internal class func endProgress() {
-        SVProgressHUD.dismiss()
+        if SVProgressHUD.isVisible() {
+            SVProgressHUD.dismiss()
+        }
     }
 }

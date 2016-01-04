@@ -2,7 +2,7 @@
 import Foundation
 import CoreData
 
-class CategoryEntriesTableViewController: UITableViewController,  NSFetchedResultsControllerDelegate {
+class CategoryEntriesTableViewController: UITableViewController,  NSFetchedResultsControllerDelegate, DZNEmptyDataSetSource, DZNEmptyDataSetDelegate {
     
     private let sectionInsets = UIEdgeInsets(top: 5.0, left: 5.0, bottom: 5.0, right: 5.0)
     
@@ -27,11 +27,20 @@ class CategoryEntriesTableViewController: UITableViewController,  NSFetchedResul
         
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 75
+        
+        self.tableView.emptyDataSetSource = self
+        self.tableView.emptyDataSetDelegate = self
+        
+        self.tableView.tableFooterView = UIView()
     }
     
     func refresh(refreshControl: UIRefreshControl) {
         refreshControl.attributedTitle = NSAttributedString(string: "Refreshing...")
         
+        self.refresh()
+    }
+    
+    func refresh() {
         if self.categoryId != nil {
             self.beginLoadStream(categoryId!)
         }
@@ -252,22 +261,7 @@ class CategoryEntriesTableViewController: UITableViewController,  NSFetchedResul
         return true
     }
     
-    //override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        //var cell = self.tableView(self.tableView, cellForRowAtIndexPath: indexPath)
-        //let entry: AnyObject! = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Entry
-        
-        //self.performSegueWithIdentifier("Entry", sender: entry)
-    //}
-    
-    // MARK: UITableViewDelegate
-    /*
-    override func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
-    
-    }
-    */
-    
     // MARK: Configure cell
-    
     
     func configureCell(cell: EntryTableViewCell, atIndexPath indexPath: NSIndexPath) {
         let entry = self.fetchedResultsController.objectAtIndexPath(indexPath) as? Entry
@@ -282,5 +276,40 @@ class CategoryEntriesTableViewController: UITableViewController,  NSFetchedResul
             cell.thumbnail = nil
         }
         //cell.layoutIfNeeded()
+    }
+    
+    // MARK DZNEmptyDataSet
+    
+    func backgroundColorForEmptyDataSet(scrollView: UIScrollView!) -> UIColor! {
+        return UIColor.whiteColor()
+    }
+    
+    func titleForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        let title = NSAttributedString(string: "Nothing to show")
+        return title
+    }
+    
+    func descriptionForEmptyDataSet(scrollView: UIScrollView!) -> NSAttributedString! {
+        let description = NSAttributedString(string: "No feeds here. Try to refresh.")
+        
+        return description
+    }
+    
+    func buttonTitleForEmptyDataSet(scrollView: UIScrollView!, forState state: UIControlState) -> NSAttributedString! {
+        return NSAttributedString(string: "Refresh")
+    }
+    
+    // MARK DZNEmptyDataSet Delegate
+    
+    func emptyDataSetShouldAllowScroll(scrollView: UIScrollView!) -> Bool {
+        return true
+    }
+    
+    func emptyDataSetShouldAllowTouch(scrollView: UIScrollView!) -> Bool {
+        return true
+    }
+    
+    func emptyDataSetDidTapButton(scrollView: UIScrollView!) {
+        self.refresh()
     }
 }

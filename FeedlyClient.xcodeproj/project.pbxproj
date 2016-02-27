@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4E144C151C11E65300148DED /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E144C141C11E65300148DED /* Launch Screen.storyboard */; };
+		4E1504AA1C7D0AF4003AD878 /* FeedlyMarkersRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1504A91C7D0AF4003AD878 /* FeedlyMarkersRequests.swift */; };
+		4E1504AC1C81BCA0003AD878 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1504AB1C81BCA0003AD878 /* Errors.swift */; };
 		4E3162AD1A04FE6000E9E477 /* EntrySummaryParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3162AC1A04FE6000E9E477 /* EntrySummaryParser.swift */; };
 		4E36590119D6C2A8001BEE78 /* KeychainData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E36590019D6C2A8001BEE78 /* KeychainData.swift */; };
 		4E3F0CA819BC8A4F00E66E07 /* CategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3F0CA719BC8A4F00E66E07 /* CategoriesViewController.swift */; };
@@ -25,8 +27,6 @@
 		4E6ADAF71975A05000D3C72C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6ADAF61975A05000D3C72C /* AppDelegate.swift */; };
 		4E6ADAFC1975A05000D3C72C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E6ADAFB1975A05000D3C72C /* Images.xcassets */; };
 		4E6ADB081975A05100D3C72C /* FeedlyClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6ADB071975A05100D3C72C /* FeedlyClientTests.swift */; };
-		4E6F352B1AC8216400D15FCC /* MyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6F35291AC8216400D15FCC /* MyCollectionViewCell.swift */; };
-		4E6F352C1AC8216400D15FCC /* MyCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E6F352A1AC8216400D15FCC /* MyCollectionViewCell.xib */; };
 		4E70E9D71A06A9D100ED5688 /* ImagesDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E70E9D61A06A9D100ED5688 /* ImagesDownloader.swift */; };
 		4E70E9D91A06C27F00ED5688 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E70E9D81A06C27F00ED5688 /* ImageIO.framework */; };
 		4E757E7419A1C0AC00CEF5DD /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E757E7319A1C0AC00CEF5DD /* KeychainService.swift */; };
@@ -64,6 +64,7 @@
 		4ECDA82F19B3B3760025E2B8 /* FeedlyFeedsSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ECDA82E19B3B3760025E2B8 /* FeedlyFeedsSearch.swift */; };
 		4ED18CEC197EE4B900EA7522 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ED18CEB197EE4B900EA7522 /* Constants.swift */; };
 		4ED6221219B97A28001CFA68 /* UniversalStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4ED6221119B97A28001CFA68 /* UniversalStoryboard.storyboard */; };
+		4EEDE2F91C56D18D0007994F /* JsScripts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EEDE2F81C56D18D0007994F /* JsScripts.swift */; };
 		4EEEAD6019FB891600956C56 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EEEAD5F19FB891500956C56 /* WebViewController.swift */; };
 		4EEEAD6219FBD60E00956C56 /* EntriesPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EEEAD6119FBD60E00956C56 /* EntriesPageViewController.swift */; };
 		4EFA2F1F1C380CDF00BF3A09 /* ProgressHud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EFA2F1E1C380CDF00BF3A09 /* ProgressHud.swift */; };
@@ -85,6 +86,8 @@
 		2C5764085B34C158AD12C95F /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		4DCF2C68A0C64F758B3366A1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E144C141C11E65300148DED /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		4E1504A91C7D0AF4003AD878 /* FeedlyMarkersRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedlyMarkersRequests.swift; sourceTree = "<group>"; };
+		4E1504AB1C81BCA0003AD878 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Errors.swift; path = CoreData/Errors.swift; sourceTree = "<group>"; };
 		4E3162AC1A04FE6000E9E477 /* EntrySummaryParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EntrySummaryParser.swift; path = Parser/EntrySummaryParser.swift; sourceTree = "<group>"; };
 		4E36590019D6C2A8001BEE78 /* KeychainData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeychainData.swift; path = Keychain/KeychainData.swift; sourceTree = "<group>"; };
 		4E3F0CA719BC8A4F00E66E07 /* CategoriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CategoriesViewController.swift; path = Views/CategoriesViewController.swift; sourceTree = "<group>"; };
@@ -106,8 +109,6 @@
 		4E6ADB011975A05100D3C72C /* FeedlyClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FeedlyClientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E6ADB061975A05100D3C72C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4E6ADB071975A05100D3C72C /* FeedlyClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedlyClientTests.swift; sourceTree = "<group>"; };
-		4E6F35291AC8216400D15FCC /* MyCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyCollectionViewCell.swift; path = Views/Entries/Cells/MyCollectionViewCell.swift; sourceTree = "<group>"; };
-		4E6F352A1AC8216400D15FCC /* MyCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MyCollectionViewCell.xib; path = Views/Entries/Cells/MyCollectionViewCell.xib; sourceTree = "<group>"; };
 		4E70E9D61A06A9D100ED5688 /* ImagesDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ImagesDownloader.swift; path = Downloader/ImagesDownloader.swift; sourceTree = "<group>"; };
 		4E70E9D81A06C27F00ED5688 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		4E757E7319A1C0AC00CEF5DD /* KeychainService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
@@ -146,6 +147,7 @@
 		4ED18CEB197EE4B900EA7522 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4ED6221119B97A28001CFA68 /* UniversalStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = UniversalStoryboard.storyboard; sourceTree = "<group>"; };
 		4EDD1C0E1975C530004C346D /* bridge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bridge.h; sourceTree = "<group>"; };
+		4EEDE2F81C56D18D0007994F /* JsScripts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JsScripts.swift; sourceTree = "<group>"; };
 		4EEEAD5F19FB891500956C56 /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WebViewController.swift; path = Views/WebViewController.swift; sourceTree = "<group>"; };
 		4EEEAD6119FBD60E00956C56 /* EntriesPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EntriesPageViewController.swift; path = Views/EntriesPageViewController.swift; sourceTree = "<group>"; };
 		4EFA2F1E1C380CDF00BF3A09 /* ProgressHud.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProgressHud.swift; path = Views/ProgressHud.swift; sourceTree = "<group>"; };
@@ -197,6 +199,14 @@
 				4ECDA7FF19B1A95E0025E2B8 /* FeedlyAuthParameters.swift */,
 			);
 			name = User;
+			sourceTree = "<group>";
+		};
+		4E1504A81C7D0A96003AD878 /* Markers */ = {
+			isa = PBXGroup;
+			children = (
+				4E1504A91C7D0AF4003AD878 /* FeedlyMarkersRequests.swift */,
+			);
+			name = Markers;
 			sourceTree = "<group>";
 		};
 		4E254AB719E1CFBB00B7938C /* Settings */ = {
@@ -261,8 +271,6 @@
 		4E456D0519FCCD2E00A8085A /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				4E6F35291AC8216400D15FCC /* MyCollectionViewCell.swift */,
-				4E6F352A1AC8216400D15FCC /* MyCollectionViewCell.xib */,
 				4E51994219FD4A1E0036166F /* EntryTableViewCell.swift */,
 			);
 			name = Cells;
@@ -379,6 +387,7 @@
 		4EDD1C0C1975A349004C346D /* Api */ = {
 			isa = PBXGroup;
 			children = (
+				4E1504A81C7D0A96003AD878 /* Markers */,
 				4E3FAE6F1986C137007DF98D /* Login */,
 				4ECDA81919B1AB9C0025E2B8 /* Categories */,
 				4E0FFD3519A8DBBC00B94672 /* User */,
@@ -410,6 +419,7 @@
 				4EEEAD6119FBD60E00956C56 /* EntriesPageViewController.swift */,
 				4EEEAD5F19FB891500956C56 /* WebViewController.swift */,
 				4EFA2F201C381B0200BF3A09 /* CssRules.swift */,
+				4EEDE2F81C56D18D0007994F /* JsScripts.swift */,
 			);
 			name = PageView;
 			sourceTree = "<group>";
@@ -426,6 +436,7 @@
 				4E3F0CAF19BCD24B00E66E07 /* SubscriptionExtensions.swift */,
 				4E3F0CB119BCD25E00E66E07 /* CategoryExtensions.swift */,
 				4EC7A88719E97C8C0072F3F0 /* EntryExtensions.swift */,
+				4E1504AB1C81BCA0003AD878 /* Errors.swift */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -536,7 +547,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E144C151C11E65300148DED /* Launch Screen.storyboard in Resources */,
-				4E6F352C1AC8216400D15FCC /* MyCollectionViewCell.xib in Resources */,
 				4E6ADAFC1975A05000D3C72C /* Images.xcassets in Resources */,
 				4E3FAE731986EBAD007DF98D /* LoginViewController.xib in Resources */,
 				4ED6221219B97A28001CFA68 /* UniversalStoryboard.storyboard in Resources */,
@@ -629,15 +639,16 @@
 				4ECDA80419B1A95E0025E2B8 /* FeedlyAuthenticationRequests.swift in Sources */,
 				4ECDA80219B1A95E0025E2B8 /* FeedlyRefreshAccessToken.swift in Sources */,
 				4ECDA82D19B3B2E80025E2B8 /* SearchOptions.swift in Sources */,
+				4E1504AC1C81BCA0003AD878 /* Errors.swift in Sources */,
 				4E3F0CA819BC8A4F00E66E07 /* CategoriesViewController.swift in Sources */,
 				4E476F9D19B6421D0010588D /* FeedlyClient.xcdatamodeld in Sources */,
 				4E456D0319FCCB9200A8085A /* SettingsViewController.swift in Sources */,
 				4EFA2F1F1C380CDF00BF3A09 /* ProgressHud.swift in Sources */,
-				4E6F352B1AC8216400D15FCC /* MyCollectionViewCell.swift in Sources */,
 				4E36590119D6C2A8001BEE78 /* KeychainData.swift in Sources */,
 				4ECDA80119B1A95E0025E2B8 /* FeedlyUserAccessTokenInfo.swift in Sources */,
 				4EEEAD6019FB891600956C56 /* WebViewController.swift in Sources */,
 				4EC7A87419E9271C0072F3F0 /* Alerts.swift in Sources */,
+				4E1504AA1C7D0AF4003AD878 /* FeedlyMarkersRequests.swift in Sources */,
 				4ECDA82219B1AC100025E2B8 /* FeedlySubcriptionsRequests.swift in Sources */,
 				4E3162AD1A04FE6000E9E477 /* EntrySummaryParser.swift in Sources */,
 				4EC7A88819E97C8C0072F3F0 /* EntryExtensions.swift in Sources */,
@@ -648,6 +659,7 @@
 				4ECDA80019B1A95E0025E2B8 /* FeedlyUserProfile.swift in Sources */,
 				4E757E7419A1C0AC00CEF5DD /* KeychainService.swift in Sources */,
 				4E456CFE19FBE36A00A8085A /* EntryPageContentViewController.swift in Sources */,
+				4EEDE2F91C56D18D0007994F /* JsScripts.swift in Sources */,
 				4ECDA81719B1AB5D0025E2B8 /* FeedlyStreamsRequests.swift in Sources */,
 				4ED18CEC197EE4B900EA7522 /* Constants.swift in Sources */,
 				4E51994319FD4A1E0036166F /* EntryTableViewCell.swift in Sources */,
@@ -713,7 +725,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				METAL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -751,7 +763,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				METAL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OBJC_BRIDGING_HEADER = FeedlyClient/bridge.h;
@@ -770,7 +782,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = FeedlyClient/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "ro.florindanmunteanu.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -790,7 +802,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = FeedlyClient/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "ro.florindanmunteanu.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -812,6 +824,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = FeedlyClientTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				METAL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "ro.florindanmunteanu.${PRODUCT_NAME:rfc1034identifier}";
@@ -829,6 +842,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = FeedlyClientTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				METAL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "ro.florindanmunteanu.${PRODUCT_NAME:rfc1034identifier}";

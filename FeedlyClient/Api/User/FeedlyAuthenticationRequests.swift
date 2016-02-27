@@ -119,8 +119,9 @@ class FeedlyAuthenticationRequests {
                 success: {
                     (task: NSURLSessionDataTask!, responseObject: AnyObject?) -> Void in
                     
-                    if let jsonResult = responseObject as? Dictionary<String, String> {
-                        _ = FeedlyRefreshAccessToken(json: jsonResult)
+                    if let jsonResult = responseObject as? Dictionary<String, AnyObject> {
+                        let response = FeedlyRefreshAccessToken(json: jsonResult)
+                        success(response)
                     } else {
                         
                         let error = NSError(domain: FeedlyClientError.domain, code: 1001,

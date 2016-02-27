@@ -46,6 +46,23 @@ class EntryTableViewCell: UITableViewCell {
         set(newValue) { self.thumbnailImageView.image = newValue }
     }
     
+    internal var unread: Bool {
+        get {
+            return self.titleLabel.textColor == UIColor.blackColor()
+        }
+        set(isUnread) {
+            if isUnread {
+                self.titleLabel.textColor = UIColor.blackColor()
+                self.summaryLabel.textColor = UIColor.darkGrayColor()
+                self.authorLabel.textColor = UIColor.darkGrayColor()
+            } else {
+                self.titleLabel.textColor = UIColor.grayColor()
+                self.summaryLabel.textColor = UIColor.grayColor()
+                self.authorLabel.textColor = UIColor.grayColor()
+            }
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -126,14 +143,12 @@ class EntryTableViewCell: UITableViewCell {
         self.summaryLabel.numberOfLines = 0
         self.summaryLabel.lineBreakMode = NSLineBreakMode.ByWordWrapping
         self.summaryLabel.font = UIFont(name: "Helvetica", size: 10)
-        self.summaryLabel.textColor = UIColor.darkGrayColor()
         
         self.summaryLabel.translatesAutoresizingMaskIntoConstraints = false
     }
     
     private func setupAuthorLabel() {
         self.authorLabel.font = UIFont(name: "Helvetica", size: 10)
-        self.authorLabel.textColor = UIColor.darkGrayColor()
         
         self.authorLabel.translatesAutoresizingMaskIntoConstraints = false
     }

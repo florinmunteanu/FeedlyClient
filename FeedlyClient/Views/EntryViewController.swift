@@ -1,4 +1,5 @@
 
+import CoreData
 import Foundation
 import WebKit
 
@@ -6,6 +7,7 @@ class EntryViewController : UIViewController {
     
     var selectedEntry: Entry? = nil
     var entries: [Entry]? = nil
+    var managedObjectContext: NSManagedObjectContext? = nil
 
     @IBOutlet weak var container: UIView!
     
@@ -27,6 +29,7 @@ class EntryViewController : UIViewController {
             if entriesPageViewController != nil {
                 entriesPageViewController!.selectedEntry = self.selectedEntry
                 entriesPageViewController!.entries = self.entries
+                entriesPageViewController!.managedObjectContext = self.managedObjectContext
             }
         }
     }

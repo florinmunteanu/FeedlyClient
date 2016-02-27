@@ -50,12 +50,15 @@ class CategoryEntriesTableViewController: UITableViewController,  NSFetchedResul
         if segue.identifier == "Entry" {
             let entryViewController = segue.destinationViewController as! EntryViewController
             
-            if let selectedCell = sender as? EntryTableViewCell {
-                if let indexPath = self.tableView!.indexPathForCell(selectedCell) {
-                    let entry = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Entry
-                    entryViewController.selectedEntry = entry
-                    entryViewController.entries = [entry]
-                }
+            if let selectedCell = sender as? EntryTableViewCell,
+                let indexPath = self.tableView!.indexPathForCell(selectedCell){
+                    
+                    let currentEntry = self.fetchedResultsController.objectAtIndexPath(indexPath) as! Entry
+                    let entries = self.fetchedResultsController.fetchedObjects as! [Entry]
+                    
+                    entryViewController.selectedEntry = currentEntry
+                    entryViewController.entries = entries
+                    entryViewController.managedObjectContext = self.managedObjectContext
             }
         }
     }
@@ -275,6 +278,13 @@ class CategoryEntriesTableViewController: UITableViewController,  NSFetchedResul
         } else {
             cell.thumbnail = nil
         }
+        
+        if let unread = entry?.unread {
+            cell.unread = unread
+        } else {
+            cell.unread = false
+        }
+        
         //cell.layoutIfNeeded()
     }
     

@@ -26,4 +26,20 @@ class CssRules {
         
         return js
     }
+    
+    internal class func createJs(width: Int) -> String {
+        var js = ""
+        
+        js += " var width = " + String(width) + ";"
+        
+        js += " var imgElements = document.getElementsByTagName(\"img\");"
+        js += " for (var i = 0; i < imgElements.length; i++) { "
+        js += "    if (imgElements[i].width > width) { "
+        js += "        imgElements[i].width = width; "
+        js += "        imgElements[i].removeAttribute(\"height\"); "
+        js += "    } "
+        js += " } "
+        
+        return js
+    }
 }

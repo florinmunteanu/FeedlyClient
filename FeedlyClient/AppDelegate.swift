@@ -17,6 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         self.setupContext()
         self.setupAppearance()
         
+        self.refreshToken()
+        
         return true
     }
     
@@ -27,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.count-1] as! UINavigationController
         
         // http://nshipster.com/uisplitviewcontroller/
-        // 
+        //
         navigationController.topViewController!.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem()
         navigationController.topViewController!.navigationItem.leftItemsSupplementBackButton = true
         
@@ -48,6 +50,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         pageControl.pageIndicatorTintColor = UIColor.lightGrayColor()
         pageControl.currentPageIndicatorTintColor = UIColor.blackColor()
         pageControl.backgroundColor = UIColor.whiteColor()
+    }
+    
+    func refreshToken() {
+        let keychainData = KeychainService.loadDataSafe()
+        
+        if let refreshToken = keychainData.refreshToken {
+            
+            FeedlyAuthenticationRequests.beginGetRefreshToken(
+                refreshToken,
+                success: {
+                    (response: FeedlyRefreshAccessToken) -> Void in
+                    keychainData.accessToken = response.accessToken
+                    do {
+                        try KeychainService.saveData(keychainData)
+                    } catch {
+                    }
+                },
+                failure: {
+                    (error: NSError) -> Void in
+                    
+            })
+        }
     }
     
     func applicationWillResignActive(application: UIApplication) {

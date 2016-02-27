@@ -1,17 +1,15 @@
 
+import CoreData
 import UIKit
 
 class EntriesPageViewController: UIPageViewController, UIPageViewControllerDataSource {
-    
-    enum EntriesError: ErrorType {
-        case NoEntries
-    }
     
     private var pageViewController: UIPageViewController?
     private var currentIndex: Int = 0
     
     var selectedEntry: Entry? = nil
     var entries: [Entry]? = nil
+    var managedObjectContext: NSManagedObjectContext? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,7 +17,8 @@ class EntriesPageViewController: UIPageViewController, UIPageViewControllerDataS
         self.pageViewController = UIPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
         self.pageViewController!.dataSource = self
         
-        if let startingViewController: EntryPageContentViewController = self.viewControllerAtIndex(0) {
+        let selectedEntryIndex = self.getSelectedEntryIndex()
+        if let startingViewController: EntryPageContentViewController = self.viewControllerAtIndex(selectedEntryIndex) {
             
             let viewControllers: [UIViewController] = [startingViewController]
             self.pageViewController!.setViewControllers(viewControllers, direction: .Forward, animated: false, completion: nil)
@@ -33,6 +32,17 @@ class EntriesPageViewController: UIPageViewController, UIPageViewControllerDataS
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    private func getSelectedEntryIndex() -> Int {
+        if let selectedEntryId = self.selectedEntry?.id {
+            for var index = 0; index < self.entries?.count; index++ {
+                if self.entries![index].id == selectedEntryId {
+                    return index
+                }
+            }
+        }
+        return NSNotFound
     }
     
     // MARK: UIPageViewControllerDataSource
@@ -76,6 +86,7 @@ class EntriesPageViewController: UIPageViewController, UIPageViewControllerDataS
         
         pageContentViewController.entry = self.entries?[index]
         pageContentViewController.index = index
+        pageContentViewController.managedObjectContext = self.managedObjectContext
         self.currentIndex = index
         
         return pageContentViewController
@@ -86,6 +97,6 @@ class EntriesPageViewController: UIPageViewController, UIPageViewControllerDataS
     }
     
     func presentationIndexForPageViewController(pageViewController: UIPageViewController) -> Int {
-        return 0
+        return self.currentIndex
     }
 }

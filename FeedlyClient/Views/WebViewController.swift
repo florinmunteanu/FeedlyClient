@@ -1,4 +1,4 @@
-
+import CoreData
 import UIKit
 import WebKit
 
@@ -7,6 +7,9 @@ class WebViewController: UIViewController {
     private var webView: WKWebView?
     
     var entry: Entry? = nil
+    var managedObjectContext: NSManagedObjectContext? = nil
+    
+    private var keychainData: KeychainData = KeychainService.loadDataSafe()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,9 +39,7 @@ class WebViewController: UIViewController {
         
         ProgressHud.beginProgress()
         
-        let keychainData = KeychainService.loadDataSafe()
-        
-        if let token = keychainData.accessToken {
+        if let token = self.keychainData.accessToken {
             FeedlyEntriesRequests.beginGetEntry(entryId,
                 accessToken: token,
                 progress: nil,
@@ -76,13 +77,25 @@ class WebViewController: UIViewController {
     }
     
     private func loadEntryContent(feedlyEntry: FeedlyEntry) {
-        self.addScripts()
-        self.webView!.loadHTMLString(feedlyEntry.content!.content, baseURL: nil)
+        //self.addScripts()
+        self.addResizeImagesScript()
+        
+        var newContent: String = " "
+        newContent += feedlyEntry.content!.content
+        self.webView!.loadHTMLString(newContent, baseURL: nil)
     }
     
-    private func addScripts() {
-        let cssRule = CssRules.createFontScript("Serif, Arial", fontSizeInPixels: "50")
-        let script = WKUserScript(source: cssRule, injectionTime: .AtDocumentStart, forMainFrameOnly: true)
+    //private func addScripts() {
+    //    let cssRule = CssRules.createFontScript("Serif, Arial", fontSizeInPixels: "14")
+    //    let script = WKUserScript(source: cssRule, injectionTime: .AtDocumentStart, forMainFrameOnly: true)
+    //    self.webView!.configuration.userContentController.addUserScript(script)
+    //}
+    
+    private func addResizeImagesScript() {
+        let deviceWidth = Int(UIScreen.mainScreen().bounds.size.width)
+        
+        let resizeImagesScript = CssRules.createJs(deviceWidth)
+        let script = WKUserScript(source: resizeImagesScript, injectionTime: .AtDocumentStart, forMainFrameOnly: true)
         self.webView!.configuration.userContentController.addUserScript(script)
     }
     
@@ -111,8 +124,22 @@ class WebViewController: UIViewController {
         
         if currentProgress == 1.0 {
             ProgressHud.endProgress()
+            self.markEntryAsRead()
         } else {
             ProgressHud.reportProgress(currentProgress)
+        }
+    }
+    
+    private func markEntryAsRead() {
+        if let entryId = self.entry?.id,
+            accessToken = self.keychainData.accessToken,
+            context = self.managedObjectContext {
+               
+                FeedlyMarkersRequests.markEntriesAsRead([entryId], accessToken: accessToken)
+                do {
+                try Entry.markAsRead(entryId, inManagedObjectContext: context)
+                } catch {
+                }
         }
     }
 }

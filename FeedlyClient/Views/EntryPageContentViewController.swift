@@ -1,10 +1,12 @@
 
+import CoreData
 import UIKit
 
 class EntryPageContentViewController: UIViewController {
 
     var index: Int = 0
     var entry: Entry? = nil
+    var managedObjectContext: NSManagedObjectContext? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +21,7 @@ class EntryPageContentViewController: UIViewController {
             let entryWebViewController = segue.destinationViewController as? WebViewController
             if entryWebViewController != nil {
                 entryWebViewController?.entry = self.entry
+                entryWebViewController?.managedObjectContext = self.managedObjectContext
             }
         }
     }

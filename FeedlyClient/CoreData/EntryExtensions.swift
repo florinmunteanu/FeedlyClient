@@ -22,18 +22,32 @@ extension Entry {
     }
     
     internal class func updateThumbnail(entryId: String, thumbnail: NSData, inManagedObjectContext context: NSManagedObjectContext) throws {
+        let entry = try readSingleEntry(entryId, inManagedObjectContext: context)
+        entry.thumbnail = thumbnail
         
+        try context.save()
+    }
+    
+    internal class func markAsRead(entryId: String, inManagedObjectContext context: NSManagedObjectContext) throws {
+        let entry = try readSingleEntry(entryId, inManagedObjectContext: context)
+        entry.unread = false
+        
+        try context.save()
+    }
+    
+    private class func readSingleEntry(entryId: String, inManagedObjectContext context: NSManagedObjectContext) throws -> Entry {
         let fetchRequest = NSFetchRequest(entityName: "Entry")
         fetchRequest.predicate = NSPredicate(format: "id=%@", entryId)
         
         let matches = try context.executeFetchRequest(fetchRequest)
         
         if matches.count == 1 {
-            let existingEntry = matches.last as! Entry
-            existingEntry.thumbnail = thumbnail
+            return matches.last as! Entry
+        } else if matches.count == 0 {
+            throw EntryError.NotFound(entryId: entryId)
+        } else {
+            throw EntryError.DuplicateFound(entryId: entryId)
         }
-
-        try context.save()
     }
     
     private class func insertNewEntry(feedlyEntry: FeedlyEntry, inManagedObjectContext context: NSManagedObjectContext) throws {

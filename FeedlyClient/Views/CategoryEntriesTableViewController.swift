@@ -272,6 +272,7 @@ class CategoryEntriesTableViewController: UITableViewController,  NSFetchedResul
         cell.title = entry?.title
         cell.summary = entry?.textSummary
         cell.author = entry?.author
+        cell.published = entry?.published
         
         if let thumbnail = entry?.thumbnail {
             cell.thumbnail = UIImage(data: thumbnail)
@@ -284,8 +285,6 @@ class CategoryEntriesTableViewController: UITableViewController,  NSFetchedResul
         } else {
             cell.unread = false
         }
-        
-        //cell.layoutIfNeeded()
     }
     
     // MARK DZNEmptyDataSet

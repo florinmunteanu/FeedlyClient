@@ -21,7 +21,16 @@ class EntrySummaryParser : NSObject, NSXMLParserDelegate  {
     
     func parse() -> String {
         self.parser.parse()
-        return self.summary
+        return trimSummary(self.summary, maxLength: 200)
+    }
+    
+    private func trimSummary(summary: String, maxLength: Int) -> String {
+        var summaryCopy = summary
+        if summary.characters.count > maxLength {
+            summaryCopy = summary.substringToIndex(summary.startIndex.advancedBy(maxLength)) + "..."
+        }
+        
+        return summaryCopy
     }
     
     // MARK: NSXMLParserDelegate

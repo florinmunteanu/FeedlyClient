@@ -26,19 +26,20 @@ class ImagesDownloader {
             return
         }
         
-        self.queue.addOperationWithBlock({
-            () -> Void in
-            if let url = NSURL(string: imageUrl) {
-                if let data = NSData(contentsOfURL: url) {
-                    if let thumbnail = self.createThumbnail(data) {
-                        NSOperationQueue.mainQueue().addOperationWithBlock({
-                            () -> Void in
-                            success(entryId: entryId, thumbnailImage: thumbnail)
-                        })
-                    }
-                }
+        let operation = {
+            ()-> Void in
+            if let url = NSURL(string: imageUrl),
+                let data = NSData(contentsOfURL: url),
+                let thumbnail = self.createThumbnail(data) {
+                    NSOperationQueue.mainQueue().addOperationWithBlock({
+                        () -> Void in
+                        success(entryId: entryId, thumbnailImage: thumbnail)
+                    })
             }
-        })
+            
+        }
+        
+        self.queue.addOperationWithBlock(operation)
     }
     
     private func createThumbnail(data: NSData) -> NSData? {

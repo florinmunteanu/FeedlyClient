@@ -41,8 +41,24 @@ class CategoryEntriesTableViewController: UITableViewController,  NSFetchedResul
     }
     
     func refresh() {
-        if self.categoryId != nil {
-            self.beginLoadStream(categoryId!)
+        
+        let keychainData = KeychainService.loadDataSafe()
+        
+        if let accessToken = keychainData.accessToken,
+            let managedObjectContext = self.managedObjectContext,
+            let categoryId = self.categoryId {
+                
+                let refreshOptions = StreamRefreshOptions(accessToken: accessToken)
+                let refreshLogic = StreamRefreshLogic(refreshOptions: refreshOptions, managedObjectContext: managedObjectContext)
+                refreshLogic.success = {
+                    self.endRefreshing();
+                }
+                refreshLogic.failure = {
+                    (error: NSError) -> Void in
+                    Alerts.displayError("An error occurred while refreshing the entries. Please try again.", onUIViewController: self)
+                }
+                
+                refreshLogic.run(forCategory: categoryId)
         }
     }
     
@@ -64,97 +80,98 @@ class CategoryEntriesTableViewController: UITableViewController,  NSFetchedResul
     }
     
     // On refresh: Get Stream by categoryId, then get entries by entries ids returned by stream.
-    
+    /*
     private func beginLoadStream(categoryId: String) {
-        var keychainData: KeychainData?
-        
-        do {
-            keychainData = try KeychainService.loadData()
-        } catch {
-            Alerts.displayError("An error occurred while refreshing the entries. Please try again.", onUIViewController: self)
-            return
-        }
-        
-        if let token = keychainData?.accessToken,
-            categoryId = self.categoryId {
-                let options = FeedlyStreamSearchOptions()
-                options.accessToken = token
-                
-                FeedlyStreamsRequests.beginGetStream(categoryId, options: options,
-                    success: {
-                        (stream: FeedlyStream) -> Void in
-                        if stream.entries.count > 0 {
-                            self.beginLoadEntries(stream.entries, accessToken: token)
-                        } else {
-                            // No entries downloaded
-                            self.endRefreshing()
-                        }
-                    },
-                    failure: {
-                        (error: NSError) -> Void in
-                        self.endRefreshing()
-                        Alerts.displayError("An error occurred while refreshing the entries. Please try again.", onUIViewController: self)
-                })
-        }
+    var keychainData: KeychainData?
+    
+    do {
+    keychainData = try KeychainService.loadData()
+    } catch {
+    Alerts.displayError("An error occurred while refreshing the entries. Please try again.", onUIViewController: self)
+    return
+    }
+    
+    if let token = keychainData?.accessToken,
+    categoryId = self.categoryId {
+    let options = FeedlyStreamSearchOptions()
+    options.accessToken = token
+    
+    FeedlyStreamsRequests.beginGetStream(categoryId, options: options,
+    success: {
+    (stream: FeedlyStream) -> Void in
+    if stream.entries.count > 0 {
+    self.beginLoadEntries(stream.entries, accessToken: token)
+    } else {
+    // No entries downloaded
+    self.endRefreshing()
+    }
+    },
+    failure: {
+    (error: NSError) -> Void in
+    self.endRefreshing()
+    Alerts.displayError("An error occurred while refreshing the entries. Please try again.", onUIViewController: self)
+    })
+    }
     }
     
     private func beginLoadEntries(entries: [String], accessToken: String) {
-        FeedlyEntriesRequests.beginGetEntries(entries, accessToken: accessToken,
-            success: {
-                (entriesDictionary: Dictionary<String, FeedlyEntry>) -> Void in
-                
-                var errorOccurred = false
-                do {
-                    try self.updateEntries(entriesDictionary)
-                } catch {
-                    errorOccurred = true
-                }
-                
-                self.endRefreshing()
-                self.tableView!.reloadData()
-                
-                if errorOccurred {
-                    Alerts.displayError("An error occurred while refreshing the entries. Please try again.", onUIViewController: self)
-                }
-                
-            },
-            failure: {
-                (error: NSError) -> Void in
-                self.endRefreshing()
-                Alerts.displayError("An error occurred while refreshing the entries. Please try again.", onUIViewController: self)
-        })
+    FeedlyEntriesRequests.beginGetEntries(entries, accessToken: accessToken,
+    success: {
+    (entriesDictionary: Dictionary<String, FeedlyEntry>) -> Void in
+    
+    var errorOccurred = false
+    do {
+    try self.updateEntries(entriesDictionary)
+    } catch {
+    errorOccurred = true
+    }
+    
+    self.endRefreshing()
+    self.tableView!.reloadData()
+    
+    if errorOccurred {
+    Alerts.displayError("An error occurred while refreshing the entries. Please try again.", onUIViewController: self)
+    }
+    
+    },
+    failure: {
+    (error: NSError) -> Void in
+    self.endRefreshing()
+    Alerts.displayError("An error occurred while refreshing the entries. Please try again.", onUIViewController: self)
+    })
     }
     
     func updateEntries(entries: Dictionary<String, FeedlyEntry>) throws {
-        if self.managedObjectContext != nil {
-            for entry in entries {
-                try self.updateEntry(entry)
-            }
-        }
+    if self.managedObjectContext != nil {
+    for entry in entries {
+    try self.updateEntry(entry)
+    }
+    }
     }
     
     func updateEntry(entry: (String, FeedlyEntry)) throws {
-        try Entry.addOrUpdate(entry.1, inManagedObjectContext: self.managedObjectContext!)
-        
-        if let visual = entry.1.visual {
-            ImagesDownloader.sharedInstance.queueImage(visual.url, entryId: entry.1.id,
-                success: {
-                    (entryId, thumbnailImage) -> Void in
-                    self.tryUpdateThumbnail(thumbnailImage, entryId: entryId, numberOfRetries: 2)
-            })
-        }
+    try Entry.addOrUpdate(entry.1, inManagedObjectContext: self.managedObjectContext!)
+    
+    if let visual = entry.1.visual {
+    ImagesDownloader.sharedInstance.queueImage(visual.url, entryId: entry.1.id,
+    success: {
+    (entryId, thumbnailImage) -> Void in
+    self.tryUpdateThumbnail(thumbnailImage, entryId: entryId, numberOfRetries: 2)
+    })
+    }
     }
     
     func tryUpdateThumbnail(thumbnailImage: NSData, entryId: String, var numberOfRetries: uint = 2) {
-        while numberOfRetries > 0 {
-            do {
-                try Entry.updateThumbnail(entryId, thumbnail: thumbnailImage, inManagedObjectContext: self.managedObjectContext!)
-                numberOfRetries = 0
-            } catch {
-                numberOfRetries--
-            }
-        }
+    while numberOfRetries > 0 {
+    do {
+    try Entry.updateThumbnail(entryId, thumbnail: thumbnailImage, inManagedObjectContext: self.managedObjectContext!)
+    numberOfRetries = 0
+    } catch {
+    numberOfRetries--
     }
+    }
+    }
+    */
     
     private func endRefreshing() {
         self.refreshControl?.attributedTitle = NSAttributedString(string: "Refreshed")

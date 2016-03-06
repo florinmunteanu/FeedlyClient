@@ -10,6 +10,9 @@
 		4E144C151C11E65300148DED /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4E144C141C11E65300148DED /* Launch Screen.storyboard */; };
 		4E1504AA1C7D0AF4003AD878 /* FeedlyMarkersRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1504A91C7D0AF4003AD878 /* FeedlyMarkersRequests.swift */; };
 		4E1504AC1C81BCA0003AD878 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1504AB1C81BCA0003AD878 /* Errors.swift */; };
+		4E1504AF1C8AEFA9003AD878 /* SubscriptionsRefreshLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1504AE1C8AEFA9003AD878 /* SubscriptionsRefreshLogic.swift */; };
+		4E1504B11C8C54B9003AD878 /* StreamRefreshLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1504B01C8C54B9003AD878 /* StreamRefreshLogic.swift */; };
+		4E1504B31C8C61A5003AD878 /* StreamRefreshOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E1504B21C8C61A5003AD878 /* StreamRefreshOptions.swift */; };
 		4E3162AD1A04FE6000E9E477 /* EntrySummaryParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3162AC1A04FE6000E9E477 /* EntrySummaryParser.swift */; };
 		4E36590119D6C2A8001BEE78 /* KeychainData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E36590019D6C2A8001BEE78 /* KeychainData.swift */; };
 		4E3F0CA819BC8A4F00E66E07 /* CategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3F0CA719BC8A4F00E66E07 /* CategoriesViewController.swift */; };
@@ -88,6 +91,9 @@
 		4E144C141C11E65300148DED /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		4E1504A91C7D0AF4003AD878 /* FeedlyMarkersRequests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedlyMarkersRequests.swift; sourceTree = "<group>"; };
 		4E1504AB1C81BCA0003AD878 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Errors.swift; path = CoreData/Errors.swift; sourceTree = "<group>"; };
+		4E1504AE1C8AEFA9003AD878 /* SubscriptionsRefreshLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SubscriptionsRefreshLogic.swift; path = Logic/SubscriptionsRefreshLogic.swift; sourceTree = "<group>"; };
+		4E1504B01C8C54B9003AD878 /* StreamRefreshLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StreamRefreshLogic.swift; path = Logic/StreamRefreshLogic.swift; sourceTree = "<group>"; };
+		4E1504B21C8C61A5003AD878 /* StreamRefreshOptions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamRefreshOptions.swift; sourceTree = "<group>"; };
 		4E3162AC1A04FE6000E9E477 /* EntrySummaryParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EntrySummaryParser.swift; path = Parser/EntrySummaryParser.swift; sourceTree = "<group>"; };
 		4E36590019D6C2A8001BEE78 /* KeychainData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KeychainData.swift; path = Keychain/KeychainData.swift; sourceTree = "<group>"; };
 		4E3F0CA719BC8A4F00E66E07 /* CategoriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CategoriesViewController.swift; path = Views/CategoriesViewController.swift; sourceTree = "<group>"; };
@@ -209,6 +215,18 @@
 			name = Markers;
 			sourceTree = "<group>";
 		};
+		4E1504AD1C8AEDA4003AD878 /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				4E3162AB1A04FCBF00E9E477 /* Parser */,
+				4E70E9D51A06A90E00ED5688 /* Downloader */,
+				4E1504AE1C8AEFA9003AD878 /* SubscriptionsRefreshLogic.swift */,
+				4E1504B01C8C54B9003AD878 /* StreamRefreshLogic.swift */,
+				4E1504B21C8C61A5003AD878 /* StreamRefreshOptions.swift */,
+			);
+			name = Logic;
+			sourceTree = "<group>";
+		};
 		4E254AB719E1CFBB00B7938C /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -299,10 +317,9 @@
 		4E6ADAF31975A05000D3C72C /* FeedlyClient */ = {
 			isa = PBXGroup;
 			children = (
+				4E1504AD1C8AEDA4003AD878 /* Logic */,
 				4EFFAE7D19916EE60031B5F0 /* CoreData */,
 				4EDD1C0C1975A349004C346D /* Api */,
-				4E3162AB1A04FCBF00E9E477 /* Parser */,
-				4E70E9D51A06A90E00ED5688 /* Downloader */,
 				4E36590219D6C2BD001BEE78 /* Keychain */,
 				4EDD1C0D1975A365004C346D /* Views */,
 				4E6ADAF61975A05000D3C72C /* AppDelegate.swift */,
@@ -624,6 +641,7 @@
 				4E3FAE721986EBAD007DF98D /* LoginViewController.swift in Sources */,
 				4E3F0CAE19BCD16300E66E07 /* Subscription.swift in Sources */,
 				4E3F0CAC19BCD16300E66E07 /* Category.swift in Sources */,
+				4E1504B11C8C54B9003AD878 /* StreamRefreshLogic.swift in Sources */,
 				4ECDA81119B1A9D40025E2B8 /* FeedlyEntry.swift in Sources */,
 				4ECDA82819B392070025E2B8 /* CategoryEntriesTableViewController.swift in Sources */,
 				4E6ADAF71975A05000D3C72C /* AppDelegate.swift in Sources */,
@@ -631,6 +649,7 @@
 				4EC7A88219E976F70072F3F0 /* EntryContent.swift in Sources */,
 				4E3F0CB019BCD24B00E66E07 /* SubscriptionExtensions.swift in Sources */,
 				4ECDA80F19B1A9D40025E2B8 /* FeedlyEntryLink.swift in Sources */,
+				4E1504AF1C8AEFA9003AD878 /* SubscriptionsRefreshLogic.swift in Sources */,
 				4E3F0CB219BCD25E00E66E07 /* CategoryExtensions.swift in Sources */,
 				4ECDA80E19B1A9D40025E2B8 /* FeedlyEntryOrigin.swift in Sources */,
 				4ECDA81C19B1ABDF0025E2B8 /* FeedlyCategoriesRequests.swift in Sources */,
@@ -649,6 +668,7 @@
 				4EEEAD6019FB891600956C56 /* WebViewController.swift in Sources */,
 				4EC7A87419E9271C0072F3F0 /* Alerts.swift in Sources */,
 				4E1504AA1C7D0AF4003AD878 /* FeedlyMarkersRequests.swift in Sources */,
+				4E1504B31C8C61A5003AD878 /* StreamRefreshOptions.swift in Sources */,
 				4ECDA82219B1AC100025E2B8 /* FeedlySubcriptionsRequests.swift in Sources */,
 				4E3162AD1A04FE6000E9E477 /* EntrySummaryParser.swift in Sources */,
 				4EC7A88819E97C8C0072F3F0 /* EntryExtensions.swift in Sources */,

@@ -18,6 +18,10 @@ class FeedlySubscription {
         }
         if let categories = json["categories"] as AnyObject! as? [Dictionary<String, String>] {
             self.categories = FeedlyCategory.fromJson(categories)
+            
+            //if self.categories.count == 0 {
+            //    self.categories.append(<#T##newElement: FeedlyCategory##FeedlyCategory#>)
+            //}
         }
     }
     

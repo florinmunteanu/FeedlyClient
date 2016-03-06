@@ -19,54 +19,33 @@ class CategoriesViewController: UITableViewController, NSFetchedResultsControlle
     func refresh(refreshControl: UIRefreshControl) {
         refreshControl.attributedTitle = NSAttributedString(string: "Refreshing...")
         
-        self.beginLoadSubscriptions()
+        self.refresh()
     }
     
-    private func beginLoadSubscriptions() {
-        var keychainData: KeychainData?
+    private func refresh() {
         
-        do {
-            keychainData = try KeychainService.loadData()
-        } catch {
-            self.endRefreshing()
-            Alerts.displayError("An error occurred while refreshing the subscriptions", onUIViewController: self)
-            return
-        }
+        let keychainData = KeychainService.loadDataSafe()
         
-        if let token = keychainData?.accessToken {
-            FeedlySubscriptionsRequests.beginGetSubscriptions(token,
-                success: {
-                    (subscriptions: [FeedlySubscription]) -> Void in
-                    do {
-                        try self.updateSubscriptions(subscriptions)
-                    } catch {
-                        Alerts.displayError("An error occurred while refreshing the subscriptions. Please try again.", onUIViewController: self)
-                    }
-                    self.endRefreshing()
-                    //self.tableView.reloadData()
-                },
-                failure: {
+        if let accessToken = keychainData.accessToken,
+            let managedObjectContext = self.managedObjectContext {
+                
+                let refreshLogic: SubscriptionsRefreshLogic = SubscriptionsRefreshLogic(accessToken: accessToken, managedObjectContext: managedObjectContext)
+                refreshLogic.success = {
+                    self.endRefreshing();
+                }
+                refreshLogic.failure = {
                     (error: NSError) -> Void in
                     self.endRefreshing()
-                    Alerts.displayError("An error occurred while refreshing the subscriptions. Please try again.", onUIViewController: self)
-            })
-        } else {
-            self.endRefreshing()
-            // display the login view controller
+                    Alerts.displayError("An error occurred while refreshing the subscriptions", onUIViewController: self)
+                }
+                
+                refreshLogic.run()
         }
     }
     
     private func endRefreshing() {
         self.refreshControl?.attributedTitle = NSAttributedString(string: "Refreshed")
         self.refreshControl?.endRefreshing()
-    }
-    
-    func updateSubscriptions(subscriptions: [FeedlySubscription]) throws {
-        if self.managedObjectContext != nil {
-            for subscription in subscriptions {
-                try Subscription.addOrUpdate(subscription, inManagedObjectContext: self.managedObjectContext!)
-            }
-        }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
